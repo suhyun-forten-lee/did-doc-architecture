@@ -95,7 +95,17 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'architecture',
+          },
+          {
+            to: 'https://suhyun-forten-lee.github.io/did-issuer-server/docs/did-issuer-server/api/Issuer_API_ko',
+            label: 'issuer',
+            position: 'left',
+          },
+          {
+            to: 'https://suhyun-forten-lee.github.io/did-verifier-server/docs/did-verifier-server/api/Verifier_API_ko',
+            label: 'verifier',
+            position: 'left',
           },
           {
             href: 'https://github.com/OmniOneID',
