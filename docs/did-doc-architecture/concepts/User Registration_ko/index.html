@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-1.000 docs-doc-page docs-doc-id-did-doc-architecture/concepts/User Registration_ko" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.1">
+<title data-rh="true">사용자 등록 | OmniOneID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://suhyun-forten-lee.github.io/did-doc-architecture/img/docusaurus-social-card.jpeg"><meta data-rh="true" name="twitter:image" content="https://suhyun-forten-lee.github.io/did-doc-architecture/img/docusaurus-social-card.jpeg"><meta data-rh="true" property="og:url" content="https://suhyun-forten-lee.github.io/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko"><meta data-rh="true" property="og:locale" content="ko"><meta data-rh="true" name="docusaurus_locale" content="ko"><meta data-rh="true" name="docsearch:language" content="ko"><meta data-rh="true" name="docusaurus_version" content="1.000"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.000"><meta data-rh="true" name="docsearch:version" content="1.000"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.000"><meta data-rh="true" property="og:title" content="사용자 등록 | OmniOneID"><meta data-rh="true" name="description" content="- 주제 : 사용자 등록의 개념 설명"><meta data-rh="true" property="og:description" content="- 주제 : 사용자 등록의 개념 설명"><link data-rh="true" rel="icon" href="/did-doc-architecture/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://suhyun-forten-lee.github.io/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko"><link data-rh="true" rel="alternate" href="https://suhyun-forten-lee.github.io/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko" hreflang="ko"><link data-rh="true" rel="alternate" href="https://suhyun-forten-lee.github.io/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/did-doc-architecture/blog/rss.xml" title="OmniOneID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/did-doc-architecture/blog/atom.xml" title="OmniOneID Atom Feed"><link rel="stylesheet" href="/did-doc-architecture/assets/css/styles.ceea0820.css">
+<script src="/did-doc-architecture/assets/js/runtime~main.9c472467.js" defer="defer"></script>
+<script src="/did-doc-architecture/assets/js/main.a815de60.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="본문으로 건너뛰기"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">본문으로 건너뛰기</a></div><nav aria-label="메인" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="사이드바 펼치거나 접기" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/did-doc-architecture/"><div class="navbar__logo"><img src="/did-doc-architecture/img/omnione.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/did-doc-architecture/img/omnione.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">OmniOne Open DID</b></a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko">1.000</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/did-doc-architecture/docs/next/did-doc-architecture/concepts/User Registration_ko">Next</a></li><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko">1.000</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>한국어</a><ul class="dropdown__menu"><li><a href="/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="ko">한국어</a></li></ul></div><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/did-doc-architecture/docs/did-doc-architecture/concepts/JSON_serialization_ko">Docs</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/OmniOneID" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="어두운 모드와 밝은 모드 전환하기 (현재 밝은 모드)" aria-label="어두운 모드와 밝은 모드 전환하기 (현재 밝은 모드)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="맨 위로 스크롤하기" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="문서 사이드바" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/did-doc-architecture/docs/did-doc-architecture/concepts/JSON_serialization_ko">did-doc-architecture</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/JSON_serialization_ko">concepts</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/JSON_serialization_ko">JSON 직렬화</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/Presentation of VP_ko">VP 제출</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/User Registration_ko">사용자 등록</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/VC Issuance_ko">VC 발급</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/blockchain_access_ko">블록체인 연동</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/components_ko">Open DID 구성도</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/life_cycle_ko">Wallet 생명 주기</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/manage_pii_ko">PII</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/token_ko">Open DID Token</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/wallet">Wallet</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/wallet_interface_ko">월렛</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/wallet_ko">Wallet</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/wallet_lock_policy_ko">월랫 잠금</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/wallet_policy_ko">Wallet 정책</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/concepts/wallet_sw_architecture_ko">월렛 소프트웨어 아키텍쳐</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/data standard/data specification/Data Specification_ko">data standard</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/guide/api/API Documentation Writing Guide_ko">guide</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/rules/coding_style_ko">rules</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/did-doc-architecture/docs/did-doc-architecture/security/MitM_ko">security</a></div></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="홈" class="breadcrumbs__link" href="/did-doc-architecture/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">did-doc-architecture</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">concepts</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">사용자 등록</span><meta itemprop="position" content="3"></li></ul></nav><span class="theme-doc-version-badge badge badge--secondary">버전: 1.000</span><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">이 페이지에서</button></div><div class="theme-doc-markdown markdown"><header><h1>사용자 등록</h1></header>
+<ul>
+<li>주제 : 사용자 등록의 개념 설명</li>
+<li>작성 : 오픈소스개발팀</li>
+<li>일자 : 2024-10-18</li>
+<li>버전 : v1.0.0</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>버전</th><th>일자</th><th>변경</th></tr></thead><tbody><tr><td>v1.0.0</td><td>2024-10-18</td><td>최초 작성</td></tr></tbody></table>
+<br>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="목차">목차<a href="#목차" class="hash-link" aria-label="목차에 대한 직접 링크" title="목차에 대한 직접 링크">​</a></h2>
+<ul>
+<li><a href="#1-%EA%B0%9C%EC%9A%94">1. 개요</a>
+<ul>
+<li><a href="#11-%EC%B0%B8%EC%A1%B0%EB%AC%B8%EC%84%9C">1.1. 참조문서</a></li>
+</ul>
+</li>
+<li><a href="#2-%EA%B3%B5%ED%86%B5%EC%82%AC%ED%95%AD">2. 공통사항</a>
+<ul>
+<li><a href="#21-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85-%EB%B0%8F-%EC%83%81%EC%88%98">2.1. 데이터 타입 및 상수</a></li>
+<li><a href="#22-did-%EC%A0%95%EC%B1%85">2.2. DID 정책</a>
+<ul>
+<li><a href="#221-did-%EC%A0%95%EC%B1%85%EC%9D%98-%EC%82%AC%EB%A1%80">2.2.1. DID 정책의 사례</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#3-%EC%9B%94%EB%A0%9B-%EB%93%B1%EB%A1%9D-%EC%A0%88%EC%B0%A8">3. 월렛 등록 절차</a>
+<ul>
+<li><a href="#31-%EC%9B%94%EB%A0%9B%EC%9D%98-%EC%A2%85%EB%A5%98">3.1. 월렛의 종류</a>
+<ul>
+<li><a href="#311-%ED%8C%8C%EC%9D%BC-%EC%9B%94%EB%A0%9B">3.1.1. 파일 월렛</a></li>
+<li><a href="#312-%EC%95%B1-%EC%9B%94%EB%A0%9B">3.1.2. 앱 월렛</a></li>
+<li><a href="#313-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9B%94%EB%A0%9B">3.1.3. 클라우드 월렛</a></li>
+</ul>
+</li>
+<li><a href="#32-%EC%9B%94%EB%A0%9B%EC%9D%98-%EA%B8%B0%EB%8A%A5">3.2. 월렛의 기능</a></li>
+<li><a href="#33-%EC%83%81%EC%84%B8-%EC%A0%88%EC%B0%A8">3.3. 상세 절차</a></li>
+</ul>
+</li>
+<li><a href="#4-%EC%82%AC%EC%9A%A9%EC%9E%90-%EB%93%B1%EB%A1%9D-%EC%A0%88%EC%B0%A8">4. 사용자 등록 절차</a>
+<ul>
+<li><a href="#41-%EC%83%81%EC%84%B8-%EC%A0%88%EC%B0%A8">4.1. 상세 절차</a></li>
+</ul>
+</li>
+</ul>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-개요">1. 개요<a href="#1-개요" class="hash-link" aria-label="1. 개요에 대한 직접 링크" title="1. 개요에 대한 직접 링크">​</a></h2>
+<p>본 문서는 OpenDID의 사용자 등록에 대한 전반적인 개념을 설명한다.
+사용자 등록 절차는 다음과 같다.</p>
+<ol>
+<li>(A) 월렛 등록 절차
+<ul>
+<li>(A1) 월렛 생성</li>
+<li>(A2) 월렛 DID Document 생성</li>
+<li>(A3) 월렛 식별자 생성 및 월렛 DID Document 서명</li>
+<li>(A4) TAS에 월렛 등록 - Request Register Wallet</li>
+</ul>
+</li>
+<li>(B) 사용자 등록 절차
+<ul>
+<li>(B1) 사용자 등록 시작 요청 - Propose Register User</li>
+<li>(B2) ECDH (보안 세션 수립) - Request ECDH</li>
+<li>(B3) 월렛토큰, 서버토큰 생성 - Request Create Token</li>
+<li>(B4) 사용자 등록 요청 - Request Register User</li>
+<li>(B5) 사용자 등록 완료 - Confirm Register User</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="11-참조문서">1.1. 참조문서<a href="#11-참조문서" class="hash-link" aria-label="1.1. 참조문서에 대한 직접 링크" title="1.1. 참조문서에 대한 직접 링크">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>참조명</th><th>문서명</th><th>위치</th></tr></thead><tbody><tr><td>[OSD]</td><td>OpenDID Schema Definition Language</td><td></td></tr><tr><td>[DATA-SPEC]</td><td>(OpenDID) 데이터 명세서(Data Specification)</td><td></td></tr><tr><td>[DIDDOC-FORMAT]</td><td>(OpenDID) DID Document format</td><td></td></tr></tbody></table>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-공통사항">2. 공통사항<a href="#2-공통사항" class="hash-link" aria-label="2. 공통사항에 대한 직접 링크" title="2. 공통사항에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-데이터-타입-및-상수">2.1. 데이터 타입 및 상수<a href="#21-데이터-타입-및-상수" class="hash-link" aria-label="2.1. 데이터 타입 및 상수에 대한 직접 링크" title="2.1. 데이터 타입 및 상수에 대한 직접 링크">​</a></h3>
+<p>여기에 정의되지 않은 항목은 <code>[DATA-SPEC]</code>을 참조한다.</p>
+<div class="language-c# codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c# codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">def enum WALLET_TYPE: &quot;wallet type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;FileWallet&quot;, &quot;AppWallet&quot;, &quot;CloudWallet&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def object DidDoc: &quot;DID Document&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Meta</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + array(url)   &quot;@context&quot;   : &quot;JSON-LD context&quot;, value([&quot;https://www.w3.org/ns/did/v1&quot;])</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + did          &quot;id&quot;         : &quot;DID owner&#x27;s did&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + did          &quot;controller&quot; : &quot;DID controller&#x27;s did&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + utcDatetime  &quot;created&quot;    : &quot;created datetime&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + utcDatetime  &quot;updated&quot;    : &quot;last updated datetime&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + didVersionId &quot;versionId&quot;  : &quot;DID version id&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + bool         &quot;deactivated&quot;: &quot;true: deactivated, false: activated&quot;, default(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // DID key list</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + array(object) &quot;verificationMethod&quot;: &quot;list of DID key with public key value&quot;, min_count(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + didKeyId     &quot;id&quot;                : &quot;key id. ex: &#x27;pin&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + DID_KEY_TYPE &quot;type&quot;              : &quot;key type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + did          &quot;controller&quot;        : &quot;key controller&#x27;s did&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + multibase    &quot;publicKeyMultibase&quot;: &quot;public key value&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        //--- 이하 비표준 항목 ---</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + AUTH_TYPE    &quot;authType&quot;          : &quot;required authentication to use the key&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // 용도별 키 목록</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // - 모든 &#x27;didKeyId&#x27;는 &#x27;~/verificationMethod[]/id&#x27;에 선언되어 있어야 함</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;assertionMethod&quot;     : &quot;list of Assertion key name&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;authentication&quot;      : &quot;list of Authentication key name&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;keyAgreement&quot;        : &quot;list of Key Agreement key name&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;capabilityInvocation&quot;: &quot;list of Capability Invocation key name&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;capabilityDelegation&quot;: &quot;list of Capability Delegation key name&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Service endpoint</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(object) &quot;service&quot;: &quot;list of service&quot;, min_count(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + didServiceId     &quot;id&quot;             : &quot;service id&quot;  // ex: &quot;homepage&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + DID_SERVICE_TYPE &quot;type&quot;           : &quot;service type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + array(url)       &quot;serviceEndpoint&quot;: &quot;list of URL to the service&quot;, min_count(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def object OwnerDidDoc: &quot;DID Document with the owner proofs&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    @spread(DidDoc)  // DidDoc 객체 내 모든 멤버를 포함하라는 의미 (중복선언 방지)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Proof - 비표준 항목</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // DID 소유자가 controller에 등록/수정을 요청할 때만 필요</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + select(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        // when 키개수 = 1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ^ Proof        &quot;proof&quot; : &quot;owner proof&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        // when 키개수 &gt;= 2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ^ array(Proof) &quot;proofs&quot;: &quot;list of owner proof&quot;, min_count(2)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def object AttestedDidDoc: &quot;Provider attested DID Document - Attestation 서명 첨부&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + walletId  &quot;walletId&quot;   : &quot;wallet id&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + mulitbase &quot;ownerDidDoc&quot;: &quot;multibase(OwnerDidDoc)&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + Provider  &quot;provider&quot;   : &quot;provider 정보&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + multibase &quot;nonce&quot;      : &quot;provider nonce&quot;, byte_length(16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // DID Document를 사용할 장치 또는 사용자를 관리하는 사업자의 증명</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + AssertProof &quot;proof&quot;    : &quot;provider&#x27;s attestation proof&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def object SignedDidDoc: &quot;Wallet signed DID Document - 월렛 서명 첨부&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + mulitbase &quot;ownerDidDoc&quot;: &quot;multibase(OwnerDidDoc)&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + object    &quot;wallet&quot;     : &quot;wallet information&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + walletId &quot;id&quot; : &quot;wallet id&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + did      &quot;did&quot;: &quot;wallet DID&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + multibase   &quot;nonce&quot;: &quot;wallet nonce&quot;, byte_length(16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + AssertProof &quot;proof&quot;: &quot;wallet proof - 월렛 서명&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def object InvokedDidDoc: &quot;Controller signed DID Document - Invocation 서명 첨부&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + mulitbase   &quot;didDoc&quot;    : &quot;multibase(DidDoc)&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + Provider    &quot;controller&quot;: &quot;controller 정보&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + multibase   &quot;nonce&quot;     : &quot;controller nonce&quot;, byte_length(16)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + InvokeProof &quot;proof&quot;     : &quot;controller&#x27;s invocation proof&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-did-정책">2.2. DID 정책<a href="#22-did-정책" class="hash-link" aria-label="2.2. DID 정책에 대한 직접 링크" title="2.2. DID 정책에 대한 직접 링크">​</a></h3>
+<p>DID 관련하여 어떤 제약조건을  적용할 것인가에 대한 의사결정을 &quot;DID 정책&quot;이라고 한다.
+월렛 등록, 사용자 등록 절차는 이러한 DID 정책에 직접적인 영향을 받으므로
+DID 정책을 명확하게 정의하고 이해하는 것이 필요하다.</p>
+<p>DID 정책의 항목은 다음과 같다.</p>
+<ul>
+<li>공개 DID 정책
+<ul>
+<li>실명: DID 값으로 개인을 식별할 수 <em>있음</em></li>
+<li>익명: DID 값으로 개인을 식별할 수 <em>없음</em></li>
+</ul>
+</li>
+<li>1인 1-DID 정책
+<ul>
+<li>본인확인에 의해 식별된 개인 1인당 활성 DID는 1개만 허용</li>
+<li>새로 DID를 생성하면 기존 DID 및 VC는 모두 자동 폐기됨</li>
+</ul>
+</li>
+<li>1인 1-월렛 정책
+<ul>
+<li>개인 1인당 여러 개의 인가앱을 허용하더라도 월렛은 1개만 허용</li>
+<li>클라우드 월렛을 사용할 경우 여러 단말에서 접근가능한지 결정 필요</li>
+<li>앱 월렛을 사용할 경우 여러 인가앱에서 접근가능한지 결정 필요</li>
+</ul>
+</li>
+<li>1인 1-단말(인가앱) 정책
+<ul>
+<li>개인 1인당 단말(혹은 인가앱)은 1개만 허용</li>
+<li>인가앱을 재설치하면 기존 DID 및 VC는 모두 자동 폐기 또는 무효화 됨</li>
+</ul>
+</li>
+<li>기타</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="221-did-정책의-사례">2.2.1. DID 정책의 사례<a href="#221-did-정책의-사례" class="hash-link" aria-label="2.2.1. DID 정책의 사례에 대한 직접 링크" title="2.2.1. DID 정책의 사례에 대한 직접 링크">​</a></h4>
+<p>아래는 어떤 도메인이 수립한 DID 정책표이다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>구분</th><th>정책</th><th>식별자 타입</th><th>설명</th></tr></thead><tbody><tr><td>공개</td><td>실명</td><td></td><td>DID 값으로 개인 식별</td></tr><tr><td>DID</td><td>1-DID</td><td><code>did</code></td><td>인당 1개의 DID만 허용</td></tr><tr><td>월렛</td><td>1-월렛</td><td><code>walletId</code></td><td>인  당 1개의 월렛만 허용</td></tr><tr><td>인가앱</td><td>N-인가앱</td><td><code>appId</code></td><td>여러 개의 인가앱 사용 가능</td></tr></tbody></table>
+<p>1인당 &quot;1-DID&quot;, &quot;1-월렛&quot; 정책이므로 하나의 월렛에 하나의 DID만 생성이 가능하다.
+즉, 여러 개의 월렛을 생성할 수도 없을 뿐더러 하나의 월렛에 여러 개의 DID를 생성할 수도 없다.
+그러나 &quot;N-인가앱&quot; 정책이므로 하나의 월렛에 여러 개의 인가앱이 접근하여 사용할 수 있다.
+그러나 파일 월렛을 사용한다면 사실상 &quot;1-인가앱&quot;과 마찬가지이다.</p>
+<p><img decoding="async" loading="lazy" alt="DID 정책" src="/did-doc-architecture/assets/images/diag_did_policy_ko-0779f7e9e8ff7c4382171b332f770297.svg" width="552" height="270" class="img_ev3q"></p>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-월렛-등록-절차">3. 월렛 등록 절차<a href="#3-월렛-등록-절차" class="hash-link" aria-label="3. 월렛 등록 절차에 대한 직접 링크" title="3. 월렛 등록 절차에 대한 직접 링크">​</a></h2>
+<p>월렛 등록 절차는 아래 그림과 같다.</p>
+<p><img decoding="async" loading="lazy" alt="월렛 등록 절차" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIzNDZweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjcwM3B4O2hlaWdodDozNDZweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA3MDMgMzQ2IiB3aWR0aD0iNzAzcHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjI0LjcyMzYiIHN0eWxlPSJzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MS4wOyIgd2lkdGg9IjY3MC41IiB4PSIxNSIgeT0iMTIuNDU1MSIvPjxlbGxpcHNlIGN4PSIxMDkiIGN5PSI1Mi4xNzg3IiBmaWxsPSIjMjIyMjIyIiByeD0iMTAiIHJ5PSIxMCIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzNi40ODI0IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjkyIiB4PSI2MyIgeT0iODIuMTc4NyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOCIgeD0iNzMiIHk9IjEwNi4wMjQ0Ij5BMS48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNTEiIHg9Ijk0IiB5PSIxMDYuMDI0NCI+JiM1MDkwMDsmIzQ3MTMxOyAmIzQ5MzczOyYjNDk0NTc7PC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzYuNDgyNCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNzYiIHg9IjIxIiB5PSIxMzguNjYxMSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOCIgeD0iMzEiIHk9IjE2Mi41MDY4Ij5BMi48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTM1IiB4PSI1MiIgeT0iMTYyLjUwNjgiPiYjNTA5MDA7JiM0NzEzMTsgRElEIERvY3VtZW50ICYjNDkzNzM7JiM0OTQ1Nzs8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMTUiIHgyPSIxNSIgeTE9IjEyLjQ1NTEiIHkyPSIzMzQuNzIzMSIvPjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzYuNDgyNCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNzYiIHg9IjIwNyIgeT0iMTk1LjE0MzYiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTgiIHg9IjIxNyIgeT0iMjE4Ljk4OTMiPkEzLjwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMzUiIHg9IjIzOCIgeT0iMjE4Ljk4OTMiPiYjNTA5MDA7JiM0NzEzMTsgRElEIERvY3VtZW50ICYjNDk0MzY7JiM0Nzc0OTs8L3RleHQ+PGxpbmUgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMjAxIiB4Mj0iMjAxIiB5MT0iMTIuNDU1MSIgeTI9IjMzNC43MjMxIi8+PHBhdGggZD0iTTUwNSwyNDcuMDExMiBMNTA1LDI2NS44NjcyIEw0ODUsMjY5Ljg2NzIgTDUwNSwyNzMuODY3MiBMNTA1LDI5Mi43MjMxIEEwLDAgMCAwIDAgNTA1LDI5Mi43MjMxIEw2NzksMjkyLjcyMzEgQTAsMCAwIDAgMCA2NzksMjkyLjcyMzEgTDY3OSwyNTcuMDExMiBMNjY5LDI0Ny4wMTEyIEw1MDUsMjQ3LjAxMTIgQTAsMCAwIDAgMCA1MDUsMjQ3LjAxMTIgIiBmaWxsPSIjRkVGRkREIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48cGF0aCBkPSJNNjY5LDI0Ny4wMTEyIEw2NjksMjU3LjAxMTIgTDY3OSwyNTcuMDExMiBMNjY5LDI0Ny4wMTEyICIgZmlsbD0iI0ZFRkZERCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iODAiIHg9IjUxMSIgeT0iMjY3LjAxMDciPlsmIzUwOTAwOyYjNDcxMzE7ICYjODU5NDsgVEFTXTwvdGV4dD48ZWxsaXBzZSBjeD0iNTE2LjUiIGN5PSIyODAuMjIzMSIgZmlsbD0iIzAwMDAwMCIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTQxIiB4PSI1MjMiIHk9IjI4NC44NjY3Ij5SZXF1ZXN0IFJlZ2lzdGVyIFdhbGxldDwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjM2LjQ4MjQiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iOTIiIHg9IjM5MyIgeT0iMjUxLjYyNiIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOCIgeD0iNDAzIiB5PSIyNzUuNDcxNyI+QTQuPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjUxIiB4PSI0MjQiIHk9IjI3NS40NzE3Ij4mIzUwOTAwOyYjNDcxMzE7ICYjNDYzMjE7JiM0NzE5Nzs8L3RleHQ+PGVsbGlwc2UgY3g9IjQzOSIgY3k9IjMyMy43MjMxIiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjQzOSIgY3k9IjMyMy43MjMxIiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjM4NyIgeDI9IjM4NyIgeTE9IjEyLjQ1NTEiIHkyPSIzMzQuNzIzMSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjY4NCIgeDI9IjY4NCIgeTE9IjEyLjQ1NTEiIHkyPSIzMzQuNzIzMSIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjEwOSIgeDI9IjEwOSIgeTE9IjYyLjE3ODciIHkyPSI4Mi4xNzg3Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxMDUsNzIuMTc4NywxMDksODIuMTc4NywxMTMsNzIuMTc4NywxMDksNzYuMTc4NyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTA5IiB4Mj0iMTA5IiB5MT0iMTE4LjY2MTEiIHkyPSIxMzguNjYxMSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTA1LDEyOC42NjExLDEwOSwxMzguNjYxMSwxMTMsMTI4LjY2MTEsMTA5LDEzMi42NjExIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSI0MzkiIHgyPSI0MzkiIHkxPSIyODguMTA4NCIgeTI9IjMxMi43MjMxIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI0MzUsMzAyLjcyMzEsNDM5LDMxMi43MjMxLDQ0MywzMDIuNzIzMSw0MzksMzA2LjcyMzEiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjEwOSIgeDI9IjEwOSIgeTE9IjE3NS4xNDM2IiB5Mj0iMTgwLjE0MzYiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMDkiIHgyPSIyOTUiIHkxPSIxODAuMTQzNiIgeTI9IjE4MC4xNDM2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMjk1IiB4Mj0iMjk1IiB5MT0iMTgwLjE0MzYiIHkyPSIxOTUuMTQzNiIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMjkxLDE4NS4xNDM2LDI5NSwxOTUuMTQzNiwyOTksMTg1LjE0MzYsMjk1LDE4OS4xNDM2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIyOTUiIHgyPSIyOTUiIHkxPSIyMzEuNjI2IiB5Mj0iMjM2LjYyNiIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjI5NSIgeDI9IjQzOSIgeTE9IjIzNi42MjYiIHkyPSIyMzYuNjI2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iNDM5IiB4Mj0iNDM5IiB5MT0iMjM2LjYyNiIgeTI9IjI1MS42MjYiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjQzNSwyNDEuNjI2LDQzOSwyNTEuNjI2LDQ0MywyNDEuNjI2LDQzOSwyNDUuNjI2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIzNiIgeD0iOTAiIHk9IjMzLjIyMzYiPiYjNTA5MDA7JiM0NzEzMTs8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTUiIHg9IjI0Ni41IiB5PSIzMy4yMjM2Ij4mIzUwOTAwOyYjNDcxMzE7ICYjNDkzMjQ7JiM1MDYyOTsmIzUxMDg4OzwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIzNSIgeD0iNTE4IiB5PSIzMy4yMjM2Ij5UQVM8L3RleHQ+PCEtLVNSQz1bZ3RhcFV5aGgxUkRoazhmQjRlakFrQW9xajFtRHpSSXE1MjMyMmMtUXZ4dmZzTVdENVpUMjRkVm5UNTVtb0t5a3BLdERBdTRodWdnMXdNZlF5c1B3d3ZqdjRzaDA2ZXJuUWNvUHl0ZkxBcVhaWTZDbUhBcTlhamhOYXBVLU5aWk5jWWlsbG9ITGVJV3BGUUU0SW00OGVnN0laemVjQUczcm5PODVqSEkyS1dqQkt1akJXN0h3UGQ1OVFmNTJVNjlFSmNlOUxzZlVZV0I4MUEwRnltaTBdLS0+PC9nPjwvc3ZnPg==" width="703" height="346" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-월렛의-종류">3.1. 월렛의 종류<a href="#31-월렛의-종류" class="hash-link" aria-label="3.1. 월렛의 종류에 대한 직접 링크" title="3.1. 월렛의 종류에 대한 직접 링크">​</a></h3>
+<p>월렛의 종류 및 현재 표준으로 채택 여부는 아래 표와 같다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>종류</th><th>설명</th><th style="text-align:center">표준</th></tr></thead><tbody><tr><td>File Wallet<br>(파일 월렛)</td><td>인가앱 내부에 파일과 SDK로 존재</td><td style="text-align:center">Y</td></tr><tr><td>App Wallet<br>(앱 월렛)</td><td>인가앱이 설치된 모바일 장치에 별도 앱으로 존재</td><td style="text-align:center">N</td></tr><tr><td>Cloud Wallet<br>(클라우드 월렛)</td><td>온라인 서비스 형태로 존재</td><td style="text-align:center">N</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="311-파일-월렛">3.1.1. 파일 월렛<a href="#311-파일-월렛" class="hash-link" aria-label="3.1.1. 파일 월렛에 대한 직접 링크" title="3.1.1. 파일 월렛에 대한 직접 링크">​</a></h4>
+<p>파일 월렛은 월렛 사업자로부터 획득한 SDK를 인가앱 내부에서 호출하여 사용하는 월렛이다.
+월렛이 인가앱 내에 존재하므로 하나의 인가앱만 해당 월렛에 접근이 가능하다.
+즉, 두 개 이상의 인가앱이 월렛을 공유할 수 없고 독점적으로만 사용 가능하다.</p>
+<p>SDK와 월렛 사업자 서버간의 통신에 대한 규정은 본 문서의 범위 밖이다.</p>
+<p><img decoding="async" loading="lazy" alt="파일 월렛" src="/did-doc-architecture/assets/images/diag_wallet_file_ko-fcde1f42b804124bf5c389b97b1486ca.svg" width="475" height="315" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="312-앱-월렛">3.1.2. 앱 월렛<a href="#312-앱-월렛" class="hash-link" aria-label="3.1.2. 앱 월렛에 대한 직접 링크" title="3.1.2. 앱 월렛에 대한 직접 링크">​</a></h4>
+<p>앱 월렛은 인가앱이 설치된 동일한 모바일 기기에 앱 형태로 설치된 월렛이다.
+인가앱과 앱 월렛간은 App2App 방식으로 통신하며 이에 대한 구체적인 방법은 현재 미정이다.
+두 개 이상의 인가앱이 하나의 앱 월렛을 공유할 수 있다.</p>
+<p><img decoding="async" loading="lazy" alt="앱 월렛" src="/did-doc-architecture/assets/images/diag_wallet_app_ko-83165903499577c5b2d0947f513ef56d.svg" width="475" height="316" class="img_ev3q"></p>
+<p><strong>■ 고려사항</strong></p>
+<ul>
+<li>다른 기기에 설치된 앱 월렛에 접근이 가능한가?</li>
+<li>여러 인가앱이 공유 시
+<ul>
+<li>어떤 인가앱에서 발급받은 VC를 다른 인가앱에서 접근 가능한가?</li>
+<li>인가앱별 월렛 잠금/해제가 필요한가?</li>
+</ul>
+</li>
+<li>앱 월렛의 백업/복구가 가능한가?</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="313-클라우드-월렛">3.1.3. 클라우드 월렛<a href="#313-클라우드-월렛" class="hash-link" aria-label="3.1.3. 클라우드 월렛에 대한 직접 링크" title="3.1.3. 클라우드 월렛에 대한 직접 링크">​</a></h4>
+<p>클라우드 월렛은 월렛 사업자가 온라인 서비스 형태로 제공하는 월렛이다.
+온라인에 존재하므로 백업/복구 기능을 기본적으로 제공하여야 한다.
+현재 표준으로 채택된 방식이 아니므로 인가앱과 클라우드 월렛에 대한 통신 방법 등은 미정이다.</p>
+<p><img decoding="async" loading="lazy" alt="클라우드 월렛" src="/did-doc-architecture/assets/images/diag_wallet_cloud_ko-8b81fb96253d40ebf12c0a8d65e49d7c.svg" width="566" height="315" class="img_ev3q"></p>
+<p><strong>■ 고려사항</strong></p>
+<ul>
+<li>인가앱으로부터 접근에 대한 인증수단은 무엇인가?</li>
+<li>백업/복구에 대한 사용자 인증수단은 무엇인가?</li>
+<li>인가앱  과 월렛간 통신 데이터 보안은 어떻게 보장하는가?</li>
+<li>여러 인가앱이 공유 시
+<ul>
+<li>어떤 인가앱에서 발급받은 VC를 다른 인가앱에서 접근 가능한가?</li>
+<li>인가앱별 월렛 잠금/해제가 필요한가?</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-월렛의-기능">3.2. 월렛의 기능<a href="#32-월렛의-기능" class="hash-link" aria-label="3.2. 월렛의 기능에 대한 직접 링크" title="3.2. 월렛의 기능에 대한 직접 링크">​</a></h3>
+<p>월렛은 그 종류와 무관하게 다음의 기능을 제공하여야 한다.</p>
+<ol>
+<li>월렛 자신의 DID를 보유하고 신뢰저장소에 등록
+<ul>
+<li>월렛 DID Document의 진본성을 월렛 사업자가 보장</li>
+</ul>
+</li>
+<li>사용자 DID Document 관련 기능
+<ul>
+<li>신규 생성 및 등록 요청</li>
+<li>변경 및 등록 요청: 키 교체, 서비스 추가 등</li>
+<li>폐기/말소 요청</li>
+</ul>
+</li>
+<li>모든 키의 안전한 저장
+<ul>
+<li>월렛 키, 사용자 키를 안전한 영역에 저장</li>
+<li>운영체제가 제공하는 안전영역을 이용</li>
+</ul>
+</li>
+<li>월렛 키와 사용자 키의 분리
+<ul>
+<li>월렛 키와 사용자 키는 (물리적으로 같은 위치에 저장하더라도) 개념적으로 분리 필요</li>
+<li>키의 생성과 사용에 대한 접근 경로가 종류별로 달라야 함(아래 인증수단 참조)</li>
+</ul>
+</li>
+<li>인증수단 준수에 의한 키 사용
+<ul>
+<li>사용자 키는 생성 시 지정한 인증수단에 맞게 사용자 인증 후 사용 가능</li>
+<li>월렛 키는 월렛토큰 인증 및 기타 월렛이 지정한 인증 완료 후 사용 가능</li>
+</ul>
+</li>
+<li>월렛토큰 생성/검증
+<ul>
+<li>현재 월렛의 상태가 인가앱이 요청한 purpose를 수용할 수 있는지 판단</li>
+<li>인가앱이 요청한 purpose를 식별할 수 있는 월렛토큰 생성</li>
+<li>인가앱이 요청한 기능을 수행할 수 있는 월렛토큰을 제 출하였는지 검증</li>
+<li>한 순간에 하나의 월렛토큰만 존재하도록 관리</li>
+</ul>
+</li>
+<li>VC 관련 기능
+<ul>
+<li>TAS에 VC 발급을 요청하고 발급 받은 VC를 월렛 내에 안전하게 저장</li>
+<li>적절한 월렛토큰 검증 후 인가앱에 VC 제공</li>
+</ul>
+</li>
+<li>VP 관련 기능
+<ul>
+<li>적절한 월렛토큰 검증 후 VP 생성 및 암호화 (제출은 인가앱이 수행)</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-상세-절차">3.3. 상세 절차<a href="#33-상세-절차" class="hash-link" aria-label="3.3. 상세 절차에 대한 직접 링크" title="3.3. 상세 절차에 대한 직접 링크">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="월렛 등록 상세" src="/did-doc-architecture/assets/images/seq_create_wallet_ko-4438c06454d1e55a70648034dd8e12ec.svg" width="1069" height="1713" class="img_ev3q"></p>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-사용자-등록-절차">4. 사용자 등록 절차<a href="#4-사용자-등록-절차" class="hash-link" aria-label="4. 사용자 등록 절차에 대한 직접 링크" title="4. 사용자 등록 절차에 대한 직접 링크">​</a></h2>
+<p>사용자 등록 절차는 아래 그림과 같다.</p>
+<p><img decoding="async" loading="lazy" alt="사용자 등록 절차" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIzODhweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjM3NXB4O2hlaWdodDozODhweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAzNzUgMzg4IiB3aWR0aD0iMzc1cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48ZWxsaXBzZSBjeD0iOTYiIGN5PSIyMCIgZmlsbD0iIzIyMjIyMiIgcng9IjEwIiByeT0iMTAiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxwYXRoIGQ9Ik0xOTUsNDUuMzg1MyBMMTk1LDY0LjI0MTIgTDE3NSw2OC4yNDEyIEwxOTUsNzIuMjQxMiBMMTk1LDkxLjA5NzIgQTAsMCAwIDAgMCAxOTUsOTEuMDk3MiBMMzU5LDkxLjA5NzIgQTAsMCAwIDAgMCAzNTksOTEuMDk3MiBMMzU5LDU1LjM4NTMgTDM0OSw0NS4zODUzIEwxOTUsNDUuMzg1MyBBMCwwIDAgMCAwIDE5NSw0NS4zODUzICIgZmlsbD0iI0ZFRkZERCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHBhdGggZD0iTTM0OSw0NS4zODUzIEwzNDksNTUuMzg1MyBMMzU5LDU1LjM4NTMgTDM0OSw0NS4zODUzICIgZmlsbD0iI0ZFRkZERCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTMiIHg9IjIwMSIgeT0iNjUuMzg0OCI+WyYjNTEwNjQ7JiM0NDAzMjsmIzUwNTQ1OyAmIzg1OTQ7IFRBU108L3RleHQ+PGVsbGlwc2UgY3g9IjIwNi41IiBjeT0iNzguNTk3MiIgZmlsbD0iIzAwMDAwMCIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTMxIiB4PSIyMTMiIHk9IjgzLjI0MDciPlByb3Bvc2UgUmVnaXN0ZXIgVXNlcjwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjM2LjQ4MjQiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTU4IiB4PSIxNyIgeT0iNTAiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTgiIHg9IjI3IiB5PSI3My44NDU3Ij5CMS48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTE3IiB4PSI0OCIgeT0iNzMuODQ1NyI+JiM0OTMyNDsmIzUwODU3OyYjNTEwODg7ICYjNDYzMjE7JiM0NzE5NzsgJiM0OTg4NDsmIzUxMDg5OyAmIzUwODM2OyYjNTIzOTc7PC90ZXh0PjxwYXRoIGQ9Ik0xNTQsMTA2LjQ4MjQgTDE1NCwxMjUuMzM4NCBMMTM0LDEyOS4zMzg0IEwxNTQsMTMzLjMzODQgTDE1NCwxNTIuMTk0MyBBMCwwIDAgMCAwIDE1NCwxNTIuMTk0MyBMMjc1LDE1Mi4xOTQzIEEwLDAgMCAwIDAgMjc1LDE1Mi4xOTQzIEwyNzUsMTE2LjQ4MjQgTDI2NSwxMDYuNDgyNCBMMTU0LDEwNi40ODI0IEEwLDAgMCAwIDAgMTU0LDEwNi40ODI0ICIgZmlsbD0iI0ZFRkZERCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHBhdGggZD0iTTI2NSwxMDYuNDgyNCBMMjY1LDExNi40ODI0IEwyNzUsMTE2LjQ4MjQgTDI2NSwxMDYuNDgyNCAiIGZpbGw9IiNGRUZGREQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjkzIiB4PSIxNjAiIHk9IjEyNi40ODE5Ij5bJiM1MTA2NDsmIzQ0MDMyOyYjNTA1NDU7ICYjODU5NDsgVEFTXTwvdGV4dD48ZWxsaXBzZSBjeD0iMTY1LjUiIGN5PSIxMzkuNjk0MyIgZmlsbD0iIzAwMDAwMCIgcng9IjIuNSIgcnk9IjIuNSIgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjA7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iODgiIHg9IjE3MiIgeT0iMTQ0LjMzNzkiPlJlcXVlc3QgRUNESDwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjM2LjQ4MjQiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iNzYiIHg9IjU4IiB5PSIxMTEuMDk3MiIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iYm9sZCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxOCIgeD0iNjgiIHk9IjEzNC45NDI5Ij5CMi48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMzUiIHg9Ijg5IiB5PSIxMzQuOTQyOSI+RUNESDwvdGV4dD48cGF0aCBkPSJNMjAxLDE2Ny41Nzk2IEwyMDEsMTg2LjQzNTUgTDE4MSwxOTAuNDM1NSBMMjAxLDE5NC40MzU1IEwyMDEsMjEzLjI5MTUgQTAsMCAwIDAgMCAyMDEsMjEzLjI5MTUgTDM2MywyMTMuMjkxNSBBMCwwIDAgMCAwIDM2MywyMTMuMjkxNSBMMzYzLDE3Ny41Nzk2IEwzNTMsMTY3LjU3OTYgTDIwMSwxNjcuNTc5NiBBMCwwIDAgMCAwIDIwMSwxNjcuNTc5NiAiIGZpbGw9IiNGRUZGREQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxwYXRoIGQ9Ik0zNTMsMTY3LjU3OTYgTDM1MywxNzcuNTc5NiBMMzYzLDE3Ny41Nzk2IEwzNTMsMTY3LjU3OTYgIiBmaWxsPSIjRkVGRkREIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI5MyIgeD0iMjA3IiB5PSIxODcuNTc5MSI+WyYjNTEwNjQ7JiM0NDAzMjsmIzUwNTQ1OyAmIzg1OTQ7IFRBU108L3RleHQ+PGVsbGlwc2UgY3g9IjIxMi41IiBjeT0iMjAwLjc5MTUiIGZpbGw9IiMwMDAwMDAiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEyOSIgeD0iMjE5IiB5PSIyMDUuNDM1MSI+UmVxdWVzdCBDcmVhdGUgVG9rZW48L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzNi40ODI0IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE3MCIgeD0iMTEiIHk9IjE3Mi4xOTQzIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE4IiB4PSIyMSIgeT0iMTk2LjA0Ij5CMy48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTI5IiB4PSI0MiIgeT0iMTk2LjA0Ij4mIzUwOTAwOyYjNDcxMzE7JiM1MzY2NDsmIzUzMzYwOywgJiM0OTQzNjsmIzQ4MjYwOyYjNTM2NjQ7JiM1MzM2MDsgJiM0OTM3MzsmIzQ5NDU3OzwvdGV4dD48cGF0aCBkPSJNMTgxLjUsMjI4LjY3NjggTDE4MS41LDI0Ny41MzI3IEwxNjEuNSwyNTEuNTMyNyBMMTgxLjUsMjU1LjUzMjcgTDE4MS41LDI3NC4zODg3IEEwLDAgMCAwIDAgMTgxLjUsMjc0LjM4ODcgTDM0NS41LDI3NC4zODg3IEEwLDAgMCAwIDAgMzQ1LjUsMjc0LjM4ODcgTDM0NS41LDIzOC42NzY4IEwzMzUuNSwyMjguNjc2OCBMMTgxLjUsMjI4LjY3NjggQTAsMCAwIDAgMCAxODEuNSwyMjguNjc2OCAiIGZpbGw9IiNGRUZGREQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjxwYXRoIGQ9Ik0zMzUuNSwyMjguNjc2OCBMMzM1LjUsMjM4LjY3NjggTDM0NS41LDIzOC42NzY4IEwzMzUuNSwyMjguNjc2OCAiIGZpbGw9IiNGRUZGREQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjgwIiB4PSIxODcuNSIgeT0iMjQ4LjY3NjMiPlsmIzUwOTAwOyYjNDcxMzE7ICYjODU5NDsgVEFTXTwvdGV4dD48ZWxsaXBzZSBjeD0iMTkzIiBjeT0iMjYxLjg4ODciIGZpbGw9IiMwMDAwMDAiIHJ4PSIyLjUiIHJ5PSIyLjUiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4wOyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjEzMSIgeD0iMTk5LjUiIHk9IjI2Ni41MzIyIj5SZXF1ZXN0IFJlZ2lzdGVyIFVzZXI8L3RleHQ+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzNi40ODI0IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjEzMSIgeD0iMzAuNSIgeT0iMjMzLjI5MTUiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9ImJvbGQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTgiIHg9IjQwLjUiIHk9IjI1Ny4xMzcyIj5CNC48L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTAiIHg9IjYxLjUiIHk9IjI1Ny4xMzcyIj4mIzQ5MzI0OyYjNTA4NTc7JiM1MTA4ODsgJiM0NjMyMTsmIzQ3MTk3OyAmIzUwODM2OyYjNTIzOTc7PC90ZXh0PjxwYXRoIGQ9Ik0xODEuNSwyODkuNzczOSBMMTgxLjUsMzA4LjYyOTkgTDE2MS41LDMxMi42Mjk5IEwxODEuNSwzMTYuNjI5OSBMMTgxLjUsMzM1LjQ4NTggQTAsMCAwIDAgMCAxODEuNSwzMzUuNDg1OCBMMzQxLjUsMzM1LjQ4NTggQTAsMCAwIDAgMCAzNDEuNSwzMzUuNDg1OCBMMzQxLjUsMjk5Ljc3MzkgTDMzMS41LDI4OS43NzM5IEwxODEuNSwyODkuNzczOSBBMCwwIDAgMCAwIDE4MS41LDI4OS43NzM5ICIgZmlsbD0iI0ZFRkZERCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHBhdGggZD0iTTMzMS41LDI4OS43NzM5IEwzMzEuNSwyOTkuNzczOSBMMzQxLjUsMjk5Ljc3MzkgTDMzMS41LDI4OS43NzM5ICIgZmlsbD0iI0ZFRkZERCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTMiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTMiIHg9IjE4Ny41IiB5PSIzMDkuNzczNCI+WyYjNTEwNjQ7JiM0NDAzMjsmIzUwNTQ1OyAmIzg1OTQ7IFRBU108L3RleHQ+PGVsbGlwc2UgY3g9IjE5MyIgY3k9IjMyMi45ODU4IiBmaWxsPSIjMDAwMDAwIiByeD0iMi41IiByeT0iMi41IiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMyIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxMjciIHg9IjE5OS41IiB5PSIzMjcuNjI5NCI+Q29uZmlybSBSZWdpc3RlciBVc2VyPC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzYuNDgyNCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxMzEiIHg9IjMwLjUiIHk9IjI5NC4zODg3Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSJib2xkIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE4IiB4PSI0MC41IiB5PSIzMTguMjM0NCI+QjUuPC90ZXh0Pjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjkwIiB4PSI2MS41IiB5PSIzMTguMjM0NCI+JiM0OTMyNDsmIzUwODU3OyYjNTEwODg7ICYjNDYzMjE7JiM0NzE5NzsgJiM1MDc1NjsmIzQ3MzA4OzwvdGV4dD48ZWxsaXBzZSBjeD0iOTYiIGN5PSIzNjYuNDg1OCIgZmlsbD0ibm9uZSIgcng9IjExIiByeT0iMTEiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxlbGxpcHNlIGN4PSI5NiIgY3k9IjM2Ni40ODU4IiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9Ijk2IiB4Mj0iOTYiIHkxPSIzMCIgeTI9IjUwIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSI5Miw0MCw5Niw1MCwxMDAsNDAsOTYsNDQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9Ijk2IiB4Mj0iOTYiIHkxPSI4Ni40ODI0IiB5Mj0iMTExLjA5NzIiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjkyLDEwMS4wOTcyLDk2LDExMS4wOTcyLDEwMCwxMDEuMDk3Miw5NiwxMDUuMDk3MiIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTYiIHgyPSI5NiIgeTE9IjE0Ny41Nzk2IiB5Mj0iMTcyLjE5NDMiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjkyLDE2Mi4xOTQzLDk2LDE3Mi4xOTQzLDEwMCwxNjIuMTk0Myw5NiwxNjYuMTk0MyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTYiIHgyPSI5NiIgeTE9IjIwOC42NzY4IiB5Mj0iMjMzLjI5MTUiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjkyLDIyMy4yOTE1LDk2LDIzMy4yOTE1LDEwMCwyMjMuMjkxNSw5NiwyMjcuMjkxNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTYiIHgyPSI5NiIgeTE9IjI2OS43NzM5IiB5Mj0iMjk0LjM4ODciLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjkyLDI4NC4zODg3LDk2LDI5NC4zODg3LDEwMCwyODQuMzg4Nyw5NiwyODguMzg4NyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iOTYiIHgyPSI5NiIgeTE9IjMzMC44NzExIiB5Mj0iMzU1LjQ4NTgiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjkyLDM0NS40ODU4LDk2LDM1NS40ODU4LDEwMCwzNDUuNDg1OCw5NiwzNDkuNDg1OCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PCEtLVNSQz1bQW92OUIyaFh1aEJJcWQ4b3JERklLZFpKakVSRGg5TGx2YXJHVTNydnUtazVTbk5VVEN6dkNzLVltZmpQS3p2aU1jbERiUFRWYWdmR2I5Y1VLU0FiMDBKSFItUmtVQk1YdVN0S1pHZ0ZzWU9mWDNXNm51QjVqSEcyWWw4Qnllako1TzlJcXBFQklyQUI1NEFCS3VrdUtsREk1NDE2RzZtcTBqZGV3a3BZR09BdkdRYzVmUWQ1OU0xalFDT1BXcHFtVXloaDFSRlZqWXJ1c3hYMUgtNURvdnBOY3JlV0Y4S3RwTkZWajZtYW1veGRlakg0ZTlRR19FcEtGM0d4SlIwNzZneEcwWmlFYnBOdVdpZUtrcHFwTXJ1bHhZNzFIeXh2VU1jUEhSYXVoSWVrb0l5MDAwMDBdLS0+PC9nPjwvc3ZnPg==" width="375" height="388" class="img_ev3q"></p>
+<p>상기의 절차에서 생략된 것은 KYC(Know Your Customer, 본인확인) 과정이다.
+KYC 수행은 DID 정책이나 KYC 수행 주체에 따라 방법이나 시점이 달라질 수 있다.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-상세-절차">4.1. 상세 절차<a href="#41-상세-절차" class="hash-link" aria-label="4.1. 상세 절차에 대한 직접 링크" title="4.1. 상세 절차에 대한 직접 링크">​</a></h3>
+<p><img decoding="async" loading="lazy" alt="사용자 등록 상세" src="/did-doc-architecture/assets/images/seq_register_user_ko-580e96f96fc0f86b6be4234b04347482.svg" width="1006" height="3927" class="img_ev3q"></p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/suhyun-forten-lee/did-doc-architecture/edit/main/versioned_docs/version-1.000/did-doc-architecture/concepts/User Registration_ko.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>페이지 편집</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="문서 페이지"><a class="pagination-nav__link pagination-nav__link--prev" href="/did-doc-architecture/docs/did-doc-architecture/concepts/Presentation of VP_ko"><div class="pagination-nav__sublabel">이전</div><div class="pagination-nav__label">VP 제출</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/did-doc-architecture/docs/did-doc-architecture/concepts/VC Issuance_ko"><div class="pagination-nav__sublabel">다음</div><div class="pagination-nav__label">VC 발급</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#목차" class="table-of-contents__link toc-highlight">목차</a></li><li><a href="#1-개요" class="table-of-contents__link toc-highlight">1. 개요</a><ul><li><a href="#11-참조문서" class="table-of-contents__link toc-highlight">1.1. 참조문서</a></li></ul></li><li><a href="#2-공통사항" class="table-of-contents__link toc-highlight">2. 공통사항</a><ul><li><a href="#21-데이터-타입-및-상수" class="table-of-contents__link toc-highlight">2.1. 데이터 타입 및 상수</a></li><li><a href="#22-did-정책" class="table-of-contents__link toc-highlight">2.2. DID 정책</a></li></ul></li><li><a href="#3-월렛-등록-절차" class="table-of-contents__link toc-highlight">3. 월렛 등록 절차</a><ul><li><a href="#31-월렛의-종류" class="table-of-contents__link toc-highlight">3.1. 월렛의 종류</a></li><li><a href="#32-월렛의-기능" class="table-of-contents__link toc-highlight">3.2. 월렛의 기능</a></li><li><a href="#33-상세-절차" class="table-of-contents__link toc-highlight">3.3. 상세 절차</a></li></ul></li><li><a href="#4-사용자-등록-절차" class="table-of-contents__link toc-highlight">4. 사용자 등록 절차</a><ul><li><a href="#41-상세-절차" class="table-of-contents__link toc-highlight">4.1. 상세 절차</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© OMNIONE.LTD All rights reserved.</div></div></div></footer></div>
+</body>
+</html>
