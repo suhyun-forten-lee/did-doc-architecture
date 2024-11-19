@@ -13,7 +13,7 @@ const config = {
   markdown: { format: 'detect' },
  
   title: 'OmniOneID',
-  tagline: 'Documentation for individual modules',
+  tagline: 'Hello World',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -35,7 +35,7 @@ const config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ko'],
+    locales: ['en'],
     path: 'i18n'
   },
 
