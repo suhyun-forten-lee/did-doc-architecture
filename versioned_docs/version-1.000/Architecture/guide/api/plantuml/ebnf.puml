@@ -1,4 +1,0 @@
-@startebnf ebnf_apiurl
-API-URL = ServiceEndpoint, "/", Path;
-ServiceEndpoint = Protocol, "://", Host, [":", Port], ["/", ContextPath];
-@endebnf

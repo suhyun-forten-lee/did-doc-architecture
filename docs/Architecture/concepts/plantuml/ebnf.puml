@@ -1,6 +1,0 @@
-@startebnf type_qrcode
-qr-code         = prefix, ";", version, ";", encoded-payload;
-prefix          = "opendid";
-version         = "v1";
-encoded-payload = ? base64Url(payload) ?;
-@endebnf
