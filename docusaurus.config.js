@@ -79,7 +79,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpeg',
       navbar: {
-        title: 'OmniOne Open DID',
+        title: 'OmniOne did-doc-architecture',
         logo: {
           alt: 'My Site Logo',
           src: 'img/omnione.jpeg',
