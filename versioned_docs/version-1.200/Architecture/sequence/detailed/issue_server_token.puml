@@ -1,0 +1,159 @@
+@startuml issue_server_token
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Settings
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID Technical Specification
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== Title ===
+title
+	<size:25>Server Token Creation</size>
+end title
+
+'=== Options ===
+autonumber "<b>(#)</b>"
+
+'=== Participants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+box Mobile #OldLace
+    participant "**Wallet**" as WALLET <<Wallet>> #WhiteSmoke
+    participant "**Certified App**" as CA <<App>> #WhiteSmoke    
+end box
+
+box Certified App Provider #AliceBlue
+    participant "**CAS**" as CAS <<WAS>> #WhiteSmoke
+end box
+
+box TAS Provider #AliceBlue
+    participant "**TAS**" as TAS <<WAS>> #WhiteSmoke
+end box
+
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Constants
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+!$refdoc = "Refer to separate document"
+!$doc = "Refer to data specification document"
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Content
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+||| 
+
+rnote across #white
+    The process of key exchange between CA and TAS for encryption and decryption is omitted.
+end note
+
+== Request Signed Wallet Information ==
+CA -> WALLET ++ : Request Signed Wallet Information {walletToken}
+    WALLET -> WALLET: Validate walletToken
+    WALLET -> WALLET: Generate nonce
+    WALLET -> WALLET: Sign Wallet Information\
+                \n* (SignedWalletInfo)walletInfo = {\
+                \n      walletId,\
+                \n      did,\
+                \n      nonce,\
+                \n      proof\
+                \n      }
+return {walletInfo}
+
+
+|||
+== Request Signed App Information ==
+rnote across #white
+    The certified app must have already established a session with the certified app server through a login or similar process.
+    However, the specific details of this process are not covered in this specification.
+end note
+
+CA -> CAS ++ : Request Signed App Information
+rnote right of CA #LightGray        
+    **[API_REQ : Request Signed App Information]**
+    query:
+        appId
+end note
+    CAS -> CAS : Generate nonce
+    CAS -> CAS : Sign App Information\
+            \n* (AttestedAppInfo)caAppInfo = {\
+            \n      appId,\
+            \n      provider,\
+            \n      nonce,\
+            \n      proof\
+            \n      }
+return Signed App Information Response {caAppInfo}
+rnote right of CA #LightGray        
+    **[API_REQ : Signed App Information Response]**
+    body:
+        attestedAppInfo
+end note
+
+
+|||
+== Request Server Token Data Generation ==
+CA -> CA: Generate Server Token Seed\
+        \n* (ServerTokenSeed)seed = {\
+        \n     purpose = "CreateDid",\
+        \n     walletInfo,\
+        \n     caAppInfo\
+        \n  }
+
+    CA -> TAS++ : Server Token Request
+    rnote right of CA #LightGray        
+        **[API_REQ : Server Token Request]**
+        body:
+            messageId,
+            txId,
+            seed
+    end note
+
+    TAS -> TAS: Verify signatures\
+            \n* Verify wallet signature\
+            \n* Verify certified app provider signature
+
+    TAS -> TAS: Extract information from seed\
+            \n* appId = Certified app identifier\
+            \n* walletId = Wallet identifier\
+            \n* walletDid = Wallet DID\
+            \n* walletProviderDid = Wallet provider DID
+
+    TAS -> TAS: Verify if it matches the registered wallet information
+
+    TAS -> TAS: Generate and store server token\
+            \n* Create (ServerTokenData)std\
+            \n* serverToken = sha256(std)
+
+    TAS -> TAS: Encrypt response information\
+            \n* iv = Generate IV\
+            \n* tmp = enc(std, sesKey, iv)\
+            \n* encStd = multibase(tmp)
+
+return Server Token Response
+rnote right of CA #LightGray        
+    **[API_REQ : Server Token Response]**
+    body:
+        txId,
+        iv,
+        encStd
+end note
+
+
+|||
+== Issue Server Token ==
+CA -> CA: Decrypt encStd\
+    \n tmp = debase(encStd)\
+    \n* std = dec(tmp, sesKey, iv)
+
+CA -> CA: Calculate serverToken\
+    \n serverToken = sha256(std)
+
+|||
+|||
+@enduml
+

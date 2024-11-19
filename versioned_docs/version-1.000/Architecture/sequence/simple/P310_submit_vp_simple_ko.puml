@@ -1,0 +1,88 @@
+@startuml P310_submit_vp_simple_ko
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 설정
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID 기술 규격
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== 제목 ===
+title
+	<size:25>P310 : VP 제출</size>
+end title
+
+'=== 옵션 ===
+autonumber "<b>(#)</b>"
+
+'=== Participants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+box 모바일 #OldLace
+    participant "**월렛**" as WALLET <<Wallet>> #WhiteSmoke
+    participant "**인가앱**" as CA <<App>> #WhiteSmoke    
+end box
+
+box 검증서버 #AliceBlue
+    participant "**Verifier**" as SP <<WAS>> #WhiteSmoke
+end box
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 내용
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|||
+== VP Offer 요청  ==
+
+rnote across #white
+    인가앱은 Verifier로부터 VP Offer 요청을 수신해야 한다.
+    그러나 이 과정의 구체적인 내용은 본 규격에서 다루지 않는다.
+end note
+
+== P310-1 : VP Profile 요청 ==
+
+CA -> SP++: VP profile 요청
+rnote right of CA #Lavender        
+    **[M310_REQ: VP Profile 요청]**
+end note
+
+SP -> SP: VP Profile 생성 / 서명
+
+SP --> CA--: VP profile 응답
+rnote right of CA #Lavender        
+    **[M310_RES: VP Profile 응답]**
+end note
+
+== P310-2 : VP 제출  ==
+
+rnote across #white
+    VP는 암호화하여 제출해야 한다.
+    인가앱과 Verifier 간의 암호화 및 복호화를 위한 키 교환 과정은 생략되었다.
+end note
+
+CA -> SP++: VP 제출
+rnote right of CA #Lavender        
+    **[M310_REQ: VP 제출]**
+end note
+
+SP -> SP : VP검증
+SP --> CA--:  VP 제출 결과
+rnote right of CA #Lavender        
+    **[M310_RES: VP 제출 결과]**    
+end note
+
+== Vp 제출 결과 확인 ==
+
+rnote across #white
+    인가앱으로부터 VP 제출을 요청한 주체는 Verifier에게 VP 제출 결과를 요청할 수 있다.
+    그러나 이 과정의 구체적인 내용은 본 규격에서 다루지 않는다.
+end note
+
+
+|||
+|||
+@enduml

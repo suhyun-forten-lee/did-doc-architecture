@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-Architecture/data standard/did document format/DID Document format" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.1">
+<title data-rh="true">DID Document format | OmniOneID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://your-docusaurus-site.example.com/architecture/img/docusaurus-social-card.jpeg"><meta data-rh="true" name="twitter:image" content="https://your-docusaurus-site.example.com/architecture/img/docusaurus-social-card.jpeg"><meta data-rh="true" property="og:url" content="https://your-docusaurus-site.example.com/architecture/docs/next/Architecture/data standard/did document format/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="ko"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="DID Document format | OmniOneID"><meta data-rh="true" name="description" content="- Subject"><meta data-rh="true" property="og:description" content="- Subject"><link data-rh="true" rel="icon" href="/architecture/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://your-docusaurus-site.example.com/architecture/docs/next/Architecture/data standard/did document format/"><link data-rh="true" rel="alternate" href="https://your-docusaurus-site.example.com/architecture/docs/next/Architecture/data standard/did document format/" hreflang="en"><link data-rh="true" rel="alternate" href="https://your-docusaurus-site.example.com/architecture/ko/docs/next/Architecture/data standard/did document format/" hreflang="ko"><link data-rh="true" rel="alternate" href="https://your-docusaurus-site.example.com/architecture/docs/next/Architecture/data standard/did document format/" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/architecture/blog/rss.xml" title="OmniOneID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/architecture/blog/atom.xml" title="OmniOneID Atom Feed"><link rel="stylesheet" href="/architecture/assets/css/styles.ceea0820.css">
+<script src="/architecture/assets/js/runtime~main.6b2d70a3.js" defer="defer"></script>
+<script src="/architecture/assets/js/main.bfa488b1.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/architecture/"><div class="navbar__logo"><img src="/architecture/img/omnione.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/architecture/img/omnione.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">OmniOne Open DID</b></a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/architecture/docs/next/Architecture/data standard/did document format/">Next</a><ul class="dropdown__menu"><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/architecture/docs/next/Architecture/data standard/did document format/">Next</a></li><li><a class="dropdown__link" href="/architecture/docs/Architecture/data standard/did document format/">1.200</a></li><li><a class="dropdown__link" href="/architecture/docs/1.100/Architecture/data standard/did document format/">1.100</a></li><li><a class="dropdown__link" href="/architecture/docs/1.000/Architecture/data standard/did document format/">1.000</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>English</a><ul class="dropdown__menu"><li><a href="/architecture/docs/next/Architecture/data standard/did document format/" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="en">English</a></li><li><a href="/architecture/ko/docs/next/Architecture/data standard/did document format/" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="ko">한국어</a></li></ul></div><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/architecture/docs/next/Architecture/architecture/Software Architecture">Docs</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/OmniOneID" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/architecture/docs/next/Architecture/architecture/Software Architecture">Architecture</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/docs/next/Architecture/architecture/Software Architecture">architecture</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/docs/next/Architecture/concepts/JSON_serialization">concepts</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/architecture/docs/next/Architecture/data standard/data specification/">data standard</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/architecture/docs/next/Architecture/data standard/data specification/">Data Specification</a><button aria-label="Expand sidebar category &#x27;Data Specification&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible menu__list-item-collapsible--active"><a class="menu__link menu__link--sublist menu__link--active" aria-current="page" tabindex="0" href="/architecture/docs/next/Architecture/data standard/did document format/">DID Document format</a><button aria-label="Collapse sidebar category &#x27;DID Document format&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-4 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/docs/next/Architecture/data standard/did document format/DID Document format_ko">DID Document format</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/docs/next/Architecture/data standard/verifiable credential format/Profile format">verifiable credential format</a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/docs/next/Architecture/guide/api/API Documentation Writing Guide">guide</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/docs/next/Architecture/rules/coding_style">rules</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/docs/next/Architecture/security/MitM">security</a></div></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/architecture/docs/next/SDK/did-blockchain-sdk-server/">SDK</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/architecture/docs/next/Server/did-api-server/">Server</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="theme-doc-version-banner alert alert--warning margin-bottom--md" role="alert"><div>This is unreleased documentation for <!-- -->OmniOneID<!-- --> <b>Next</b> version.</div><div class="margin-top--md">For up-to-date documentation, see the <b><a href="/architecture/docs/Architecture/data standard/did document format/">latest version</a></b> (<!-- -->1.200<!-- -->).</div></div><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/architecture/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Architecture</span><meta itemprop="position" content="1"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">data standard</span><meta itemprop="position" content="2"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">DID Document format</span><meta itemprop="position" content="3"></li></ul></nav><span class="theme-doc-version-badge badge badge--secondary">Version: Next</span><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>DID Document format</h1></header>
+<ul>
+<li>Subject
+<ul>
+<li>Definition of DID Document types by entity</li>
+<li>Definition of keys and management data used in each DID Document</li>
+</ul>
+</li>
+<li>Author: Youngho Kang</li>
+<li>Date: 2024-09-03</li>
+<li>Version: v1.0.0</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="revision-history">Revision History<a href="#revision-history" class="hash-link" aria-label="Direct link to Revision History" title="Direct link to Revision History">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Version</th><th>Date</th><th>Changes</th></tr></thead><tbody><tr><td>v1.0.0</td><td>2024-09-03</td><td>Initial version</td></tr></tbody></table>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="table-of-contents">Table of Contents<a href="#table-of-contents" class="hash-link" aria-label="Direct link to Table of Contents" title="Direct link to Table of Contents">​</a></h2>
+<ul>
+<li><a href="#1-overview">1. Overview</a>
+<ul>
+<li><a href="#11-notation">1.1. Notation</a></li>
+<li><a href="#12-reference-documents">1.2. Reference Documents</a></li>
+</ul>
+</li>
+<li><a href="#2-general-matters">2. General Matters</a>
+<ul>
+<li><a href="#21-key-usage-verification-relationship">2.1. Key Usage (Verification Relationship)</a></li>
+<li><a href="#22-authentication-type-authtype">2.2. Authentication Type (authType)</a></li>
+<li><a href="#23-did-document-lifecycle">2.3. DID Document Lifecycle</a></li>
+<li><a href="#24-key-lifecycle">2.4. Key Lifecycle</a></li>
+<li><a href="#25-did-document-structure">2.5. DID Document Structure</a></li>
+</ul>
+</li>
+<li><a href="#3-did-document-specifications-by-entity">3. DID Document Specifications by Entity</a>
+<ul>
+<li><a href="#31-holder-did-document">3.1. Holder DID Document</a></li>
+<li><a href="#32-wallet-did-document">3.2. Wallet DID Document</a></li>
+<li><a href="#33-tas-did-document">3.3. TAS DID Document</a></li>
+<li><a href="#34-provider-did-document">3.4. Provider DID Document</a></li>
+</ul>
+</li>
+</ul>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-overview">1. Overview<a href="#1-overview" class="hash-link" aria-label="Direct link to 1. Overview" title="Direct link to 1. Overview">​</a></h2>
+<p>This document describes the DID Documents used in OpenDID.
+The basic rules comply with W3C&#x27;s <code>[DID-v1.0]</code>.</p>
+<p>The following must adhere to what is defined in this document:</p>
+<ul>
+<li>Types and usage of keys, names, algorithms</li>
+<li>Service endpoint</li>
+</ul>
+<p>The following are <em>outside the scope of this document</em> and can be freely defined by the implementation:</p>
+<ul>
+<li>Key validity period and key rotation methods</li>
+<li>Procedures for creating and modifying DID Documents</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="11-notation">1.1. Notation<a href="#11-notation" class="hash-link" aria-label="Direct link to 1.1. Notation" title="Direct link to 1.1. Notation">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="111-json-data-notation">1.1.1. JSON Data Notation<a href="#111-json-data-notation" class="hash-link" aria-label="Direct link to 1.1.1. JSON Data Notation" title="Direct link to 1.1.1. JSON Data Notation">​</a></h4>
+<p>When defining document formats or input/output data in JSON format, follow the rules in <code>[OSD]</code>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="112-official-and-other-notations">1.1.2. Official and Other Notations<a href="#112-official-and-other-notations" class="hash-link" aria-label="Direct link to 1.1.2. Official and Other Notations" title="Direct link to 1.1.2. Official and Other Notations">​</a></h4>
+<h5 class="anchor anchorWithStickyNavbar_LWe7" id="1121-json-member-reference">1.1.2.1. JSON Member Reference<a href="#1121-json-member-reference" class="hash-link" aria-label="Direct link to 1.1.2.1. JSON Member Reference" title="Direct link to 1.1.2.1. JSON Member Reference">​</a></h5>
+<p>The rules for referencing specific members or values within a JSON formatted document are as follows.</p>
+<p>■ Sample JSON</p>
+<div class="language-json codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-json codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;name&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;value&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;array&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token string" style="color:#e3116c">&quot;A&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;B&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;C&quot;</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token property" style="color:#36acaa">&quot;obj&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;attr1&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;value1&quot;</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token property" style="color:#36acaa">&quot;attr2&quot;</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;value2&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li>Use slashes to represent parent/child relationships, similar to Unix paths.</li>
+<li>Use <code>~</code> for the top-level path in the document, akin to the Unix home path.
+<ul>
+<li><code>~/name</code>, <code>~/obj/attr</code></li>
+</ul>
+</li>
+<li>Use <code>.</code> and <code>..</code> for relative paths.
+<ul>
+<li><code>.</code>: Same level as the subject being described</li>
+<li><code>..</code>: One level above the subject being described</li>
+</ul>
+</li>
+<li>Arrays are denoted with <code>[&lt;index&gt;]</code>.
+<ul>
+<li><code>~/array[0]</code> → &quot;A&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="12-reference-documents">1.2. Reference Documents<a href="#12-reference-documents" class="hash-link" aria-label="Direct link to 1.2. Reference Documents" title="Direct link to 1.2. Reference Documents">​</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Reference Name</th><th>Document Name</th><th>Location</th></tr></thead><tbody><tr><td>[DID-v1.0]</td><td>Decentralized Identifiers (DIDs) v1.0</td><td><a href="https://www.w3.org/TR/did-core/" target="_blank" rel="noopener noreferrer">https://www.w3.org/TR/did-core/</a></td></tr><tr><td>[DID-IMPL-v1.0]</td><td>DID Implementation Guide v1.0</td><td><a href="https://www.w3.org/TR/did-imp-guide/" target="_blank" rel="noopener noreferrer">https://www.w3.org/TR/did-imp-guide/</a></td></tr><tr><td>[OSD]</td><td>OpenDID Schema Definition Language</td><td></td></tr><tr><td>[DATA-SPEC]</td><td>(OpenDID) Data Specification</td><td></td></tr></tbody></table>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-general-matters">2. General Matters<a href="#2-general-matters" class="hash-link" aria-label="Direct link to 2. General Matters" title="Direct link to 2. General Matters">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-key-usage-verification-relationship">2.1. Key Usage (Verification Relationship)<a href="#21-key-usage-verification-relationship" class="hash-link" aria-label="Direct link to 2.1. Key Usage (Verification Relationship)" title="Direct link to 2.1. Key Usage (Verification Relationship)">​</a></h3>
+<p>The key usages defined in <code>[DID-v1.0]</code> are as follows, and this specification adheres to them.
+That is, keys must be declared according to their intended usage and must be used only for that purpose.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Identifier</th><th>Description</th></tr></thead><tbody><tr><td>Assertion</td><td><code>assertionMethod</code></td><td>Proof signing</td></tr><tr><td>Authentication</td><td><code>authentication</code></td><td>Authenticate the DID Subject</td></tr><tr><td>Key Agreement</td><td><code>keyAgreement</code></td><td>Key exchange for encrypted communication</td></tr><tr><td>Capability Invocation</td><td><code>capabilityInvocation</code></td><td>Perform cryptographic functions (e.g., update DID Document)</td></tr><tr><td>Capability Delegation</td><td><code>capabilityDelegation</code></td><td>Delegate cryptographic functions to a third party</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-authentication-type-authtype">2.2. Authentication Type (authType)<a href="#22-authentication-type-authtype" class="hash-link" aria-label="Direct link to 2.2. Authentication Type (authType)" title="Direct link to 2.2. Authentication Type (authType)">​</a></h3>
+<p>Authentication type refers to what authentication must be performed to use the corresponding key.
+Authentication types are set as int32 type numbers with bitwise meanings as shown in the table below.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:center">b32 ~ b4</th><th style="text-align:center">b3</th><th style="text-align:center">b2</th><th style="text-align:center">b1</th><th>Description</th></tr></thead><tbody><tr><td style="text-align:center">-</td><td style="text-align:center"><strong>x</strong></td><td style="text-align:center"><strong>x</strong></td><td style="text-align:center"><strong>x</strong></td><td><strong>Authentication Type</strong></td></tr><tr><td style="text-align:center">-</td><td style="text-align:center">0</td><td style="text-align:center">0</td><td style="text-align:center">1</td><td>0x0001: No Authentication</td></tr><tr><td style="text-align:center">-</td><td style="text-align:center">0</td><td style="text-align:center">1</td><td style="text-align:center">0</td><td>0x0002: PIN</td></tr><tr><td style="text-align:center">-</td><td style="text-align:center">1</td><td style="text-align:center">0</td><td style="text-align:center">0</td><td>0x0004: BIO</td></tr></tbody></table>
+<ul>
+<li>No Authentication: Use the key without authentication</li>
+<li>PIN: Use the key after entering a PIN</li>
+<li>BIO: Use the key after fingerprint or FaceID recognition</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-did-document-lifecycle">2.3. DID Document Lifecycle<a href="#23-did-document-lifecycle" class="hash-link" aria-label="Direct link to 2.3. DID Document Lifecycle" title="Direct link to 2.3. DID Document Lifecycle">​</a></h3>
+<p>The lifecycle of a DID Document is as shown in the table and diagram below.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Status Value</th><th>Status Name</th><th style="text-align:center"><code>~/deactivated</code></th><th>Description</th></tr></thead><tbody><tr><td><code>ACTIVATED</code></td><td>Active</td><td style="text-align:center"><code>false</code></td><td>• Usable state<br>• Can transition to inactive or revoked state</td></tr><tr><td><code>DEACTIVATED</code></td><td>Inactive</td><td style="text-align:center"><code>true</code></td><td>• Temporarily suspended by Controller<br>• Can transition back to active</td></tr><tr><td><code>REVOKED</code></td><td>Revoked</td><td style="text-align:center">N/A</td><td>• No longer in use, permanently revoked<br>• Cannot transition to other states</td></tr><tr><td><code>TERMINATED</code></td><td>Terminated</td><td style="text-align:center">N/A</td><td>• Not usable even for non-repudiation<br>• Termination start date must be specified</td></tr></tbody></table>
+<p><img decoding="async" loading="lazy" alt="DID Document Lifecycle" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIxMDhweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjY4MHB4O2hlaWdodDoxMDhweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA2ODAgMTA4IiB3aWR0aD0iNjgwcHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48ZyBpZD0iQUNUSVZBVEVEIj48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjUwIiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9Ijk5IiB4PSI2MS41IiB5PSI1Mi4xNyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgeDE9IjYxLjUiIHgyPSIxNjAuNSIgeTE9Ijc4LjY1ODMiIHkyPSI3OC42NTgzIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iNzkiIHg9IjcxLjUiIHk9IjcwLjcwNTIiPkFDVElWQVRFRDwvdGV4dD48L2c+PGcgaWQ9IkRFQUNUSVZBVEVEIj48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjUwIiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjExNyIgeD0iMTk1LjUiIHk9IjUyLjE3Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iMTk1LjUiIHgyPSIzMTIuNSIgeTE9Ijc4LjY1ODMiIHkyPSI3OC42NTgzIi8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iOTciIHg9IjIwNS41IiB5PSI3MC43MDUyIj5ERUFDVElWQVRFRDwvdGV4dD48L2c+PGcgaWQ9IlJFVk9LRUQiPjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iNTAiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iODQiIHg9IjM0OCIgeT0iNTIuMTciLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHgxPSIzNDgiIHgyPSI0MzIiIHkxPSI3OC42NTgzIiB5Mj0iNzguNjU4MyIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjY0IiB4PSIzNTgiIHk9IjcwLjcwNTIiPlJFVk9LRUQ8L3RleHQ+PC9nPjxnIGlkPSJURVJNSU5BVEVEIj48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjUwLjYyMTEiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMTUwIiB4PSI0NjciIHk9IjUxLjg2Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB4MT0iNDY3IiB4Mj0iNjE3IiB5MT0iNzguMzQ4MyIgeTI9Ijc4LjM0ODMiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI4OSIgeD0iNDk3LjUiIHk9IjcwLjM5NTIiPlRFUk1JTkFURUQ8L3RleHQ+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMTMwIiB4PSI0NzIiIHk9Ijk0Ljk0OTgiPlRlcm1pbmF0aW9uIFN0YXJ0IERhdGU8L3RleHQ+PC9nPjxlbGxpcHNlIGN4PSIxNiIgY3k9Ijc3LjE3IiBmaWxsPSIjMjIyMjIyIiByeD0iMTAiIHJ5PSIxMCIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjY2MyIgY3k9Ijc3LjE3IiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjY2MyIgY3k9Ijc3LjE3IiBmaWxsPSIjMjIyMjIyIiByeD0iNiIgcnk9IjYiIHN0eWxlPSJzdHJva2U6IzIyMjIyMjtzdHJva2Utd2lkdGg6MS4wOyIvPjwhLS1saW5rICpzdGFydCogdG8gQUNUSVZBVEVELS0+PGcgaWQ9ImxpbmtfKnN0YXJ0Kl9BQ1RJVkFURUQiPjxwYXRoIGQ9Ik0yNi4zOSw3Ny4xNyBDMzcuOTYsNzcuMTcgNDMuNTMsNzcuMTcgNTUuMDksNzcuMTcgIiBmaWxsPSJub25lIiBpZD0iKnN0YXJ0Ki10by1BQ1RJVkFURUQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNjEuMDksNzcuMTcsNTIuMDksNzMuMTcsNTYuMDksNzcuMTcsNTIuMDksODEuMTcsNjEuMDksNzcuMTciIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tbGluayBBQ1RJVkFURUQgdG8gREVBQ1RJVkFURUQtLT48ZyBpZD0ibGlua19BQ1RJVkFURURfREVBQ1RJVkFURUQiPjxwYXRoIGQ9Ik0xNjAuOTksOTQuMjIgQzE3Mi4zOCw5Ni4wMiAxNzcuNzg1OSw5Ni45NDY1IDE4OS4xNjU5LDk1Ljg4NjUgIiBmaWxsPSJub25lIiBpZD0iQUNUSVZBVEVELXRvLURFQUNUSVZBVEVEIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjE5NS4xNCw5NS4zMywxODUuODA3OCw5Mi4xODE5LDE5MC4xNjE2LDk1Ljc5MzcsMTg2LjU0OTgsMTAwLjE0NzUsMTk1LjE0LDk1LjMzIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48L2c+PCEtLWxpbmsgREVBQ1RJVkFURUQgdG8gQUNUSVZBVEVELS0+PGcgaWQ9ImxpbmtfREVBQ1RJVkFURURfQUNUSVZBVEVEIj48cGF0aCBkPSJNMTk1LjE0LDU5LjAxIEMxODMuNzYsNTcuOTUgMTc4LjMwNjUsNTcuMzgzNCAxNjYuOTE2NSw1OS4xODM0ICIgZmlsbD0ibm9uZSIgaWQ9IkRFQUNUSVZBVEVELXRvLUFDVElWQVRFRCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxNjAuOTksNjAuMTIsMTcwLjUwNDEsNjIuNjY2MSwxNjUuOTI4Nyw1OS4zMzk1LDE2OS4yNTUzLDU0Ljc2NDIsMTYwLjk5LDYwLjEyIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48L2c+PCEtLWxpbmsgQUNUSVZBVEVEIHRvIFJFVk9LRUQtLT48ZyBpZD0ibGlua19BQ1RJVkFURURfUkVWT0tFRCI+PHBhdGggZD0iTTE0MC41Miw1MS43MiBDMTU1Ljg0LDQwLjE5IDE3NS41MSwyNy44MiAxOTUuNSwyMS44NiBDMjQ1LjMzLDcgMjYyLjk4LDYgMzEyLjUsMjEuODYgQzMzMS4yMywyNy44NiAzNDQuNjcyNSwzNi40MTA4IDM1OC42NDI1LDQ3Ljk0MDggIiBmaWxsPSJub25lIiBpZD0iQUNUSVZBVEVELXRvLVJFVk9LRUQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMzYzLjI3LDUxLjc2LDM1OC44NzUsNDIuOTQ2MiwzNTkuNDEzOCw0OC41NzczLDM1My43ODI2LDQ5LjExNjEsMzYzLjI3LDUxLjc2IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48L2c+PCEtLWxpbmsgREVBQ1RJVkFURUQgdG8gUkVWT0tFRC0tPjxnIGlkPSJsaW5rX0RFQUNUSVZBVEVEX1JFVk9LRUQiPjxwYXRoIGQ9Ik0zMTIuOTcsNzcuMTcgQzMyNC41LDc3LjE3IDMzMC4wNCw3Ny4xNyAzNDEuNTcsNzcuMTcgIiBmaWxsPSJub25lIiBpZD0iREVBQ1RJVkFURUQtdG8tUkVWT0tFRCIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzNDcuNTcsNzcuMTcsMzM4LjU3LDczLjE3LDM0Mi41Nyw3Ny4xNywzMzguNTcsODEuMTcsMzQ3LjU3LDc3LjE3IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48L2c+PCEtLWxpbmsgUkVWT0tFRCB0byBURVJNSU5BVEVELS0+PGcgaWQ9ImxpbmtfUkVWT0tFRF9URVJNSU5BVEVEIj48cGF0aCBkPSJNNDMyLjQ1LDc3LjE3IEM0NDMuODYsNzcuMTcgNDQ5LjI4LDc3LjE3IDQ2MC42OSw3Ny4xNyAiIGZpbGw9Im5vbmUiIGlkPSJSRVZPS0VELXRvLVRFUk1JTkFURUQiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iNDY2LjY5LDc3LjE3LDQ1Ny42OSw3My4xNyw0NjEuNjksNzcuMTcsNDU3LjY5LDgxLjE3LDQ2Ni42OSw3Ny4xNyIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PC9nPjwhLS1saW5rIFRFUk1JTkFURUQgdG8gKmVuZCotLT48ZyBpZD0ibGlua19URVJNSU5BVEVEXyplbmQqIj48cGF0aCBkPSJNNjE3LjE1LDc3LjE3IEM2MjguNjEsNzcuMTcgNjM0LjA4LDc3LjE3IDY0NS41NCw3Ny4xNyAiIGZpbGw9Im5vbmUiIGlkPSJURVJNSU5BVEVELXRvLSplbmQqIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjY1MS41NCw3Ny4xNyw2NDIuNTQsNzMuMTcsNjQ2LjU0LDc3LjE3LDY0Mi41NCw4MS4xNyw2NTEuNTQsNzcuMTciIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjwvZz48IS0tU1JDPVtBb3Y5QjRiTFM3R0V5R25wMzc1cnVJZTZ5cnJTcUtNMk5DRnlsVTZ5NERTV05xeV9hQkkyYks5OFFiNWtQYnZZSU1QLWRhOW1JTTlIWU84QkswcU5MeEhNaDhBazdQQlBTMVA4NkRhQTUwY09KTG44QWIzREdQRTBRdTBvRzY4ODF0OFhrSEtlME5HSzAwMDBdLS0+PC9nPjwvc3ZnPg==" width="680" height="108" class="img_ev3q"></p>
+<p>DID Documents must be managed within the Trust Repository in the following two distinct lists:</p>
+<ul>
+<li>Active List (DID In-service List)</li>
+<li>Revocation List (DID Revocation List)</li>
+</ul>
+<p>The following rules apply regarding the lifecycle of DID Documents:</p>
+<ol>
+<li>Register the DID Document in the active list upon initial registration.</li>
+<li>Move to the revocation list upon revocation.</li>
+<li>DID Documents transferred to the revocation list cannot be returned to the active list.</li>
+<li>Only DID Documents in the active list can have the <code>deactivated</code> value changed.</li>
+<li>The <code>deactivated</code> value can be changed by the Controller without the consent of the DID owner.</li>
+<li>The <code>versionId</code> remains unchanged when only the <code>deactivated</code> value is changed.</li>
+<li>When changing values other than <code>deactivated</code>, the following conditions must be met:
+<ul>
+<li>The <code>versionId</code> must increase.</li>
+<li>Verify the owner&#x27;s signature to confirm consent.</li>
+</ul>
+</li>
+<li>Termination is a form of revocation but with additional conditions:
+<ul>
+<li>A termination start date must be specified upon request.</li>
+<li>After the termination start date, the keys cannot be used for any purpose.</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="24-key-lifecycle">2.4. Key Lifecycle<a href="#24-key-lifecycle" class="hash-link" aria-label="Direct link to 2.4. Key Lifecycle" title="Direct link to 2.4. Key Lifecycle">​</a></h3>
+<p>The key lifecycle follows the DID Document lifecycle and applies the following rules:</p>
+<ul>
+<li>For non-repudiation, keys can be used to verify signatures regardless of key status.</li>
+<li>When the key status is <code>ACTIVATED</code>, it can be used for any purpose.</li>
+<li>When the key status is <code>DEACTIVATED</code>, usage depends on the verifier&#x27;s policy.</li>
+<li>When the key status is <code>REVOKED</code>, it cannot be used for any purpose other than non-repudiation.</li>
+<li>When the key status is <code>TERMINATED</code>, it cannot be used even for non-repudiation purposes after the termination start date.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Purpose / Status</th><th>ACTIVATED</th><th>DEACTIVATED</th><th>REVOKED</th><th>TERMINATED</th></tr></thead><tbody><tr><td>VC Issuer Signature Verification</td><td>Yes</td><td>Depends on verifier policy</td><td>No</td><td>No</td></tr><tr><td>VP Holder Signature Verification</td><td>Yes</td><td>Depends on verifier policy</td><td>No</td><td>No</td></tr><tr><td>Non-repudiation Signature Verification</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No (after termination start date)</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="25-did-document-structure">2.5. DID Document Structure<a href="#25-did-document-structure" class="hash-link" aria-label="Direct link to 2.5. DID Document Structure" title="Direct link to 2.5. DID Document Structure">​</a></h3>
+<p>For data types, constants, and object definitions not specified in this document, refer to <code>[DATA-SPEC]</code>.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="251-data-types-and-constants">2.5.1. Data Types and Constants<a href="#251-data-types-and-constants" class="hash-link" aria-label="Direct link to 2.5.1. Data Types and Constants" title="Direct link to 2.5.1. Data Types and Constants">​</a></h4>
+<div class="language-c# codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c# codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">def string did          : &quot;DID id. ex: &#x27;did:omn:123&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def string didVersionId : &quot;DID version id. ex: &#x27;1&#x27;, &#x27;2&#x27;&quot;, regex(/[0-9]+/)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def string didKeyId     : &quot;DID key id. ex: &#x27;pin&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def string didServiceId : &quot;DID service id. ex: &#x27;homepage&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def string didKeyUrl    : &quot;DID key URL. ex: &#x27;did:omn:123?versionId=1#pin&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def string didServiceUrl: &quot;DID service URL. ex: &#x27;did:omn:123?versionId=1#homepage&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def enum AUTH_TYPE: &quot;Authentication Type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    1: &quot;Free - No Authentication&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    2: &quot;PIN - Password Authentication&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    4: &quot;BIO - Biometric Authentication&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def enum DID_KEY_TYPE: &quot;DID Key Type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;RsaVerificationKey2018&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;Secp256k1VerificationKey2018&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;Secp256r1VerificationKey2018&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def enum PROOF_TYPE: &quot;Proof Type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;RsaSignature2018&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;Secp256k1Signature2018&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;Secp256r1Signature2018&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def enum PROOF_PURPOSE: &quot;Proof Purpose&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;assertionMethod&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;authentication&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;keyAgreement&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;capabilityInvocation&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;capabilityDelegation&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">def enum DID_SERVICE_TYPE: &quot;Service Type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;LinkedDomains&quot;     : &quot;site URL&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &quot;CredentialRegistry&quot;: &quot;URL to query verifiable credentials&quot;,</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="252-diddoc-object">2.5.2. <code>DidDoc</code> object<a href="#252-diddoc-object" class="hash-link" aria-label="Direct link to 252-diddoc-object" title="Direct link to 252-diddoc-object">​</a></h4>
+<div class="language-c# codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c# codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">def object DidDoc: &quot;DID Document&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Meta</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + array(url)   &quot;@context&quot;   : &quot;JSON-LD context&quot;, value([&quot;https://www.w3.org/ns/did/v1&quot;])</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + did          &quot;id&quot;         : &quot;DID owner&#x27;s DID&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + did          &quot;controller&quot; : &quot;DID controller&#x27;s DID&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + utcDatetime  &quot;created&quot;    : &quot;created datetime&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + utcDatetime  &quot;updated&quot;    : &quot;last updated datetime&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + didVersionId &quot;versionId&quot;  : &quot;DID version ID&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + bool         &quot;deactivated&quot;: &quot;true: deactivated, false: activated&quot;, default(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // DID key list</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + array(object) &quot;verificationMethod&quot;: &quot;list of DID keys with public key values&quot;, min_count(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + didKeyId     &quot;id&quot;                : &quot;key ID, e.g., &#x27;pin&#x27;&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + DID_KEY_TYPE &quot;type&quot;              : &quot;key type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + did          &quot;controller&quot;        : &quot;key controller&#x27;s DID&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + multibase    &quot;publicKeyMultibase&quot;: &quot;public key value&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        //--- Non-standard fields ---</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + AUTH_TYPE    &quot;authType&quot;          : &quot;required authentication to use the key&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Key lists by purpose</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // - All &#x27;didKeyId&#x27; must be declared in &#x27;~/verificationMethod[]/id&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;assertionMethod&quot;     : &quot;list of Assertion key names&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;authentication&quot;      : &quot;list of Authentication key names&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;keyAgreement&quot;        : &quot;list of Key Agreement key names&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;capabilityInvocation&quot;: &quot;list of Capability Invocation key names&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(didKeyId) &quot;capabilityDelegation&quot;: &quot;list of Capability Delegation key names&quot;, emptiable(false)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Service endpoint</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    - array(object) &quot;service&quot;: &quot;list of services&quot;, min_count(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + didServiceId     &quot;id&quot;             : &quot;service ID&quot;  // e.g., &quot;homepage&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + DID_SERVICE_TYPE &quot;type&quot;           : &quot;service type&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        + array(url)       &quot;serviceEndpoint&quot;: &quot;list of URLs to the service&quot;, min_count(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="253-ownerdiddoc">2.5.3. OwnerDidDoc<a href="#253-ownerdiddoc" class="hash-link" aria-label="Direct link to 2.5.3. OwnerDidDoc" title="Direct link to 2.5.3. OwnerDidDoc">​</a></h4>
+<p>This is a <code>DidDoc</code> with the owner&#x27;s key signatures added.</p>
+<div class="language-c# codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c# codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">def object OwnerDidDoc: &quot;DID Document with the owner proofs&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">{</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    @spread(DidDoc)  // Include all members from the DidDoc object to avoid duplicate declarations</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Proof - Non-standard fields</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    //---------------------------------------------------------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    // Required only when the DID owner requests registration/modification to the controller</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    + select(1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        // when number of keys = 1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ^ Proof        &quot;proof&quot; : &quot;owner proof&quot;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        // when number of keys &gt;= 2</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ^ array(Proof) &quot;proofs&quot;: &quot;list of owner proofs&quot;, min_count(2)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><code>~/proofs[]</code> are generated for all keys except those used for Key Agreement.</p>
+<p>Proofs must be included when the DID owner requests registration or modification to the controller. However, when stored in the Trust Repository by the controller, proofs are verified and then removed, so they do not appear when the DID Document is queried.</p>
+<p><img decoding="async" loading="lazy" alt="DID Document Modification Procedure" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXMtYXNjaWkiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBjb250ZW50U3R5bGVUeXBlPSJ0ZXh0L2NzcyIgaGVpZ2h0PSIzMjlweCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSIgc3R5bGU9IndpZHRoOjUzNXB4O2hlaWdodDozMjlweDtiYWNrZ3JvdW5kOiNGRkZGRkY7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MzUgMzI5IiB3aWR0aD0iNTM1cHgiIHpvb21BbmRQYW49Im1hZ25pZnkiPjxkZWZzLz48Zz48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjIxLjE5OTIiIHN0eWxlPSJzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MS4wOyIgd2lkdGg9IjUwMiIgeD0iMTUiIHk9IjEyLjI5NjkiLz48ZWxsaXBzZSBjeD0iMTA5LjUiIGN5PSI0OC40OTYxIiBmaWxsPSIjMjIyMjIyIiByeD0iMTAiIHJ5PSIxMCIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PHJlY3QgZmlsbD0iI0YxRjFGMSIgaGVpZ2h0PSIzNC4xMzI4IiByeD0iMTIuNSIgcnk9IjEyLjUiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MC41OyIgd2lkdGg9IjE3NyIgeD0iMjEiIHk9Ijc4LjQ5NjEiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSIxNTciIHg9IjMxIiB5PSIxMDAuMDk3NyI+Q3JlYXRlIERJRCBEb2N1bWVudCBCb2R5PC90ZXh0PjxyZWN0IGZpbGw9IiNGMUYxRjEiIGhlaWdodD0iMzQuMTMyOCIgcng9IjEyLjUiIHJ5PSIxMi41IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjAuNTsiIHdpZHRoPSIxNzMiIHg9IjIzIiB5PSIxMzIuNjI4OSIvPjx0ZXh0IGZpbGw9IiMwMDAwMDAiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBsZW5ndGhBZGp1c3Q9InNwYWNpbmciIHRleHRMZW5ndGg9IjE1MyIgeD0iMzMiIHk9IjE1NC4yMzA1Ij5HZW5lcmF0ZSBIb2xkZXIgU2lnbmF0dXJlPC90ZXh0PjxsaW5lIHN0eWxlPSJzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MS41OyIgeDE9IjE1IiB4Mj0iMTUiIHkxPSIxMi4yOTY5IiB5Mj0iMzE3LjAyNzMiLz48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjM0LjEzMjgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMzAzIiB4PSIyMDgiIHk9IjE4Ni43NjE3Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjgzIiB4PSIyMTgiIHk9IjIwOC4zNjMzIj5WZXJpZnkgSG9sZGVyIFNpZ25hdHVyZSBhbmQgUmVtb3ZlIGl0IGZyb20gQm9keTwvdGV4dD48cmVjdCBmaWxsPSIjRjFGMUYxIiBoZWlnaHQ9IjM0LjEzMjgiIHJ4PSIxMi41IiByeT0iMTIuNSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDowLjU7IiB3aWR0aD0iMjgxIiB4PSIyMTkiIHk9IjI0MC44OTQ1Ii8+PHRleHQgZmlsbD0iIzAwMDAwMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGxlbmd0aEFkanVzdD0ic3BhY2luZyIgdGV4dExlbmd0aD0iMjYxIiB4PSIyMjkiIHk9IjI2Mi40OTYxIj5TdG9yZSBESUQgRG9jdW1lbnQgQm9keSBpbiBUcnVzdCBSZXBvc2l0b3J5PC90ZXh0PjxlbGxpcHNlIGN4PSIzNTkuNSIgY3k9IjMwNi4wMjczIiBmaWxsPSJub25lIiByeD0iMTEiIHJ5PSIxMSIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGVsbGlwc2UgY3g9IjM1OS41IiBjeT0iMzA2LjAyNzMiIGZpbGw9IiMyMjIyMjIiIHJ4PSI2IiByeT0iNiIgc3R5bGU9InN0cm9rZTojMjIyMjIyO3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iMjAyIiB4Mj0iMjAyIiB5MT0iMTIuMjk2OSIgeTI9IjMxNy4wMjczIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDoxLjU7IiB4MT0iNTE1IiB4Mj0iNTE1IiB5MT0iMTIuMjk2OSIgeTI9IjMxNy4wMjczIi8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMTA5LjUiIHgyPSIxMDkuNSIgeTE9IjU4LjQ5NjEiIHkyPSI3OC40OTYxIi8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIxMDUuNSw2OC40OTYxLDEwOS41LDc4LjQ5NjEsMTEzLjUsNjguNDk2MSwxMDkuNSw3Mi40OTYxIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMDkuNSIgeDI9IjEwOS41IiB5MT0iMTEyLjYyODkiIHkyPSIxMzIuNjI4OSIvPjxwb2x5Z29uIGZpbGw9IiMxODE4MTgiIHBvaW50cz0iMTA1LjUsMTIyLjYyODksMTA5LjUsMTMyLjYyODksMTEzLjUsMTIyLjYyODksMTA5LjUsMTI2LjYyODkiIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjM1OS41IiB4Mj0iMzU5LjUiIHkxPSIyMjAuODk0NSIgeTI9IjI0MC44OTQ1Ii8+PHBvbHlnb24gZmlsbD0iIzE4MTgxOCIgcG9pbnRzPSIzNTUuNSwyMzAuODk0NSwzNTkuNSwyNDAuODk0NSwzNjMuNSwyMzAuODk0NSwzNTkuNSwyMzQuODk0NSIgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzU5LjUiIHgyPSIzNTkuNSIgeTE9IjI3NS4wMjczIiB5Mj0iMjk1LjAyNzMiLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjM1NS41LDI4NS4wMjczLDM1OS41LDI5NS4wMjczLDM2My41LDI4NS4wMjczLDM1OS41LDI4OS4wMjczIiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48bGluZSBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiIHgxPSIxMDkuNSIgeDI9IjEwOS41IiB5MT0iMTY2Ljc2MTciIHkyPSIxNzEuNzYxNyIvPjxsaW5lIHN0eWxlPSJzdHJva2U6IzE4MTgxODtzdHJva2Utd2lkdGg6MS4wOyIgeDE9IjEwOS41IiB4Mj0iMzU5LjUiIHkxPSIxNzEuNzYxNyIgeTI9IjE3MS43NjE3Ii8+PGxpbmUgc3R5bGU9InN0cm9rZTojMTgxODE4O3N0cm9rZS13aWR0aDoxLjA7IiB4MT0iMzU5LjUiIHgyPSIzNTkuNSIgeTE9IjE3MS43NjE3IiB5Mj0iMTg2Ljc2MTciLz48cG9seWdvbiBmaWxsPSIjMTgxODE4IiBwb2ludHM9IjM1NS41LDE3Ni43NjE3LDM1OS41LDE4Ni43NjE3LDM2My41LDE3Ni43NjE3LDM1OS41LDE4MC43NjE3IiBzdHlsZT0ic3Ryb2tlOiMxODE4MTg7c3Ryb2tlLXdpZHRoOjEuMDsiLz48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI1NyIgeD0iODAiIHk9IjI5LjY5OTIiPkhvbGRlcjwvdGV4dD48dGV4dCBmaWxsPSIjMDAwMDAwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgbGVuZ3RoQWRqdXN0PSJzcGFjaW5nIiB0ZXh0TGVuZ3RoPSI4NiIgeD0iMzE1LjUiIHk9IjI5LjY5OTIiPkNvbnRyb2xsZXI8L3RleHQ+PCEtLVNSQz1bUk9xbjNlOTA0NE54RlNMcXRXNHc4TDVSQ1ZPUlRqMTliWGFvLXA0WHVWMTJaOU5NX3h0dDN2YTc0OG5TN2F6RzRrU1VPWGhNaS1ONGxlUTJ3MFhMdW5wMXI1dlFRZ3NWSHJSR3FUOUlYLWg0b2h3Rjd1S3dVTVo0eDVvN2kzUWNTQ2p2SnJMdFRYY003dXdZOWhob1EyeWMwR3JrdXhWVG1WcEZBdWRJcFVVMkpQa2lvNFBqVDg1RFJtMDBdLS0+PC9nPjwvc3ZnPg==" width="535" height="329" class="img_ev3q"></p>
+<div style="page-break-after:always"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-did-document-specifications-by-entity">3. DID Document Specifications by Entity<a href="#3-did-document-specifications-by-entity" class="hash-link" aria-label="Direct link to 3. DID Document Specifications by Entity" title="Direct link to 3. DID Document Specifications by Entity">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-holder-did-document">3.1. Holder DID Document<a href="#31-holder-did-document" class="hash-link" aria-label="Direct link to 3.1. Holder DID Document" title="Direct link to 3.1. Holder DID Document">​</a></h3>
+<p>The Holder refers to the entity that receives VCs from Issuers and TAS, typically referred to as &quot;users.&quot;</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="311-main-attributes">3.1.1. Main Attributes<a href="#311-main-attributes" class="hash-link" aria-label="Direct link to 3.1.1. Main Attributes" title="Direct link to 3.1.1. Main Attributes">​</a></h4>
+<ul>
+<li><code>~/controller</code>: TAS</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="312-public-keys">3.1.2. Public Keys<a href="#312-public-keys" class="hash-link" aria-label="Direct link to 3.1.2. Public Keys" title="Direct link to 3.1.2. Public Keys">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>Name</th><th style="text-align:center">Required</th><th>Authentication</th><th>Usage</th><th>Description</th></tr></thead><tbody><tr><td><code>pin</code></td><td>PIN Key</td><td style="text-align:center">Y</td><td>2 (PIN)</td><td>• Assertion<br>• Authentication</td><td>Used with PIN input</td></tr><tr><td><code>bio</code></td><td>BIO Key</td><td style="text-align:center">N</td><td>4 (BIO)</td><td>• Assertion<br>• Authentication</td><td>Used with fingerprint or FaceID</td></tr><tr><td><code>keyagree</code></td><td>Key Agreement</td><td style="text-align:center">Y</td><td>1 (No Authentication)</td><td>• Key Agreement</td><td>ECC public key for key exchange</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="313-service">3.1.3. Service<a href="#313-service" class="hash-link" aria-label="Direct link to 3.1.3. Service" title="Direct link to 3.1.3. Service">​</a></h4>
+<p><code>~/service</code> provides means for communication with the DID Subject.
+The Holder can register their homepage URL if desired.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>type</th><th style="text-align:center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>homepage</code></td><td>LinkedDomains</td><td style="text-align:center">N</td><td>Homepage URL</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-wallet-did-document">3.2. Wallet DID Document<a href="#32-wallet-did-document" class="hash-link" aria-label="Direct link to 3.2. Wallet DID Document" title="Direct link to 3.2. Wallet DID Document">​</a></h3>
+<p>Defines the DID Document rules for the Holder&#x27;s wallet.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="321-main-attributes">3.2.1. Main Attributes<a href="#321-main-attributes" class="hash-link" aria-label="Direct link to 3.2.1. Main Attributes" title="Direct link to 3.2.1. Main Attributes">​</a></h4>
+<ul>
+<li><code>~/controller</code>: TAS</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="322-public-keys">3.2.2. Public Keys<a href="#322-public-keys" class="hash-link" aria-label="Direct link to 3.2.2. Public Keys" title="Direct link to 3.2.2. Public Keys">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>Name</th><th style="text-align:center">Required</th><th>Authentication</th><th>Usage</th><th>Description</th></tr></thead><tbody><tr><td><code>assert</code></td><td>Signature Key</td><td style="text-align:center">Y</td><td>1 (No Authentication)</td><td>• Assertion</td><td>Signs data for Wallet Token creation (replaces Wallet attestation key)</td></tr><tr><td><code>auth</code></td><td>Authentication Key</td><td style="text-align:center">Y</td><td>1</td><td>• Authentication</td><td>Used for DID Auth and other authentication</td></tr><tr><td><code>keyagree</code></td><td>Key Agreement</td><td style="text-align:center">Y</td><td>1</td><td>• Key Agreement</td><td>ECC public key for key exchange</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-tas-did-document">3.3. TAS DID Document<a href="#33-tas-did-document" class="hash-link" aria-label="Direct link to 3.3. TAS DID Document" title="Direct link to 3.3. TAS DID Document">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="331-main-attributes">3.3.1. Main Attributes<a href="#331-main-attributes" class="hash-link" aria-label="Direct link to 3.3.1. Main Attributes" title="Direct link to 3.3.1. Main Attributes">​</a></h4>
+<ul>
+<li><code>~/controller</code>: TAS</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="332-public-keys">3.3.2. Public Keys<a href="#332-public-keys" class="hash-link" aria-label="Direct link to 3.3.2. Public Keys" title="Direct link to 3.3.2. Public Keys">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>Name</th><th style="text-align:center">Required</th><th>Authentication</th><th>Usage</th><th>Description</th></tr></thead><tbody><tr><td><code>assert</code></td><td>Signature Key</td><td style="text-align:center">Y</td><td>1 (No Authentication)</td><td>• Assertion</td><td>Used for VC issuance signatures</td></tr><tr><td><code>auth</code></td><td>Authentication Key</td><td style="text-align:center">Y</td><td>1</td><td>• Authentication</td><td>Used for DID Auth and other authentication</td></tr><tr><td><code>invoke</code></td><td>Invocation Key</td><td style="text-align:center">Y</td><td>1</td><td>• Capability Invocation</td><td>Used for performing management functions</td></tr><tr><td><code>keyagree</code></td><td>Key Agreement</td><td style="text-align:center">Y</td><td>1</td><td>• Key Agreement</td><td>ECC public key for key exchange</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="333-service">3.3.3. Service<a href="#333-service" class="hash-link" aria-label="Direct link to 3.3.3. Service" title="Direct link to 3.3.3. Service">​</a></h4>
+<p><code>~/service</code> provides means for communication with the DID Subject.
+The Holder can register their homepage URL if desired.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>type</th><th style="text-align:center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>homepage</code></td><td>LinkedDomains</td><td style="text-align:center">N</td><td>Homepage URL</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="34-provider-did-document">3.4. Provider DID Document<a href="#34-provider-did-document" class="hash-link" aria-label="Direct link to 3.4. Provider DID Document" title="Direct link to 3.4. Provider DID Document">​</a></h3>
+<p>Defines the DID Document rules for all providers except Holder, Wallet, and TAS.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="341-main-attributes">3.4.1. Main Attributes<a href="#341-main-attributes" class="hash-link" aria-label="Direct link to 3.4.1. Main Attributes" title="Direct link to 3.4.1. Main Attributes">​</a></h4>
+<ul>
+<li><code>~/controller</code>: TAS</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="342-public-keys">3.4.2. Public Keys<a href="#342-public-keys" class="hash-link" aria-label="Direct link to 3.4.2. Public Keys" title="Direct link to 3.4.2. Public Keys">​</a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>Name</th><th style="text-align:center">Required</th><th>Authentication</th><th>Usage</th><th>Description</th></tr></thead><tbody><tr><td><code>assert</code></td><td>Signature Key</td><td style="text-align:center">Y</td><td>1 (No Authentication)</td><td>• Assertion</td><td>Used for VC issuance signatures</td></tr><tr><td><code>auth</code></td><td>Authentication Key</td><td style="text-align:center">Y</td><td>1</td><td>• Authentication</td><td>Used for DID Auth and other authentication</td></tr><tr><td><code>keyagree</code></td><td>Key Agreement</td><td style="text-align:center">Y</td><td>1</td><td>• Key Agreement</td><td>ECC public key for key exchange</td></tr></tbody></table>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="343-service">3.4.3. Service<a href="#343-service" class="hash-link" aria-label="Direct link to 3.4.3. Service" title="Direct link to 3.4.3. Service">​</a></h4>
+<p><code>~/service</code> provides means for communication with the DID Subject.
+The Holder can register their homepage URL if desired.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>id</th><th>type</th><th style="text-align:center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>homepage</code></td><td>LinkedDomains</td><td style="text-align:center">N</td><td>Homepage URL</td></tr></tbody></table></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Architecture/data standard/did document format/DID Document format.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/architecture/docs/next/Architecture/data standard/data specification/Data Specification_ko"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">데이터 명세서 (Data Specification)</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/architecture/docs/next/Architecture/data standard/did document format/DID Document format_ko"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">DID Document format</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#revision-history" class="table-of-contents__link toc-highlight">Revision History</a></li><li><a href="#table-of-contents" class="table-of-contents__link toc-highlight">Table of Contents</a></li><li><a href="#1-overview" class="table-of-contents__link toc-highlight">1. Overview</a><ul><li><a href="#11-notation" class="table-of-contents__link toc-highlight">1.1. Notation</a></li><li><a href="#12-reference-documents" class="table-of-contents__link toc-highlight">1.2. Reference Documents</a></li></ul></li><li><a href="#2-general-matters" class="table-of-contents__link toc-highlight">2. General Matters</a><ul><li><a href="#21-key-usage-verification-relationship" class="table-of-contents__link toc-highlight">2.1. Key Usage (Verification Relationship)</a></li><li><a href="#22-authentication-type-authtype" class="table-of-contents__link toc-highlight">2.2. Authentication Type (authType)</a></li><li><a href="#23-did-document-lifecycle" class="table-of-contents__link toc-highlight">2.3. DID Document Lifecycle</a></li><li><a href="#24-key-lifecycle" class="table-of-contents__link toc-highlight">2.4. Key Lifecycle</a></li><li><a href="#25-did-document-structure" class="table-of-contents__link toc-highlight">2.5. DID Document Structure</a></li></ul></li><li><a href="#3-did-document-specifications-by-entity" class="table-of-contents__link toc-highlight">3. DID Document Specifications by Entity</a><ul><li><a href="#31-holder-did-document" class="table-of-contents__link toc-highlight">3.1. Holder DID Document</a></li><li><a href="#32-wallet-did-document" class="table-of-contents__link toc-highlight">3.2. Wallet DID Document</a></li><li><a href="#33-tas-did-document" class="table-of-contents__link toc-highlight">3.3. TAS DID Document</a></li><li><a href="#34-provider-did-document" class="table-of-contents__link toc-highlight">3.4. Provider DID Document</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© OMNIONE.LTD All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+@startuml proc_wallet_token
+title
+	<size:25>월렛토큰 생성</size>
+end title
+
+participant "**월렛**" as wal <<Wallet>>
+participant "**인가앱**" as ca <<App>>
+participant "**인가앱 서비스**" as cap <<Server>>
+autonumber "<b>(#)</b>"
+
+ca -> wal++: WalletTokenSeed 요청 
+wal --> ca--: WalletTokenSeed 전달
+ca -> cap++: WalletTokenData 요청 (WalletTokenSeed)
+cap --> ca--: WalletTokenData 전달
+ca -> wal++: WalletToken 생성 요청 (WalletTokenData)
+wal -> wal: Nonce 생성
+wal -> wal: WalletTokenData와 Nonce를 조합하여 WalletToken 생성(WalletTokenData, Nonce)
+wal -> wal: WalletToken 저장
+wal --> ca--: Nonce 전달
+ca -> ca: WalletTokenData와 Nonce를 조합하여 WalletToken 생성
+ca -> wal: Wallet 사용시 WalletToken 제출
+
+@enduml

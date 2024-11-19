@@ -1,0 +1,793 @@
+@startuml seq_create_wallet
+title
+    <size:25>Wallet Registration</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+box Mobile #OldLace
+    participant "**CApp**" as ca <<App>>
+    participant "**Wallet**" as wal <<Wallet>>
+end box
+participant "**Wallet Provider**" as wp <<Server>>
+participant "**TAS**" as tas <<Server>>
+participant "**Trust Repository**" as bc <<Blockchain>>
+
+activate ca
+
+ca -> wal ++: Request Wallet Generation
+
+== (A1) Wallet Generation ==
+
+    wal -> wal: Initialize Wallet
+
+== (A2) Wallet DID Document Generation ==
+
+    wal -> wal: Generate Wallet Key (Device Key)
+    wal -> wal: (DidDoc)didDoc \
+            \n  = Create DID Document
+    wal -> wal: (OwnerDidDoc)ownerDidDoc\
+            \n  = Sign with Individual Key (didDoc)
+
+== (A3) Generate Wallet Identifier and Sign Wallet DID Document ==
+
+    wal -> wp ++: Request DID Document Signature\n{ownerDidDoc}
+        wp -> wp: walletId = Generate Wallet Identifier
+        wp -> wp: (AttestedDidDoc)attDidDoc = {\
+            \n   walletId,\
+            \n   ownerDidDoc,\
+            \n   provider = Wallet Provider Information,\
+            \n   nonce = Generate Nonce\
+            \n }
+        wp -> wp: Sign with Wallet Provider\
+            \n* signAssert(attDidDoc)
+        wp -> wp: Store Mapping Information in DB\
+            \n* walletId (Wallet Identifier)\
+            \n* walletDid (Wallet DID)
+    return {attDidDoc}
+
+== (A4) Register Wallet with TAS ==
+
+    wal -> tas ++: Request Register Wallet\n{attDidDoc}
+        tas -> tas: Verify Signature\
+            \n* Verify Wallet Provider Signature\
+            \n* Verify Individual Key Signature
+        
+        tas -> tas: (InvokedDidDoc)invDidDoc = {\
+            \n   didDoc,\
+            \n   controller = TAS Information,\
+            \n   nonce = Generate Nonce\
+            \n }
+
+        tas -> tas: Sign with Controller\
+            \n* signInvoke(invDidDoc)
+
+        tas -> bc ++: Request DID Registration\n{invDidDoc}
+            bc -> bc: Verify Controller Signature
+            bc -> bc: Register
+        return OK
+
+        tas -> tas: Store Mapping Information in DB\
+            \n* walletId (Wallet Identifier)\
+            \n* walletDid (Wallet DID)\
+            \n* walletProviderDid (Wallet Provider DID)
+    return OK
+return OK
+
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_register_user
+title
+    <size:25>User Registration</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+actor "**User**" as user
+box Mobile #OldLace
+    participant "**CApp**" as ca <<App>>
+    participant "**Wallet**" as wal <<Wallet>>
+end box
+participant "**TAS**" as tas <<Server>>
+participant "**Trust Repository**" as bc <<Blockchain>>
+
+rnote over ca, bc
+    (Optional)
+    KYC may be performed before Request Register User for TAS to obtain a personal identification number
+    CApp may perform KYC and provide the personal identification number to TAS
+    
+    * pii = personal identification number
+end rnote
+
+== (B1) Propose Register User ==
+
+activate ca
+
+ca -> tas ++: Propose Register User
+    tas -> tas: Prepare Transaction
+    note right: If pii is identified, check if issuance is possible
+return OK
+
+== (B2) Request ECDH ==
+
+ca -> ca: Prepare ECDH Data and Sign\
+        \n* (ReqEcdh)reqEcdh\
+        \n   = Create ECDH Request
+
+opt KeyAgreement Signature ON
+    ca -> wal ++: Request KeyAgreement Signature\n{reqEcdh}
+        wal -> wal: signKeyAgree(reqEcdh)
+        note right
+            During actual call
+            * CApp provides hash of the original text and keyId
+            * Wallet responds with the signature value only
+        end note
+    return {reqEcdh}
+end
+
+ca -> tas ++: Request ECDH\n{reqEcdh}
+    opt KeyAgreement Signature ON
+        tas -> tas: Verify reqEcdh.proof Signature
+    end
+    tas -> tas: Perform ECDH\
+            \n* sesKey = Session Key\
+            \n* (AccEcdh)accEcdh\
+            \n   = Create ECDH Acceptance
+
+    opt KeyAgreement Signature ON
+        tas -> tas: signKeyAgree(accEcdh)
+    end
+
+return {accEcdh}
+opt KeyAgreement Signature ON
+    ca -> ca: Verify accEcdh.proof Signature
+end
+ca -> ca: Perform ECDH\n* sesKey = Session Key
+
+== (B3) Request Create Token ==
+
+hnote over ca, wal #LimeGreen
+    * purpose = "CreateDid"
+    * (SignedWalletInfo)walletInfo = Create Wallet Information
+    * walletToken = Wallet Token
+end hnote
+
+ca -> ca: * (AttestedAppInfo)caAppInfo\
+        \n   = Create Signed App Information
+
+ca -> ca: Generate Server Token Seed\
+        \n* (ServerTokenSeed)seed = {\
+        \n     purpose = "CreateDid",\
+        \n     walletInfo,\
+        \n     caAppInfo\
+        \n  }
+
+ca -> tas ++: Request Create Token\n{seed}
+    tas -> tas: Verify Signatures\
+            \n* Verify Wallet Signature\
+            \n* Verify CApp Provider Signature
+
+    tas -> tas: Extract Information from Seed\
+            \n* appId = CApp Identifier\
+            \n* walletId = Wallet Identifier\
+            \n* walletDid = Wallet DID\
+            \n* walletProviderDid = Wallet Provider DID
+
+    tas -> tas: Check Consistency with Registered Wallet Information
+
+    tas -> tas: Generate and Store Server Token\
+            \n* Create (ServerTokenData)std\
+            \n* serverToken = sha256(std)
+
+    tas -> tas: Encrypt Response Information\
+            \n* iv = Generate IV\
+            \n* tmp = enc(std, sesKey, iv)\
+            \n* encStd = multibase(tmp)
+return {iv, encStd}
+
+ca -> ca: Encrypt and Prepare Data\
+        \n* Calculate serverToken
+
+== (B4) Request Register User ==
+
+ca -> wal ++: Request User DID Key Generation\n{walletToken}
+    wal -> wal: Verify walletToken
+
+    user -[#Blue]\ wal: Enter PIN
+    wal -> wal: Generate PIN Key
+
+    opt If User Desires
+        user -[#Blue]\ wal: Fingerprint/Facial Recognition
+        wal -> wal: Generate BIO Key
+    end
+
+    wal -> wal: Generate Key for Key Exchange
+return OK
+
+ca -> wal ++: Request User Registration\n{walletToken, serverToken}
+    wal -> wal: Verify walletToken
+
+    wal -> wal: (DidDoc)didDoc \
+            \n  = Create DID Document
+    wal -> wal: (OwnerDidDoc)ownerDidDoc\
+            \n  = Sign with Individual Key (didDoc)
+    wal -> wal: (SignedDidDoc)sgdDidDoc = {\
+            \n   ownerDidDoc,\
+            \n   wallet = Wallet Information,\
+            \n   nonce = Generate Nonce\
+            \n }
+    wal -> wal: Sign with Wallet\
+            \n* signAssert(sgdDidDoc)
+
+    wal -> tas ++: Request Register User\n{serverToken, sgdDidDoc}
+        tas -> tas: Verify serverToken
+
+        tas -> tas: Verify Signatures\
+            \n* Verify Wallet Signature\
+            \n* Verify Individual Key Signature
+        
+        tas -> tas: (InvokedDidDoc)invDidDoc = {\
+            \n   didDoc,\
+            \n   controller = TAS Information,\
+            \n   nonce = Generate Nonce\
+            \n }
+
+        tas -> tas: Sign with Controller\
+            \n* signInvoke(invDidDoc)
+
+        tas -> bc ++: Request DID Registration\n{invDidDoc}
+            bc -> bc: Verify Controller Signature
+            bc -> bc: Register
+        return OK
+
+        tas -> tas: Store User Mapping Information in DB\
+                \n* pii (Personal Identification Number)\
+                \n* holderDid (User DID)\
+                \n* walletId (Wallet Identifier)\
+                \n* appId (CApp Identifier)
+        return OK
+return OK
+
+== (B5) Confirm Register User ==
+
+ca -> tas ++: Confirm Register User\n{serverToken}
+    tas -> tas: Verify serverToken
+    tas -> tas: Delete Session Information and End Transaction
+return OK
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_user_init
+title
+    <size:25>Issuance Initiated by User</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+actor "**User**" as user
+participant "**CApp**" as ca <<App>>
+participant "**List Provider**" as lp <<Server>>
+participant "**TAS**" as tas <<Server>>
+
+== (C) Initiation ==
+
+activate ca
+
+user -[#Blue]\ ca: Request List of Issuable VCs
+
+ca -> lp ++: Search and Retrieve VC Plan\n{searchCriteria}
+    lp -> lp: vcPlanList = Retrieve VC Plan List
+return {vcPlanList}
+
+ca -> ca: Display VC Plan List
+user -[#Blue]\ ca: Select VC Plan
+opt When Multiple Issuers are Provided
+    user -[#Blue]\ ca: Select Issuer
+end
+
+ca -> ca: Prepare Issuance Request Data\
+        \n* vcPlanId = Selected VC Plan id\
+        \n* issuer = Selected Issuer DID
+
+== (D) Issuance ==
+
+ca -> tas ++: D1. Request Start Issuance\n{vcPlanId[, issuer]}
+note over ca, tas: The rest is omitted
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_issuer_init
+title
+    <size:25>Issuance Initiated by Issuer</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+'actor "**User**" as user
+participant "**CApp**" as ca <<App>>
+participant "**TAS**" as tas <<Server>>
+participant "**Issuer**" as vf <<Server>>
+participant "**Notification Provider**" as noti <<Server>>
+
+rnote over vf
+    **[Pre-acquired Information (per User)]**
+    -- Mandatory --
+    * userId = Issuer-side User Account
+    * userEmail = User Email Address
+    -- Optional --
+    * holderDid = User DID
+    * userMobile = User Mobile Number
+end rnote
+
+== (C) Initiation ==
+
+activate vf
+vf -> vf: Create Issue Offer\
+        \n* offerId = Offer Identifier\
+        \n* vcPlanId = VC Plan id\
+        \n* issuer = Issuer DID\
+        \n* validUntil = Set Validity Period
+vf -> vf: Map Offer to User\
+        \n* offerId ~ userId
+vf -> vf: Create Offer Payload\
+        \n* (IssueOfferPayload)payload\
+        \n = {offerId, vcPlanId, issuer, validUntil}
+vf -> vf: Generate Offer QR Code\
+        \n* qr = GenQr(payload)
+note right: QR Code format is out of scope
+
+vf -> vf: Create Email Message\
+        \n* emailMsg = GenEmailMsg(qr)
+note right: Email message format is out of scope
+
+
+vf -> noti ++: Request Email Sending\n{userEmail, emailMsg}
+    noti -[#Blue]-\ : Send Email to userEmail
+return Response
+
+opt If holderDid is available
+    vf -> vf: Create PUSH Message\
+            \n* pushMsg = GenPushMsg(payload)
+    note right: PUSH message format is out of scope
+
+    vf -> noti ++: Request PUSH Sending\n{holderDid, pushMsg}
+        noti -[#Blue]-\ : Send PUSH to holderDid
+    return
+end
+deactivate vf
+
+|||
+...a few moments later...
+|||
+
+alt When Email is Received
+    ca \-[#Blue]-? ++: Scan QR Code
+    ca -> ca: Parse QR Message\n* payload = Read payload
+else When PUSH is Received
+    ca \-[#Blue]-? : Receive PUSH Message
+    ca -> ca: Parse PUSH Message\n* payload = Read payload
+end
+
+== (D) Issuance ==
+
+ca -> tas ++: D1. Request Start Issuance\
+        \n{\
+        \n    vcPlanId = payload.vcPlanId,\
+        \n    issuer = payload.issuer,\
+        \n    **offerId** = payload.offerId\
+        \n}
+note over ca, tas: The rest is omitted
+
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_issue_vc
+title
+    <size:25>VC Issuance</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+actor "**User**" as user
+box Mobile #OldLace
+    participant "**CApp**" as ca <<App>>
+    participant "**Wallet**" as wal <<Wallet>>
+end box
+participant "**TAS**" as tas <<Server>>
+participant "**Issuer**" as vf <<Server>>
+
+hnote over ca, vf #LimeGreen
+    Information obtained through initiation stage
+    * vcPlanId, (optional)issuer, (optional)offerId
+end hnote
+
+rnote over ca, vf
+    (Optional)
+    Before Request Issue Profile, KYC can be performed for TAS to obtain a personal identification number.
+    CApp can perform KYC and provide the personal identification number to TAS.
+    
+    * pii = personal identification number
+end rnote
+
+== 1. Propose Issue VC ==
+
+activate ca
+
+ca -> tas ++: Propose Issue VC\n{vcPlanId[, issuer, offerId]}
+    tas -> tas: * Validate VC plan\n* Identify issuing issuer
+    note right
+        Issuer identification is done by checking TAS DB or internal settings
+    end note
+    tas -> vf ++: Inspect Propose\n{vcPlanId[, issuer, offerId]}
+        vf -> vf: Check if VC issuance is possible
+        vf -> vf: refId = Generate reference number
+    return {refId}
+return {refId}
+
+== 2. Request ECDH ==
+
+ca -> ca: Prepare and sign ECDH data\
+        \n* (ReqEcdh)reqEcdh\
+        \n   = Create ECDH request
+
+opt KeyAgreement Signature ON
+    ca -> wal ++: Request KeyAgreement Signature\n{reqEcdh}
+        wal -> wal: signKeyAgree(reqEcdh)
+        note right
+            During actual call:
+            * CApp provides hash of the original text and keyId
+            * Wallet responds with the signature value only
+        end note
+    return {reqEcdh}
+end
+
+ca -> tas ++: Request ECDH\n{reqEcdh}
+    opt KeyAgreement Signature ON
+        tas -> tas: Verify reqEcdh.proof signature
+    end
+    tas -> tas: Perform ECDH\
+            \n* sesKey = Session key\
+            \n* (AccEcdh)accEcdh\
+            \n   = Create ECDH acceptance
+
+    opt KeyAgreement Signature ON
+        tas -> tas: signKeyAgree(accEcdh)
+    end
+
+return {accEcdh}
+opt KeyAgreement Signature ON
+    ca -> ca: Verify accEcdh.proof signature
+end
+ca -> ca: Perform ECDH\n* sesKey = Session key
+
+== 3. Request Create Token ==
+
+hnote over ca, wal #LimeGreen
+    * purpose = "IssueVc"
+    * (SignedWalletInfo)walletInfo = Create wallet information
+    * walletToken = Wallet token
+end hnote
+
+ca -> ca: * (AttestedAppInfo)caAppInfo\
+        \n   = Create signed app information
+ca -> ca: Generate server token seed\
+        \n* (ServerTokenSeed)seed = {\
+        \n     purpose = "IssueVc",\
+        \n     walletInfo,\
+        \n     caAppInfo\
+        \n  }
+
+ca -> tas ++: Request Create Token\n{seed}
+    tas -> tas: Verify signatures\
+            \n* Verify wallet signature\
+            \n* Verify CApp provider signature
+    tas -> tas: Generate and store server token\
+            \n* Create (ServerTokenData)std\
+            \n* serverToken = sha256(std)
+    tas -> tas: Encrypt response information\
+            \n* iv = Generate IV\
+            \n* tmp = enc(std, sesKey, iv)\
+            \n* encStd = multibase(tmp)
+return {iv, encStd}
+
+ca -> ca: Encrypt and Prepare Data\
+        \n* Calculate serverToken
+
+== 4. Request Issue Profile ==
+
+ca -> tas ++: Request Issue Profile\n{serverToken}
+    tas -> tas: Confirm authorization and identify holder\
+            \n* Verify serverToken\
+            \n* holderDid = Holder DID
+    tas -> vf ++: Generate Profile\n{holderDid[, pii]}
+        vf -> vf: Prepare profile-related data\
+                \n* issuerNonce = Generate nonce for issuance\
+                \n* (ReqE2e)reqE2e = Create E2E request information\
+                \n* Other data omitted
+        vf -> vf: (IssueProfile)profile = Create profile
+    return {profile}
+    tas -> tas: * authNonce = Generate nonce for DID Auth
+return {authNonce, profile}
+
+== 5. Request Issue VC ==
+
+ca -> wal ++: Request VC Issuance\n{walletToken, serverToken,\
+        \n   refId, authNonce, profile}
+    wal -> wal: Verify walletToken
+
+    wal -> wal: Verify profile.proof signature
+    wal -> wal: Prepare DID Auth data\
+        \n* (DidAuth)didAuth = {\
+        \n     did = Holder DID,\
+        \n     authNonce\
+        \n  }
+    user -[#Blue]\ wal: User authentication
+    wal -> wal: signAuth(didAuth)
+
+    wal -> wal: Perform E2E ECDH\
+            \n* _, pubKeyE2E = Generate ECC key pair\
+            \n* e2eKey = Generate encryption key using E2E data from profile\
+            \n* iv = Generate IV\
+            \n* (AccE2e)accE2e = {pubKeyE2E, iv}\
+            \n* signKeyAgree(accE2e)
+    wal -> wal: Generate and encrypt issuance request information\
+            \n* Create (ReqVc)reqVc\
+            \n* encReqVc = enc(data, e2eKey, iv)
+
+    wal -> tas ++: Request Issue VC\n{serverToken, didAuth, accE2e, encReqVc}
+        tas -> tas: Verify serverToken
+        tas -> tas: Verify DID Auth\
+                \n* Verify didAuth.proof\
+                \n* Check authNonce match
+        tas -> vf ++: Issue VC\n{accE2e, encReqVc}
+            vf -> vf: Perform E2E ECDH\
+                    \n* Verify accE2e.proof\
+                    \n* Generate e2eKey\
+                    \n* iv = accE2e.iv
+            vf -> vf: Decrypt encReqVc\
+                    \n* tmp = debase(encReqVc)\
+                    \n* reqVc = dec(tmp, e2eKey, iv)
+            vf -> vf: Verify reqVc against IssueProfile\
+                    \n* Check refId match\
+                    \n* Check profile.id match\
+                    \n* Check profile.issuerNonce match
+            vf -> vf: vc = **Issue or re-issue VC**
+            vf -> vf: Encrypt vc\
+                    \n* iv = Generate IV\
+                    \n* tmp = enc(vc, e2eKey, iv)\
+                    \n* encVc = multibase(tmp)
+        return {encVc, iv}
+    return {encVc, iv}
+
+    wal -> wal: Decrypt encVc\
+            \n* tmp = debase(encVc)\
+            \n* vc = dec(tmp, e2eKey, iv)
+    wal -> wal: Verify issuer signature and store
+    wal -> wal: Extract vcId = VC id
+return {vcId}
+
+== 6. Confirm Issue VC ==
+
+ca -> tas ++: Confirm Issue VC\n{vcId}
+    tas -> vf ++: Complete VC\n{vcId}
+        vf -> vf: Check vcId and complete processing
+    return OK
+return OK
+
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_vp_offer1
+title
+    <size:25>[Example 1] Verify Offer - Dynamic QR, Direct Mode</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+participant "**CApp**" as ca <<App>>
+box Service Device (Customer Service Desk) #Azure
+    participant "**Display**" as dp <<Gadget>>
+    participant "**Staff PC**" as pc <<PC>>
+end box
+participant "**Verifier**" as vf <<Server>>
+
+rnote over pc
+    **[Pre-Configured Information]**
+    * device = Service Device Identifier
+    * service = Service Identifier
+    * mode = "Direct"
+end rnote
+
+== (B) Offer ==
+
+activate pc
+activate dp
+pc -> vf ++: (Example) Request Offer\n{mode, device, service}
+    vf -> vf: Create Verify Offer\
+        \n* offerId = Generate offer id\
+        \n* (VerifyOfferPayload)payload \
+        \n    = Create Payload
+    note left
+        If mode = "Direct",
+        include endpoints in payload
+    end note
+return {payload}
+
+pc -> pc: Generate QR Code\n* qr = GenQr(payload)
+pc -> dp: Display QR Code {qr}
+
+activate ca
+ca <[#blue]-o dp: Scan QR Code
+ca -> ca: * Extract payload\n* offerId = payload.offerId
+
+== (C) Verify ==
+
+ca -> vf ++: C1. Request Profile\n{offerId}
+note over ca, vf: The rest is omitted
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_vp_offer2
+title
+<size:25>[Example 2] Verify Offer - Static QR + Passcode, Direct Mode</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+actor "**User**" as user
+participant "**CApp**" as ca <<App>>
+box Service Device (Customer Service Desk) #Azure
+    actor "**Staff**" as staff
+    participant "**Static QR**" as qr <<Paper>>
+    participant "**Staff PC**" as pc <<PC>>
+end box
+participant "**Verifier**" as vf <<Server>>
+
+rnote over pc
+    **[Pre-Configured Information]**
+    * device = Service Device Identifier
+    * service = Service Identifier
+    * mode = "Direct"
+end rnote
+
+== Preparation ==
+
+staff -> qr: Prepare Printed QR
+activate qr
+
+== (B) Offer Stage ==
+
+user -[#Blue]\ staff: Request Service
+staff -[#Blue]\ pc: Request Passcode
+activate pc
+
+pc -> vf ++: (Example) Request Offer\n{mode, device, service}
+    vf -> vf: Create Verify Offer\
+        \n* offerId = Generate offer id\
+        \n* passcode = Generate passcode
+return {offerId, passcode}
+
+pc -> pc: Display passcode
+
+pc o-[#Blue]\ staff: Confirm passcode
+staff -[#Blue]\ user: "Scan the QR and enter <passcode>."
+
+ca <[#blue]-o qr: Scan QR Code
+activate ca
+ca -> ca: * Extract payload\
+        \n* device = payload.device\
+        \n* service = payload.service
+ca -> ca: Display Passcode Input Field
+
+user -[#Blue]\ ca: Enter <passcode>
+ca -> vf ++: (Example) Verify Passcode\n{device, service, passcode}
+    vf -> vf: Verify passcode
+    vf -> vf: Retrieve offerId
+return {offerId}
+
+== (C) Verify ==
+
+ca -> vf ++: C1. Request Profile\n{offerId}
+note over ca, vf: The rest is omitted
+@enduml
+
+--------------------------------------------------------------------------------
+
+@startuml seq_present_vp_direct
+title
+    <size:25> Presentation of VP - Direct Mode</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+actor "**User**" as user
+box Mobile #OldLace
+    participant "**CApp**" as ca <<App>>
+    participant "**Wallet**" as wal <<Wallet>>
+end box
+participant "**Verifier**" as vf <<Server>>
+
+hnote over ca, vf #LimeGreen
+    Information obtained through the Offer stage:
+    * device, service, (optional)offerId, (optional)passcode
+end hnote
+
+== 1. Request Profile ==
+
+activate ca
+
+ca -> vf ++: Request Profile\n{offerId}
+    vf -> vf: Validate offerId
+    vf -> vf: Prepare profile-related data\
+            \n* verifierNonce = Generate nonce for submission\
+            \n* (ReqE2e)reqE2e = Create E2E request information\
+            \n* Other data omitted
+    vf -> vf: (VerifyProfile)profile = Create profile
+return {profile}
+
+hnote over ca, wal #LimeGreen
+    Generate walletToken {purpose = "PresentVp"}
+    * walletToken = walletToken
+end hnote
+
+ca -> wal ++: Retrieve list of presentable VCs\n{walletToken, profile}
+    wal -> wal: Validate walletToken
+    wal -> wal: Verify profile.proof
+    wal -> wal: Search for VCs matching filter criteria\
+            \n* (VpCandidate[ ])candidates\
+            \n    = Create list of candidate VCs
+return {candidates}
+
+ca -> ca: Display list of candidate VCs
+
+user -[#Blue]\ ca: Select VC
+ca -> ca: vcId = Selected VC id
+
+user -[#Blue]\ ca: Select claims to submit
+ca -> ca: claimCodes = List of claim codes to submit
+
+user -[#Blue]\ ca: Consent to submission
+
+== 2. Request Verify ==
+
+ca -> wal ++: Request Presentation of VP\n{walletToken, vcId, claimCodes}
+    wal -> wal: Validate walletToken
+    wal -> wal: Perform E2E ECDH\
+            \n* _, pubKeyE2E = Generate ECC key pair\
+            \n* e2eKey = Generate encryption key using E2E data from profile\
+            \n* iv = Generate IV\
+            \n* (AccE2e)accE2e = {pubKeyE2E, iv}\
+            \n* signKeyAgree(accE2e)
+    wal -> wal: Generate VP\
+            \n* vp = GenVp(vcId, claimCodes, verifierNonce)
+
+    user -[#Blue]\ wal: Authenticate user\n(as per authType)
+
+    wal -> wal: Sign and encrypt VP\
+            \n* signAssert(vp)\
+            \n* encVp = enc(vp, e2eKey, iv)
+return {accE2e, encVp}
+
+ca -> vf ++: Request Verify\n{accE2e, encVp}
+    vf -> vf: Perform E2E ECDH\
+        \n* Verify accE2e.proof if present\
+        \n* Generate e2eKey\
+        \n* iv = accE2e.iv
+    vf -> vf: Decrypt encVp\
+        \n* vp = dec(debase(encVp), e2eKey, iv)
+    vf -> vf: Verify VP\
+        \n* Verify vp.proof\
+        \n* Validate VC lifecycle\
+        \n* Verify issuer signatures within VC
+    vf -> vf: Store VP and provide service
+return OK
+@enduml
+
+

@@ -1,0 +1,239 @@
+@startuml P210_issue_vc_ko
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 설정
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID 기술 규격
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== 제목 ===
+title
+	<size:25>VC 발급</size>
+end title
+
+'=== 옵션 ===
+' 자동채번: ex) "<b>000." => 앞에 0을 채워 3자리 숫자로 표시
+autonumber "<b>(#)</b>"
+' 페이지 하단 participant box 숨기기
+'hide footbox
+
+'=== 상수 ===
+
+!$refdoc = "별도 문서 참조"
+!$doc = "데이터명세 문서 참조"
+
+'=== Panticipants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+actor "**사용자**" as user
+box 모바일 #OldLace
+    participant "**인가앱**" as ca <<App>>
+    participant "**월렛**" as wal <<Wallet>>
+end box
+participant "**TAS**" as tas <<Server>>
+participant "**발급 사업자**" as vf <<Server>>
+
+box 신뢰저장소
+    participant "**blockchain**" as BC <<Storage>> #WhiteSmoke
+end box 
+
+== offer요청 ==
+
+hnote over ca, vf #LimeGreen
+    개시 단계 수행으로 아래 정보 획득
+    * vcPlanId, (optional)issuer, (optional)offerId
+end hnote
+
+rnote over ca, vf
+    (선택적 수행)
+    Request Issue Profile 이전에 KYC 수행하여 TAS가 개인식별번호 획득
+    인가앱이 KYC 수행하여 TAS에 개인식별번호를 넘겨줄 수도 있음
+    
+    * pii = 개인식별번호
+end rnote
+
+== P210-1 : Propose Issue VC ==
+
+activate ca
+
+ca -> tas ++: Propose Issue VC\n{vcPlanId[, issuer, offerId]}
+    tas -> tas: * VC plan 유효성 확인\n* 발급이슈어 식별
+    note right
+        발급이슈어 식별은 TAS DB 또는
+        내부 설정에 저장된 정보를 확인
+    end note
+    tas -> vf ++: Inspect Propose\n{vcPlanId[, issuer, offerId]}
+        vf -> vf: VC 발급 가능여부 확인
+        vf -> vf: refId = 참조번호 생성
+    return {refId}
+return {refId}
+
+== P210-2 : Request ECDH ==
+
+ca -> ca: ECDH 데이터 준비 및 서명\
+        \n* (ReqEcdh)reqEcdh\
+        \n   = ECDH 요청 생성
+
+opt KeyAgreement 서명 ON
+    ca -> wal ++: KeyAgreement 서명 요청\n{reqEcdh}
+        wal -> wal: signKeyAgree(reqEcdh)
+        note right
+            실제 호출 시
+            * 인가앱은 원문의 해시와 keyId를 전달
+            * 월렛은 서명값만 응답
+        end note
+    return {reqEcdh}
+end
+
+ca -> tas ++: Request ECDH\n{reqEcdh}
+    opt KeyAgreement 서명 ON
+        tas -> tas: reqEcdh.proof 서명 검증
+    end
+    tas -> tas: ECDH 수행\
+            \n* sesKey = 세션키\
+            \n* (AccEcdh)accEcdh\
+            \n   = ECDH 수락 생성
+
+    opt KeyAgreement 서명  ON
+        tas -> tas: signKeyAgree(accEcdh)
+    end
+
+return {accEcdh}
+opt KeyAgreement 서명 ON
+    ca -> ca: accEcdh.proof 서명 검증
+end
+ca -> ca: ECDH 수행\n* sesKey = 세션키
+
+== P210-3 : Request Create Token ==
+
+hnote over ca, wal #LimeGreen
+    * purpose = "IssueVc"
+    * (SignedWalletInfo)walletInfo = 월렛정보 생성
+    * walletToken = 월렛토큰
+end hnote
+
+ca -> ca: * (AttestedAppInfo)caAppInfo\
+        \n   = 서명된 앱정보 생성
+ca -> ca: 서버토큰시드 생성\
+        \n* (ServerTokenSeed)seed = {\
+        \n     purpose = "IssueVc",\
+        \n     walletInfo,\
+        \n     caAppInfo\
+        \n  }
+
+ca -> tas ++: Request Create Token\n{seed}
+    tas -> tas: 서명 검증\
+            \n* 월렛서명 검증\
+            \n* 인증앱 사업자 서명 검증
+    tas -> tas: 서버토큰 생성 및 저장\
+            \n* (ServerTokenData)std 생성\
+            \n* serverToken = sha256(std)
+    tas -> tas: 응답정보 암호화\
+            \n* iv = IV 생성\
+            \n* tmp = enc(std, sesKey, iv)\
+            \n* encStd = multibase(tmp)
+return {iv, encStd}
+
+ca -> ca: 복호화(생략) 및 데이터 준비\
+        \n* serverToken 계산
+
+== P210-4 : Request Issue Profile ==
+
+ca -> tas ++: Request Issue Profile\n{serverToken}
+    tas -> tas: 권한확인 및 holder 식별\
+            \n* serverToken 검증\
+            \n* holderDid = Holder DID
+    tas -> vf ++: Generate Profile\n{holderDid[, pii]}
+        vf -> vf: Profile 관련 데이터 준비\
+                \n* issuerNonce = 발급용 nonce 생성\
+                \n* (ReqE2e)reqE2e = E2E 요청정보 생성\
+                \n* 기타 데이터는 생략
+         vf <-> BC: Issuer DID Doc 조회 / 응답
+                rnote right of vf #MintCream    
+                    **DidDoc** : $doc
+                end note
+        vf -> vf: (IssueProfile)profile = Profile 생성
+    return {profile}
+    tas -> tas: * authNonce = DID Auth용 nonce 생성
+return {authNonce, profile}
+
+== P210-5 : Request Issue VC ==
+
+ca -> wal ++: VC 발급 요청\n{walletToken, serverToken,\
+        \n   refId, authNonce, profile}
+    wal -> wal: walletToken 검증
+
+    wal -> wal: profile.proof 서명 검증
+    wal -> wal: DID Auth 데이터 준비\
+        \n* (DidAuth)didAuth = {\
+        \n     did = Holder DID,\
+        \n     authNonce\
+        \n  }
+    user -[#Blue]\ wal: 사용자 인증(비표준)
+    wal -> wal: signAuth(didAuth)
+
+    wal -> wal: E2E용 ECDH 수행\
+            \n* _, pubKeyE2E = ECC 키쌍 생성\
+            \n* e2eKey = profile 내 E2E 데이터로\
+            \n  암호화키 생성\
+            \n* iv = IV 생성\
+            \n* (AccE2e)accE2e = {pubKeyE2E, iv}\
+            \n* signKeyAgree(accE2e)
+    wal -> wal: 발급 요청정보 생성 및 암호화\
+            \n* (ReqVc)reqVc 생성\
+            \n* encReqVc = enc(data, e2eKey, iv)
+
+    wal -> tas ++: Request Issue VC\n{serverToken, didAuth, accE2e, encReqVc}
+        tas -> tas: serverToken 검증
+        tas -> tas: DID Auth 검증\
+                \n* didAuth.proof 검증\
+                \n* authNonce 일치여부 확인
+        tas -> vf ++: Issue VC\n{accE2e, encReqVc}
+            vf -> vf: E2E ECDH 수행\
+                    \n* accE2e.proof 검증\
+                    \n* e2eKey = 암호화키 생성\
+                    \n* iv = accE2e.iv
+            vf -> vf: encReqVc 복호화\
+                    \n* tmp = debase(encReqVc)\
+                    \n* reqVc = dec(tmp, e2eKey, iv)
+            vf -> vf: IssueProfile 대비 reqVc 검증\
+                    \n* refId 일치여부 확인\
+                    \n* profile.id 일치여부 확인\
+                    \n* profile.issuerNonce 일치여부 확인
+            vf <-> BC: Issuer DID Doc 조회 / 응답
+                rnote right of vf #MintCream    
+                    **DidDoc** : $doc
+                end note
+            vf -> vf: vc = **VC 발급 or 재발급**            
+            vf -> BC: vcMeta 생성 / 등록
+                rnote right of vf #MintCream    
+                    **vcMeta** : $doc
+                end note
+            vf -> vf: vc 암호화\
+                    \n* iv = IV 생성\
+                    \n* tmp = enc(vc, e2eKey, iv)\
+                    \n* encVc = multibase(tmp)
+        return {encVc, iv}
+    return {encVc, iv}
+
+    wal -> wal: encVc 복호화\
+            \n* tmp = debase(encVc)\
+            \n* vc = dec(tmp, e2eKey, iv)
+    wal -> wal: 이슈어 서명 검증 및 저장
+    wal -> wal: vcId = VC id 추출
+return {vcId}
+
+== P210-6 : Confirm Issue VC ==
+
+ca -> tas ++: Confirm Issue VC\n{vcId}
+    tas -> vf ++: Complete VC\n{vcId}
+        vf -> vf: vcId 확인 및 완료 처리
+    return OK
+return OK
+@enduml

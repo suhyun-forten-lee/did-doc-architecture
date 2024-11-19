@@ -1,0 +1,165 @@
+@startuml P220_revoke_vc_ko
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 설정
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID 기술 규격
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== 제목 ===
+title
+	<size:25>P220: VC 폐기</size>
+end title
+
+'=== 옵션 ===
+' 자동채번: ex) "<b>000." => 앞에 0을 채워 3자리 숫자로 표시
+autonumber "<b>(#)</b>"
+' 페이지 하단 participant box 숨기기
+'hide footbox
+
+'=== 상수 ===
+
+!$refdoc = "별도 문서 참조"
+!$doc = "데이터명세 문서 참조"
+
+'=== Panticipants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+actor "**사용자**" as user
+box 모바일 #OldLace
+    participant "**인가앱**" as ca <<App>>
+    participant "**월렛**" as wal <<Wallet>>
+end box
+participant "**TAS**" as tas <<Server>>
+participant "**발급 사업자**" as vf <<Server>>
+
+box 신뢰저장소
+    participant "**blockchain**" as BC <<Storage>> #WhiteSmoke
+end box 
+
+== P220-1 : Propose Revoke VC ==
+
+activate ca
+
+ca -> tas ++: Propose Revoke VC\n{vcId}
+    tas <-> BC: VC Meta 조회
+    tas -> tas: Issuer DID 확인
+    tas -> vf ++: Inspect Propose Revoke\n{vcId}
+    note right
+        발급이슈어 식별은 TAS DB 또는
+        내부 설정에 저장된 정보를 확인
+    end note
+        vf -> vf: VC 폐기 가능 여부 확인
+        vf -> vf: issuerNonce = 사용자 서명 검증용 nonce 생성
+        vf -> vf: authType: 사용자 인증수단 조회
+    return {issuerNonce, authType}
+return {issuerNonce, authType}
+
+== P220-2 : Request ECDH ==
+
+ca -> ca: ECDH 데이터 준비 및 서명\
+        \n* (ReqEcdh)reqEcdh\
+        \n   = ECDH 요청 생성
+
+opt KeyAgreement 서명 ON
+    ca -> wal ++: KeyAgreement 서명 요청\n{reqEcdh}
+        wal -> wal: signKeyAgree(reqEcdh)
+        note right
+            실제 호출 시
+            * 인가앱은 원문의 해시와 keyId를 전달
+            * 월렛은 서명값만 응답
+        end note
+    return {reqEcdh}
+end
+
+ca -> tas ++: Request ECDH\n{reqEcdh}
+    opt KeyAgreement 서명 ON
+        tas -> tas: reqEcdh.proof 서명 검증
+    end
+    tas -> tas: ECDH 수행\
+            \n* sesKey = 세션키\
+            \n* (AccEcdh)accEcdh\
+            \n   = ECDH 수락 생성
+
+    opt KeyAgreement 서명  ON
+        tas -> tas: signKeyAgree(accEcdh)
+    end
+
+return {accEcdh}
+opt KeyAgreement 서명 ON
+    ca -> ca: accEcdh.proof 서명 검증
+end
+ca -> ca: ECDH 수행\n* sesKey = 세션키
+
+== P220-3 : Request Create Token ==
+
+hnote over ca, wal #LimeGreen
+    * purpose = "RevokeVc"
+    * (SignedWalletInfo)walletInfo = 월렛정보 생성
+    * walletToken = 월렛토큰
+end hnote
+
+ca -> ca: * (AttestedAppInfo)caAppInfo\
+        \n   = 서명된 앱정보 생성
+ca -> ca: 서버토큰시드 생성\
+        \n* (ServerTokenSeed)seed = {\
+        \n     purpose = "RevokeVc",\
+        \n     walletInfo,\
+        \n     caAppInfo\
+        \n  }
+
+ca -> tas ++: Request Create Token\n{seed}
+    tas -> tas: 서명 검증\
+            \n* 월렛서명 검증\
+            \n* 인증앱 사업자 서명 검증
+    tas -> tas: 서버토큰 생성 및 저장\
+            \n* (ServerTokenData)std 생성\
+            \n* serverToken = sha256(std)
+    tas -> tas: 응답정보 암호화\
+            \n* iv = IV 생성\
+            \n* tmp = enc(std, sesKey, iv)\
+            \n* encStd = multibase(tmp)
+return {iv, encStd}
+
+ca -> ca: 복호화(생략) 및 데이터 준비\
+        \n* serverToken 계산
+
+
+== P220-4 : Request Revoke VC ==
+
+ca -> wal ++: VC 폐기 요청\n{walletToken, serverToken, vcId,\
+        \n issuerNonce, authType}
+    wal -> wal: walletToken 검증
+    wal -> wal: vcId, issuerNonce 
+    wal -> wal: ReqRevokeVc 데이터 준비\
+        \n* (ReqRevokeVc)reqRevokeVc = {\
+        \n     vcId = Revoke VC ID,\
+        \n     issuerNonce\
+        \n  }
+    user -[#Blue]\ wal: 사용자 인증(비표준)
+    wal -> wal: signAuth(reqRevokeVc)
+    wal -> tas ++: Request Revoke VC\n{serverToken, reqRevokeVc}
+        tas -> tas: serverToken 검증
+        tas -> vf ++: Revoke VC\n{reqRevokeVc}
+            vf -> vf: issuerNonce 검증
+            vf <-> BC: Holder DID Doc 조회
+            vf -> vf: reqRevokeVc 서명 검증
+            vf -> BC++: VC 상태 변경 요청
+            return {result}
+        return {result}
+    return {result}
+return {result}
+
+== P220-5 : Confirm Issue VC ==
+
+ca -> tas ++: Confirm Revoke VC
+    tas -> vf ++: Complete Revoke VC
+    return OK
+return OK
+@enduml

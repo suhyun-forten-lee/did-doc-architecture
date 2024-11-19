@@ -1,0 +1,68 @@
+@startuml update_vc_status_simple
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Settings
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID Technical Specification
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== Title ===
+title
+	<size:25>VC Status Update</size>
+end title
+
+'=== Options ===
+autonumber "<b>(#)</b>"
+
+'=== Participants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+box Issuer Admin
+    actor "**Issuer Admin**" as ADMIN #WhiteSmoke
+end box
+
+box Issuing Provider #AliceBlue
+    participant "**ISSUER**" as ISSUER <<WAS>> #WhiteSmoke
+end box
+
+box Trusted Storage
+    participant "**blockchain**" as BC <<Storage>> #WhiteSmoke
+end box 
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Constants
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Content
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+||| 
+
+== VC Status Update ==
+rnote across #white
+    The Admin must request the ISSUER to update the VC status via the admin site or another interface.
+    This process is not covered in this specification.
+end note
+
+ADMIN -> ISSUER++: VC Status Update Request
+rnote right of ADMIN #Lavender        
+    **[API_REQ: VC Status Update Request]**
+end note
+
+ISSUER -> BC: Update VC Metadata
+
+ISSUER --> ADMIN--: VC Status Update Response
+rnote right of ADMIN #Lavender        
+    **[API_RES: VC Status Update Response]**
+end note
+
+||| 
+||| 
+@enduml

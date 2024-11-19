@@ -1,0 +1,88 @@
+@startuml issue_server_token_simple
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Settings
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID Technical Specification
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== Title ===
+title
+	<size:25>Issue Server Token</size>
+end title
+
+'=== Options ===
+autonumber "<b>(#)</b>"
+
+'=== Participants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+box Mobile #OldLace
+    participant "**Wallet**" as WALLET <<Wallet>> #WhiteSmoke
+    participant "**Certified App**" as CA <<App>> #WhiteSmoke    
+end box
+
+box Certified App Provider #AliceBlue
+    participant "**CAS**" as CAS <<WAS>> #WhiteSmoke
+end box
+
+box TAS Provider #AliceBlue
+    participant "**TAS**" as TAS <<WAS>> #WhiteSmoke
+end box
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Constants
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+!$refdoc = "Refer to separate document"
+!$doc = "Refer to data specification document"
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Content
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+||| 
+
+== Request Signed Wallet Information ==
+CA -> WALLET ++ : Request Signed Wallet Information {Wallet Token}
+WALLET -> WALLET: Generate Random Number
+WALLET -> WALLET : Sign Wallet Information (Wallet ID, Random Number)
+WALLET --> CA--: Return Signed Wallet Information
+
+||| 
+== Request Signed App Information ==
+rnote across #white
+    The Certified App must already have an active session with the Certified App Server through a login or similar process.
+    However, the specific details of this process are not covered in this specification.
+end note
+
+CA -> CAS ++ : Request Signed App Information
+CAS -> CAS : Generate Random Number
+CAS -> CAS : Sign App Information (Certified App ID, Random Number)
+CAS --> CA--: Return Signed App Information
+
+||| 
+== Request Server Token Data Generation ==
+CA -> CA: Generate Server Token Seed (Signed Wallet Information, Signed App Information)
+
+CA -> TAS++ : Request Server Token Data (Server Token Seed)
+TAS -> TAS: Generate Server Token Data (Server Token Seed)
+TAS -> TAS: Issue Server Token (Server Token Data)
+TAS --> CA--: Return Encrypted Server Token Data
+
+rnote across #white
+    The process of key exchange between CA and TAS for encryption and decryption is omitted.
+end note
+
+||| 
+== Issue Server Token ==
+CA -> CA: Decrypt Server Token Data
+CA -> CA: Generate Server Token (Server Token Data)
+
+||| 
+||| 
+@enduml

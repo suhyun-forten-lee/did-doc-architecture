@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="ko" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-1.100 docs-doc-page docs-doc-id-Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.1">
+<title data-rh="true">Open DID Issuer Server Installation And Operation Guide | OmniOneID</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://your-docusaurus-site.example.com/architecture/ko/img/docusaurus-social-card.jpeg"><meta data-rh="true" name="twitter:image" content="https://your-docusaurus-site.example.com/architecture/ko/img/docusaurus-social-card.jpeg"><meta data-rh="true" property="og:url" content="https://your-docusaurus-site.example.com/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide"><meta data-rh="true" property="og:locale" content="ko"><meta data-rh="true" property="og:locale:alternate" content="en"><meta data-rh="true" name="docusaurus_locale" content="ko"><meta data-rh="true" name="docsearch:language" content="ko"><meta data-rh="true" name="docusaurus_version" content="1.100"><meta data-rh="true" name="docusaurus_tag" content="docs-default-1.100"><meta data-rh="true" name="docsearch:version" content="1.100"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-1.100"><meta data-rh="true" property="og:title" content="Open DID Issuer Server Installation And Operation Guide | OmniOneID"><meta data-rh="true" name="description" content="- Date: 2024-09-02"><meta data-rh="true" property="og:description" content="- Date: 2024-09-02"><link data-rh="true" rel="icon" href="/architecture/ko/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://your-docusaurus-site.example.com/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide"><link data-rh="true" rel="alternate" href="https://your-docusaurus-site.example.com/architecture/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide" hreflang="en"><link data-rh="true" rel="alternate" href="https://your-docusaurus-site.example.com/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide" hreflang="ko"><link data-rh="true" rel="alternate" href="https://your-docusaurus-site.example.com/architecture/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/architecture/ko/blog/rss.xml" title="OmniOneID RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/architecture/ko/blog/atom.xml" title="OmniOneID Atom Feed"><link rel="stylesheet" href="/architecture/ko/assets/css/styles.ceea0820.css">
+<script src="/architecture/ko/assets/js/runtime~main.103bace2.js" defer="defer"></script>
+<script src="/architecture/ko/assets/js/main.8d87db70.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="본문으로 건너뛰기"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">본문으로 건너뛰기</a></div><nav aria-label="메인" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="사이드바 펼치거나 접기" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/architecture/ko/"><div class="navbar__logo"><img src="/architecture/ko/img/omnione.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/architecture/ko/img/omnione.jpeg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">OmniOne Open DID</b></a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current="page" class="navbar__link active" aria-haspopup="true" aria-expanded="false" role="button" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">1.100</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/architecture/ko/docs/next/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">Next</a></li><li><a class="dropdown__link" href="/architecture/ko/docs/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">1.200</a></li><li><a aria-current="page" class="dropdown__link dropdown__link--active" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">1.100</a></li><li><a class="dropdown__link" href="/architecture/ko/docs/1.000/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">1.000</a></li></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_nlXk"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>한국어</a><ul class="dropdown__menu"><li><a href="/architecture/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="en">English</a></li><li><a href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="ko">한국어</a></li></ul></div><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/architecture/ko/docs/1.100/Architecture/architecture/Software Architecture">Docs</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/OmniOneID" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="어두운 모드와 밝은 모드 전환하기 (현재 밝은 모드)" aria-label="어두운 모드와 밝은 모드 전환하기 (현재 밝은 모드)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="맨 위로 스크롤하기" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="문서 사이드바" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/architecture/ko/docs/1.100/Architecture/architecture/Software Architecture">Architecture</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/architecture/ko/docs/1.100/SDK/did-blockchain-sdk-server/">SDK</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/architecture/ko/docs/1.100/Server/did-api-server/">Server</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-api-server/">API Gateway Server</a><button aria-label="사이드바 분류 &#x27;API Gateway Server&#x27; 펼치기" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/">Issuer Server</a><button aria-label="사이드바 분류 &#x27;Issuer Server&#x27; 접기" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/CHANGELOG">Changelog</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/CLA">Individual Software Grant and Contributor License Agreement</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/CODE_OF_CONDUCT">Contributor Covenant Code of Conduct</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/CONTRIBUTING">Contribution Guidelines</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/MAINTAINERS">Maintainers</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/README_ko">Issuer Server</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/RELEASE-PROCESS">Release Process</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/SECURITY">Security Policy</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/dependencies-license">Project Dependency License Report</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-3 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/api/Issuer_API_ko">docs</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/api/Issuer_API_ko">api</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/db/OpenDID_TableDefinition_Issuer">db</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/errorCode/Issuer_ErrorCode">errorCode</a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-4 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">installation</a></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">Open DID Issuer Server Installation And Operation Guide</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-5 menu__list-item"><a class="menu__link" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide_ko">Open DID Issuer Server Installation And Operation Guide</a></li></ul></li></ul></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-ta-server/">TAS(Trust Agent Service) Server</a><button aria-label="사이드바 분류 &#x27;TAS(Trust Agent Service) Server&#x27; 펼치기" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-verifier-server/">Verifier Server</a><button aria-label="사이드바 분류 &#x27;Verifier Server&#x27; 펼치기" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" tabindex="0" href="/architecture/ko/docs/1.100/Server/did-wallet-server/">Wallet Server</a><button aria-label="사이드바 분류 &#x27;Wallet Server&#x27; 펼치기" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="theme-doc-version-banner alert alert--warning margin-bottom--md" role="alert"><div>OmniOneID<!-- --> <b>1.100</b> 문서는 더 이상 업데이트되지 않습니다.</div><div class="margin-top--md">최신 문서는 <b><a href="/architecture/ko/docs/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide">최신 버전</a></b> (<!-- -->1.200<!-- -->)을 확인하세요.</div></div><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="홈" class="breadcrumbs__link" href="/architecture/ko/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">Server</span><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/architecture/ko/docs/1.100/Server/did-issuer-server/"><span itemprop="name">Issuer Server</span></a><meta itemprop="position" content="2"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">docs</span><meta itemprop="position" content="3"></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">installation</span><meta itemprop="position" content="4"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Open DID Issuer Server Installation And Operation Guide</span><meta itemprop="position" content="5"></li></ul></nav><span class="theme-doc-version-badge badge badge--secondary">버전: 1.100</span><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">이 페이지에서</button></div><div class="theme-doc-markdown markdown"><header><h1>Open DID Issuer Server Installation And Operation Guide</h1></header>
+<ul>
+<li>Date: 2024-09-02</li>
+<li>Version: v1.0.0</li>
+</ul>
+<h1>Table of Contents</h1>
+<ul>
+<li><a href="#1-introduction">1. Introduction</a>
+<ul>
+<li><a href="#11-overview">1.1. Overview</a></li>
+<li><a href="#12-issuer-server-definition">1.2. Issuer Server Definition</a></li>
+<li><a href="#13-system-requirements">1.3. System Requirements</a></li>
+</ul>
+</li>
+<li><a href="#2-preparation">2. Preparation</a>
+<ul>
+<li><a href="#21-git-installation">2.1. Git Installation</a></li>
+<li><a href="#22-postgresql-installation">2.2. PostgreSQL Installation</a></li>
+</ul>
+</li>
+<li><a href="#3-cloning-the-source-code-from-github">3. Cloning the Source Code from GitHub</a>
+<ul>
+<li><a href="#31-cloning-the-source-code">3.1. Cloning the Source Code</a></li>
+<li><a href="#32-directory-structure">3.2. Directory Structure</a></li>
+</ul>
+</li>
+<li><a href="#4-how-to-run-the-server">4. How to Run the Server</a>
+<ul>
+<li><a href="#41-running-with-intellij-idea-gradle-support">4.1. Running with IntelliJ IDEA (Gradle Support)</a>
+<ul>
+<li><a href="#411-installing-and-setting-up-intellij-idea">4.1.1. Installing and Setting Up IntelliJ IDEA</a></li>
+<li><a href="#412-opening-the-project-in-intellij">4.1.2. Opening the Project in IntelliJ</a></li>
+<li><a href="#413-gradle-build">4.1.3. Gradle Build</a></li>
+<li><a href="#414-running-the-server">4.1.4. Running the Server</a></li>
+<li><a href="#415-database-installation">4.1.5. Database Installation</a></li>
+<li><a href="#416-server-configuration">4.1.6. Server Configuration</a></li>
+</ul>
+</li>
+<li><a href="#42-running-the-server-using-console-commands">4.2. Running the Server Using Console Commands</a>
+<ul>
+<li><a href="#421-gradle-build-command">4.2.1. Gradle Build Command</a></li>
+<li><a href="#422-running-the-server">4.2.2. Running the Server</a></li>
+<li><a href="#423-database-installation">4.2.3. Database Installation</a></li>
+<li><a href="#424-server-configuration">4.2.4. Server Configuration</a></li>
+</ul>
+</li>
+<li><a href="#43-running-with-docker">4.3. Running with Docker</a></li>
+</ul>
+</li>
+<li><a href="#5-configuration-guide">5. Configuration Guide.</a>
+<ul>
+<li><a href="#51-applicationyml">5.1. application.yml</a>
+<ul>
+<li><a href="#511-spring-basic-settings">5.1.1. Spring Basic Settings</a></li>
+<li><a href="#512-server-settings">5.1.2. Server Setting</a></li>
+<li><a href="#513-tas-settings">5.1.3. TAS Settings</a></li>
+</ul>
+</li>
+<li><a href="#52-application-loggingyml">5.2. application-logging.yml</a>
+<ul>
+<li><a href="#521-logging-settings">5.2.1. Logging Settings</a></li>
+</ul>
+</li>
+<li><a href="#53-databaseyml">5.3. database.yml</a>
+<ul>
+<li><a href="#531-spring-liquibase-settings">5.3.1. Spring Liquibase Settings</a></li>
+<li><a href="#532-data-source-settings">5.3.2. Data Source Settings</a></li>
+<li><a href="#533-jpa-settings">5.3.3. JPA Settings</a></li>
+</ul>
+</li>
+<li><a href="#54-walletyml">5.4. wallet.yml</a>
+<ul>
+<li><a href="#541-wallet-settings">5.4.1. Wallet Settings</a></li>
+</ul>
+</li>
+<li><a href="#55-issueyml">5.5. issue.yml</a>
+<ul>
+<li><a href="#551-issuer-settings">5.5.1. Issuer Settings</a></li>
+</ul>
+</li>
+<li><a href="#56-blockchainproperties">5.6. blockchain.properties</a>
+<ul>
+<li><a href="#561-blockchain-integration-settings">5.6.1. Blockchain Integration Settings</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#6-profile-configuration-and-usage">6. Profile Configuration and Usage</a>
+<ul>
+<li><a href="#61-profile-overview-sample-dev">6.1. Profile Overview (<code>sample</code>, <code>dev</code>)</a>
+<ul>
+<li><a href="#611-sample-profile">6.1.1. <code>sample</code> Profile</a></li>
+<li><a href="#612-dev-profile">6.1.2. <code>dev</code> Profile</a></li>
+</ul>
+</li>
+<li><a href="#62-how-to-configure-profiles">6.2. How to Configure Profiles</a>
+<ul>
+<li><a href="#621-running-the-server-using-an-ide">6.2.1. Running the Server Using an IDE</a></li>
+<li><a href="#622-running-the-server-using-console-commands">6.2.2. Running the Server Using Console Commands</a></li>
+<li><a href="#623-running-the-server-using-docker">6.2.3. Running the Server Using Docker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#7-running-after-building-with-docker">7. Running After Building with Docker</a>
+<ul>
+<li><a href="#71-how-to-build-a-docker-image-based-on-dockerfile">7.1. How to Build a Docker Image (Based on <code>Dockerfile</code>)</a></li>
+<li><a href="#72-running-the-docker-image">7.2. Running the Docker Image</a></li>
+<li><a href="#73-running-with-docker-compose">7.3. Running with Docker Compose</a>
+<ul>
+<li><a href="#731-docker-composeyml-file-explanation">7.3.1. <code>docker-compose.yml</code> File Explanation</a></li>
+<li><a href="#732-running-and-managing-containers">7.3.2. Running and Managing Containers</a></li>
+<li><a href="#733-how-to-configure-the-server">7.3.3. How to Configure the Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#8-installing-postgresql-with-docker">8. Installing PostgreSQL with Docker</a>
+<ul>
+<li><a href="#81-installing-postgresql-using-docker-compose">8.1. Installing PostgreSQL Using Docker Compose</a></li>
+<li><a href="#82-running-the-postgresql-container">8.2. Running the PostgreSQL Container</a></li>
+</ul>
+</li>
+</ul>
+<h1>1. Introduction</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="11-overview">1.1. Overview<a href="#11-overview" class="hash-link" aria-label="1.1. Overview에 대한 직접 링크" title="1.1. Overview에 대한 직접 링크">​</a></h2>
+<p>This document provides a guide for the installation and operation of the Issuer server. It explains the installation process, configuration methods, and operational procedures step by step, guiding users to install and operate it efficiently.</p>
+<p>For the complete installation guide of OpenDID, please refer to the <a href="https://github.com/OmniOneID/did-release/blob/main/docs/guide/installation/OepnDID_Installation_Guide.md" target="_blank" rel="noopener noreferrer">Open DID Installation Guide</a>.</p>
+<br>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="12-issuer-server-definition">1.2. Issuer Server Definition<a href="#12-issuer-server-definition" class="hash-link" aria-label="1.2. Issuer Server Definition에 대한 직접 링크" title="1.2. Issuer Server Definition에 대한 직접 링크">​</a></h2>
+<p>Issuer server provides various functions such as Issue VC, Revoke VC, and status changes within Open DID.</p>
+<br>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="13-system-requirements">1.3. System Requirements<a href="#13-system-requirements" class="hash-link" aria-label="1.3. System Requirements에 대한 직접 링크" title="1.3. System Requirements에 대한 직접 링크">​</a></h2>
+<ul>
+<li><strong>Java 17</strong> or higher</li>
+<li><strong>Gradle 7.0</strong> or higher</li>
+<li><strong>Docker</strong> and <strong>Docker Compose</strong> (when using Docker)</li>
+<li>At least <strong>2GB RAM</strong> and <strong>10GB of disk space</strong></li>
+</ul>
+<br>
+<h1>2. Preparation</h1>
+<p>This chapter provides the necessary preparatory steps before installing the components of the Open DID project.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="21-git-installation">2.1. Git Installation<a href="#21-git-installation" class="hash-link" aria-label="2.1. Git Installation에 대한 직접 링크" title="2.1. Git Installation에 대한 직접 링크">​</a></h2>
+<p><code>Git</code> is a distributed version control system that tracks changes in the source code and supports collaboration among multiple developers. Git is essential for managing the source code and version control of the Open DID project.</p>
+<p>After a successful installation, you can check the version of Git with the following command:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">git --version</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<blockquote>
+<p><strong>Reference Links</strong></p>
+<ul>
+<li><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository" target="_blank" rel="noopener noreferrer">Git Installation Guide</a></li>
+</ul>
+</blockquote>
+<br>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="22-postgresql-installation">2.2. PostgreSQL Installation<a href="#22-postgresql-installation" class="hash-link" aria-label="2.2. PostgreSQL Installation에 대한 직접 링크" title="2.2. PostgreSQL Installation에 대한 직접 링크">​</a></h2>
+<p>To run the Issuer server, a database installation is required, and Open DID uses PostgreSQL.</p>
+<blockquote>
+<p><strong>Reference Links</strong></p>
+<ul>
+<li><a href="https://www.postgresql.org/download/" target="_blank" rel="noopener noreferrer">PostgreSQL Installation Guide</a></li>
+<li><a href="#8-installing-postgresql-with-docker">8. Installing PostgreSQL with Docker</a></li>
+</ul>
+</blockquote>
+<br>
+<h1>3. Cloning the Source Code from GitHub</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="31-cloning-the-source-code">3.1. Cloning the Source Code<a href="#31-cloning-the-source-code" class="hash-link" aria-label="3.1. Cloning the Source Code에 대한 직접 링크" title="3.1. Cloning the Source Code에 대한 직접 링크">​</a></h2>
+<p>The <code>git clone</code> command allows you to copy the source code from a remote repository hosted on GitHub to your local computer. By using this command, you can work on the entire source code and related files locally. After cloning, you can proceed with the necessary tasks within the repository and push any changes back to the remote repository.</p>
+<p>Open a terminal and run the following commands to copy the Issuer server repository to your local computer:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># Clone the repository from the Git repository</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">git clone https://github.com/OmniOneID/did-issuer-server.git</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"># Navigate to the cloned repository</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">cd did-issuer-server</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<blockquote>
+<p><strong>Reference Links</strong></p>
+<ul>
+<li><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository" target="_blank" rel="noopener noreferrer">Git Clone Guide</a></li>
+</ul>
+</blockquote>
+<br>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="32-directory-structure">3.2. Directory Structure<a href="#32-directory-structure" class="hash-link" aria-label="3.2. Directory Structure에 대한 직접 링크" title="3.2. Directory Structure에 대한 직접 링크">​</a></h2>
+<p>The main directory structure of the cloned project is as follows:</p>
+<div class="codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">did-issuer-server</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── CHANGELOG.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── CLA.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── CODE_OF_CONDUCT.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── CONTRIBUTING.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── dependencies-license.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── MAINTAINERS.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── README.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── RELEASE-PROCESS.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── SECURITY.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├── docs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── api</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       └── Issuer_API.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── errorCode</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       └── Issuer_ErrorCode.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   ├── installation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       └── OpenDID_IssuerServer_InstallationAndOperation_Guide.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│   └── db</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│       └── OpenDID_TableDefinition_Issuer.md</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└── source</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    └── issuer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ├── gradle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ├── libs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            └── did-sdk-common-1.0.0.jar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            └── did-blockchain-sdk-server-1.0.0.jar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            └── did-core-sdk-server-1.0.0..jar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            └── did-crypto-sdk-server-1.0.0.jar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            └── did-datamodel-sdk-server-1.0.0.jar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            └── did-wallet-sdk-server-1.0.0.jar</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        ├── sample</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        └── src</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        └── build.gradle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        └── README.md</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td>CHANGELOG.md</td><td>Changes by version for the project</td></tr><tr><td>CODE_OF_CONDUCT.md</td><td>Code of conduct for contributors</td></tr><tr><td>CONTRIBUTING.md</td><td>Contribution guidelines and procedures</td></tr><tr><td>LICENSE</td><td>License</td></tr><tr><td>dependencies-license.md</td><td>License information for project dependencies</td></tr><tr><td>MAINTAINERS.md</td><td>Guidelines for project maintainers</td></tr><tr><td>RELEASE-PROCESS.md</td><td>Procedure for releasing a new version</td></tr><tr><td>SECURITY.md</td><td>Security policy and vulnerability reporting</td></tr><tr><td>docs</td><td>Documentation</td></tr><tr><td>┖ api</td><td>API guide documents</td></tr><tr><td>┖ errorCode</td><td>Error codes and troubleshooting guide</td></tr><tr><td>┖ installation</td><td>Installation and configuration guide</td></tr><tr><td>┖ db</td><td>Database ERD and table specifications</td></tr><tr><td>source</td><td>Source code</td></tr><tr><td>┖ did-issuer-server</td><td>Issuer server source code and build files</td></tr><tr><td>┖ gradle</td><td>Gradle build configuration and scripts</td></tr><tr><td>┖ libs</td><td>External libraries and dependencies</td></tr><tr><td>┖ sample</td><td>Sample files</td></tr><tr><td>┖ src</td><td>Main source code directory</td></tr><tr><td>┖ build.gradle</td><td>Gradle build configuration file</td></tr><tr><td>┖ README.md</td><td>Source code overview and instructions</td></tr></tbody></table>
+<br>
+<h1>4. How to Run the Server</h1>
+<p>This chapter explains three methods to run the server.</p>
+<p>The project source is located under the <code>source</code> directory, and depending on the method, you need to load and configure the source from that directory.</p>
+<ol>
+<li>
+<p><strong>Using an IDE</strong>: You can open the project in an Integrated Development Environment (IDE), set up the run configuration, and directly run the server. This method is useful when quickly testing code changes during development.</p>
+</li>
+<li>
+<p><strong>Using console commands after building</strong>: After building the project, you can run the server by executing the generated JAR file with a console command (<code>java -jar</code>). This method is mainly used when deploying or running the server in a production environment.</p>
+</li>
+<li>
+<p><strong>Building with Docker</strong>: You can build the server as a Docker image and run it as a Docker container. This method ensures consistency across environments and makes deployment and scaling easier.</p>
+</li>
+</ol>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="41-running-with-intellij-idea-gradle-support">4.1. Running with IntelliJ IDEA (Gradle Support)<a href="#41-running-with-intellij-idea-gradle-support" class="hash-link" aria-label="4.1. Running with IntelliJ IDEA (Gradle Support)에 대한 직접 링크" title="4.1. Running with IntelliJ IDEA (Gradle Support)에 대한 직접 링크">​</a></h2>
+<p>IntelliJ IDEA is a widely used Integrated Development Environment (IDE) for Java development. It supports build tools like Gradle, making project setup and dependency management very convenient. Since the Open DID server is built using Gradle, you can easily configure and run the server within IntelliJ IDEA.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="411-installing-and-setting-up-intellij-idea">4.1.1. Installing and Setting Up IntelliJ IDEA<a href="#411-installing-and-setting-up-intellij-idea" class="hash-link" aria-label="4.1.1. Installing and Setting Up IntelliJ IDEA에 대한 직접 링크" title="4.1.1. Installing and Setting Up IntelliJ IDEA에 대한 직접 링크">​</a></h3>
+<ol>
+<li>Install IntelliJ. (Refer to the link below for installation instructions)</li>
+</ol>
+<blockquote>
+<p><strong>Reference Links</strong></p>
+<ul>
+<li><a href="https://www.jetbrains.com/idea/download/" target="_blank" rel="noopener noreferrer">Download IntelliJ IDEA</a></li>
+</ul>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="412-opening-the-project-in-intellij">4.1.2. Opening the Project in IntelliJ<a href="#412-opening-the-project-in-intellij" class="hash-link" aria-label="4.1.2. Opening the Project in IntelliJ에 대한 직접 링크" title="4.1.2. Opening the Project in IntelliJ에 대한 직접 링크">​</a></h3>
+<ul>
+<li>Launch IntelliJ and select <code>File -&gt; New -&gt; Project</code> from Existing Sources. When the file selection window appears, choose the &#x27;source/did-issuer-server&#x27; folder from the repository cloned in <a href="#31-cloning-the-source-code">3.1. Cloning the Source Code</a></li>
+<li>When the project opens, the <code>build.gradle</code> file will be automatically recognized.</li>
+<li>Gradle will automatically download the necessary dependency files. Please wait until this process is completed.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="413-gradle-build">4.1.3. Gradle Build<a href="#413-gradle-build" class="hash-link" aria-label="4.1.3. Gradle Build에 대한 직접 링크" title="4.1.3. Gradle Build에 대한 직접 링크">​</a></h3>
+<ul>
+<li>In the Gradle tab in IntelliJ IDEA, run <code>Tasks -&gt; build -&gt; build</code>.</li>
+<li>Once the build is successfully completed, the project will be ready for execution.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="414-running-the-server">4.1.4. Running the Server<a href="#414-running-the-server" class="hash-link" aria-label="4.1.4. Running the Server에 대한 직접 링크" title="4.1.4. Running the Server에 대한 직접 링크">​</a></h3>
+<ul>
+<li>In the Gradle tab of IntelliJ IDEA, select <code>Tasks -&gt; application -&gt; bootRun</code> and run it.</li>
+<li>Gradle will automatically build and run the server.</li>
+<li>Check the console log for the message &quot;Started [ApplicationName] in [time] seconds&quot; to confirm that the server has started successfully.</li>
+<li>Once the server is running properly, open your browser and navigate to <a href="http://localhost:8090/swagger-ui/index.html" target="_blank" rel="noopener noreferrer">http://localhost:8090/swagger-ui/index.html</a> to verify that the API documentation is displayed correctly through Swagger UI.</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>The Issuer server is initially configured to use the <code>sample</code> profile.</li>
+<li>When the sample profile is set, the server will run without required configurations (e.g., database). For more details, refer to <a href="#6-profile-configuration-and-usage">6. Profile Configuration and Usage</a></li>
+</ul>
+</blockquote>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="415-database-installation">4.1.5. Database Installation<a href="#415-database-installation" class="hash-link" aria-label="4.1.5. Database Installation에 대한 직접 링크" title="4.1.5. Database Installation에 대한 직접 링크">​</a></h3>
+<p>The Issuer server stores the necessary data for operation in a database, so a database must be installed to run the server. The Open DID server uses the PostgreSQL database. There are several ways to install the PostgreSQL server, but using Docker is the simplest and easiest method. For PostgreSQL installation instructions, please refer to <a href="#22-postgresql-installation">2.2. PostgreSQL Installation</a></p>
+<br>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="416-server-configuration">4.1.6. Server Configuration<a href="#416-server-configuration" class="hash-link" aria-label="4.1.6. Server Configuration에 대한 직접 링크" title="4.1.6. Server Configuration에 대한 직접 링크">​</a></h3>
+<ul>
+<li>The server settings must be modified according to the deployment environment to ensure stable operation. For example, you need to adjust configuration elements such as database connection information, port numbers, email integration details, etc., based on the specific environment.</li>
+<li>The server configuration files are located at <code>src/main/resource/config.</code></li>
+<li>For detailed configuration instructions, please refer to <a href="#5-configuration-guide">5. Configuration Guide.</a></li>
+</ul>
+<br>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="42-running-the-server-using-console-commands">4.2. Running the Server Using Console Commands<a href="#42-running-the-server-using-console-commands" class="hash-link" aria-label="4.2. Running the Server Using Console Commands에 대한 직접 링크" title="4.2. Running the Server Using Console Commands에 대한 직접 링크">​</a></h2>
+<p>This section provides instructions on how to run the Open DID server using console commands. It explains the process of building the project with Gradle and running the server using the generated JAR file.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="421-gradle-build-command">4.2.1. Gradle Build Command<a href="#421-gradle-build-command" class="hash-link" aria-label="4.2.1. Gradle Build Command에 대한 직접 링크" title="4.2.1. Gradle Build Command에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p>Build the source using <code>gradlew</code>:</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  # Navigate to the source folder of the cloned repository</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  cd source/did-issuer-server</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # Grant execute permission to the Gradle Wrapper</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  chmod 755 ./gradlew</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  # Clean build the project (delete previous build files and rebuild)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ./gradlew clean build</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<blockquote>
+<p>Note</p>
+<ul>
+<li><code>gradlew</code> is short for Gradle Wrapper, a script used to run Gradle in a project. Even if Gradle is not installed locally, it automatically downloads and runs the version of Gradle specified by the project, allowing developers to build the project in a consistent environment, regardless of whether Gradle is installed.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>Navigate to the build folder and confirm that the JAR file has been generated:</p>
+<div class="language-shell codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-shell codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">  cd build/libs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  ls</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p>This command generates the file <code>did-issuer-server-1.0.0.jar</code>.</p>
+</li>
+</ul>
+<br>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="422-running-the-server">4.2.2. Running the Server<a href="#422-running-the-server" class="hash-link" aria-label="4.2.2. Running the Server에 대한 직접 링크" title="4.2.2. Running the Server에 대한 직접 링크">​</a></h3>
+<p>Run the server using the built JAR file:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">java -jar did-issuer-server-1.0.0.jar</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<ul>
+<li>Once the server is running properly, open your browser and navigate to <a href="http://localhost:8090/swagger-ui/index.html" target="_blank" rel="noopener noreferrer">http://localhost:8090/swagger-ui/index.html</a> to verify that the API documentation is displayed correctly through Swagger UI.</li>
+</ul>
+<blockquote>
+<p><strong>Note</strong></p>
+<ul>
+<li>The Issuer server is initially configured to use the <code>sample</code> profile.</li>
+<li>When the sample profile is set, the server will run without required configurations (e.g., database). For more details, refer to <a href="#6-profile-configuration-and-usage">6. Profile Configuration and Usage</a></li>
+</ul>
+</blockquote>
+<br>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="423-database-installation">4.2.3. Database Installation<a href="#423-database-installation" class="hash-link" aria-label="4.2.3. Database Installation에 대한 직접 링크" title="4.2.3. Database Installation에 대한 직접 링크">​</a></h3>
+<p>The Issuer server stores the necessary data for operation in a database, so a database must be installed to run the server. The Open DID server uses the PostgreSQL database. There are several ways to install the PostgreSQL server, but using Docker is the simplest and easiest method. For PostgreSQL installation instructions, please refer to <a href="#22-postgresql-installation">2.2. PostgreSQL Installation</a></p>
+<br>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="424-server-configuration">4.2.4. Server Configuration<a href="#424-server-configuration" class="hash-link" aria-label="4.2.4. Server Configuration에 대한 직접 링크" title="4.2.4. Server Configuration에 대한 직접 링크">​</a></h3>
+<ul>
+<li>The server settings must be modified according to the deployment environment to ensure stable operation. For example, you need to adjust configuration elements such as database connection information, port numbers, email integration details, etc., based on the specific environment.</li>
+<li>The server configuration files are located at <code>src/main/resource/config.</code></li>
+<li>For detailed configuration instructions, please refer to <a href="#5-configuration-guide">5. Configuration Guide.</a></li>
+</ul>
+<p><br>\</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="43-running-with-docker">4.3. Running with Docker<a href="#43-running-with-docker" class="hash-link" aria-label="4.3. Running with Docker에 대한 직접 링크" title="4.3. Running with Docker에 대한 직접 링크">​</a></h2>
+<ul>
+<li>For the process of building, configuring, and running a Docker image, please refer to <a href="#7-running-after-building-with-docker">7. Running After Building with Docker</a></li>
+</ul>
+<br>
+<h1>5. Configuration Guide.</h1>
+<p>This chapter provides guidance on each configuration value included in all of the server&#x27;s configuration files. Each setting is a crucial element that controls the server&#x27;s behavior and environment, so proper configuration is necessary for stable server operation. Refer to the descriptions and examples for each item to apply the appropriate settings for your environment.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="51-applicationyml">5.1. application.yml<a href="#51-applicationyml" class="hash-link" aria-label="5.1. application.yml에 대한 직접 링크" title="5.1. application.yml에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="511-spring-basic-settings">5.1.1. Spring Basic Settings<a href="#511-spring-basic-settings" class="hash-link" aria-label="5.1.1. Spring Basic Settings에 대한 직접 링크" title="5.1.1. Spring Basic Settings에 대한 직접 링크">​</a></h3>
+<p>The basic settings in Spring define the application&#x27;s name and the active profile, playing a critical role in configuring the server&#x27;s runtime environment.</p>
+<ul>
+<li>
+<p><code>spring.application.name</code>:</p>
+<ul>
+<li>Specifies the name of the application.</li>
+<li>Purpose: Primarily used for identifying the application in log messages, monitoring tools, or within Spring Cloud services.</li>
+<li>Example: <code>Issuer</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.profiles</code>:</p>
+<ul>
+<li>Defines the profiles and profile groups to be activated.</li>
+<li>Purpose:
+<ul>
+<li><code>active</code>: Specifies the profile that will be activated by default.</li>
+<li><code>group</code>: Defines the profile groups to be activated by environment (dev, sample).</li>
+</ul>
+</li>
+<li>Example configuration and explanation:
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">profiles</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">active</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> dev</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">group</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">dev</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">            </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> databases   </span><span class="token comment" style="color:#999988;font-style:italic"># Database related settings (application-database.yml)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> wallet      </span><span class="token comment" style="color:#999988;font-style:italic"># Wallet related settings (application-wallet.yml)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> logging     </span><span class="token comment" style="color:#999988;font-style:italic"># Logging settings (application-logging.yml)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> spring</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">docs </span><span class="token comment" style="color:#999988;font-style:italic"># Swagger API documentation settings (application-spring-docs.yml, optional)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> issue       </span><span class="token comment" style="color:#999988;font-style:italic"># Issuer server settings (application-issue.yml)            </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+<li>
+<p><code>spring.jackson</code>: 🔒</p>
+<ul>
+<li>Settings related to JSON serialization/deserialization. Commonly used values during communication with other servers.</li>
+<li>Example:
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">default-property-inclusion</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> non_null</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">serialization</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">fail-on-empty-beans</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token boolean important" style="color:#36acaa">false</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="512-server-settings">5.1.2. Server Settings<a href="#512-server-settings" class="hash-link" aria-label="5.1.2. Server Settings에 대한 직접 링크" title="5.1.2. Server Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li><code>server.port</code>:
+<ul>
+<li>The port number on which the application will run. The default port setting for the Issuer server is 8091.</li>
+<li>Value: 8091</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="513-tas-settings">5.1.3. TAS Settings<a href="#513-tas-settings" class="hash-link" aria-label="5.1.3. TAS Settings에 대한 직접 링크" title="5.1.3. TAS Settings에 대한 직접 링크">​</a></h3>
+<p>The Issuer service communicates with the TAS server. You just need to set the address of the TAS server you built.</p>
+<ul>
+<li><code>tas.url</code>:
+<ul>
+<li>The URL of the TAS (Trust Anchor Service). It can be used for authentication or trust verification.</li>
+<li>Example: <code>http://localhost:8090/contextpath/tas</code></li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="52-application-loggingyml">5.2. application-logging.yml<a href="#52-application-loggingyml" class="hash-link" aria-label="5.2. application-logging.yml에 대한 직접 링크" title="5.2. application-logging.yml에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="521-logging-settings">5.2.1. Logging Settings<a href="#521-logging-settings" class="hash-link" aria-label="5.2.1. Logging Settings에 대한 직접 링크" title="5.2.1. Logging Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li><code>logging.level</code>:
+<ul>
+<li>Sets the log level.</li>
+<li>By setting the level to debug, you can see all log messages at DEBUG level or higher (INFO, WARN, ERROR, FATAL) for the specified package.</li>
+</ul>
+</li>
+</ul>
+<p>Full example:</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">logging</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">level</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">org.omnione</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> debug</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="53-databaseyml">5.3. database.yml<a href="#53-databaseyml" class="hash-link" aria-label="5.3. database.yml에 대한 직접 링크" title="5.3. database.yml에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="531-spring-liquibase-settings">5.3.1. Spring Liquibase Settings<a href="#531-spring-liquibase-settings" class="hash-link" aria-label="5.3.1. Spring Liquibase Settings에 대한 직접 링크" title="5.3.1. Spring Liquibase Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><code>spring.liquibase.change-log</code>: 🔒</p>
+<ul>
+<li>Specifies the location of the database change log file. This is the log file used by Liquibase to track and apply changes to the database schema.</li>
+<li>Example: <code>classpath:/db/changelog/master.xml</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.liquibase.enabled</code>: 🔒</p>
+<ul>
+<li>Sets whether Liquibase is enabled. If set to true, Liquibase will run at application startup to perform database migration.</li>
+<li>Example: <code>true</code> [dev], <code>false</code> [sample]</li>
+</ul>
+</li>
+<li>
+<p><code>spring.liquibase.fall-on-error</code>: 🔒</p>
+<ul>
+<li>Controls the behavior when an error occurs during Liquibase&#x27;s database migration. It is set only in sample.</li>
+<li>Example: <code>false</code> [sample]</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="532-data-source-settings">5.3.2. Data Source Settings<a href="#532-data-source-settings" class="hash-link" aria-label="5.3.2. Data Source Settings에 대한 직접 링크" title="5.3.2. Data Source Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><code>spring.datasource.driver-class-name</code>:</p>
+<ul>
+<li>Specifies the database driver class to be used. It designates the JDBC driver for connecting to the database. Currently written with PostgreSQL as a reference.</li>
+<li>Example: <code>org.postgresql.Driver</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.datasource.url</code>:</p>
+<ul>
+<li>The database connection URL. It specifies the location and name of the database the application will connect to. It is written with PostgreSQL as a reference.</li>
+<li>Example: <code>jdbc:postgresql://localhost:5432/issuer_db</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.datasource.username</code>:</p>
+<ul>
+<li>The username for database access.</li>
+<li>Example: <code>issuer_user</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.datasource.password</code>:</p>
+<ul>
+<li>The password for database access.</li>
+<li>Example: <code>your_secure_password</code></li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="533-jpa-settings">5.3.3. JPA Settings<a href="#533-jpa-settings" class="hash-link" aria-label="5.3.3. JPA Settings에 대한 직접 링크" title="5.3.3. JPA Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><code>spring.jpa.open-in-view</code>: 🔒</p>
+<ul>
+<li>Sets whether to use the OSIV (Open Session In View) pattern. If set to true, it maintains a database connection for the entire HTTP request. Care must be taken as it may affect performance.</li>
+<li>Example: <code>true</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.jpa.show-sql</code>: 🔒</p>
+<ul>
+<li>Sets whether to log SQL queries. If set to true, it outputs the executed SQL queries to the log. It is useful for debugging during development.</li>
+<li>Example: <code>true</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.jpa.hibernate.ddl-auto</code>: 🔒</p>
+<ul>
+<li>Sets the DDL auto generation mode of Hibernate. It specifies the strategy for automatic generation of the database schema. Setting it to &#x27;none&#x27; disables automatic generation.</li>
+<li>Example: <code>none</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.jpa.hibernate.naming.physical-strategy</code>: 🔒</p>
+<ul>
+<li>Sets the naming strategy for database objects. It specifies the strategy for converting entity class names into database table names.</li>
+<li>Example: <code>org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy</code></li>
+</ul>
+</li>
+<li>
+<p><code>spring.jpa.properties.hibernate.format_sql</code>: 🔒</p>
+<ul>
+<li>Sets whether to format SQL. If set to false, it disables formatting of the SQL queries output in the logs.</li>
+<li>Example: <code>false</code></li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="54-walletyml">5.4. wallet.yml<a href="#54-walletyml" class="hash-link" aria-label="5.4. wallet.yml에 대한 직접 링크" title="5.4. wallet.yml에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="541-wallet-settings">5.4.1. Wallet Settings<a href="#541-wallet-settings" class="hash-link" aria-label="5.4.1. Wallet Settings에 대한 직접 링크" title="5.4.1. Wallet Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><code>wallet.file-path</code>:</p>
+<ul>
+<li>Specifies the path of the wallet file. It designates the location of the file storing the wallet. This file may contain sensitive information such as private keys. <em>Must be entered as an absolute path</em></li>
+<li>Example: <code>/path/to/your/issuer.wallet</code></li>
+</ul>
+</li>
+<li>
+<p><code>wallet.password</code>:</p>
+<ul>
+<li>The password used to access the wallet. This password is used when accessing the wallet file. It is highly sensitive information.</li>
+<li>Example: <code>your_secure_wallet_password</code></li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="55-issueyml">5.5. issue.yml<a href="#55-issueyml" class="hash-link" aria-label="5.5. issue.yml에 대한 직접 링크" title="5.5. issue.yml에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="551-issuer-settings">5.5.1. Issuer Settings<a href="#551-issuer-settings" class="hash-link" aria-label="5.5.1. Issuer Settings에 대한 직접 링크" title="5.5.1. Issuer Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><code>issue.did</code>:</p>
+<ul>
+<li>Specifies the decentralized identifier (DID) of the Issuer.</li>
+<li>DID is an identifier that uniquely identifies the Issuer in a distributed system.</li>
+<li>Example: <code>did:omn:issuer</code></li>
+</ul>
+</li>
+<li>
+<p><code>issue.name</code>:</p>
+<ul>
+<li>Specifies the name of the Issuer. This name is used to represent the issuing entity.</li>
+<li>Example: <code>issuer</code></li>
+</ul>
+</li>
+<li>
+<p><code>issue.assert-sign-key-id</code>:</p>
+<ul>
+<li>Specifies the ID of the key to be used for assertion signing. This key is used to sign issued certificates or proofs.</li>
+<li>Example: <code>assert</code></li>
+</ul>
+</li>
+<li>
+<p><code>issue.domain</code>:</p>
+<ul>
+<li>Inputs the domain of the Issuer server. This domain is used in Issue Profile, VC Schema, etc.</li>
+<li>Example: <code>http://127.0.0.1:8091/issuer</code></li>
+</ul>
+</li>
+<li>
+<p><code>issue.cert-vc-ref</code>:</p>
+<ul>
+<li>Specifies the address (URL) where the Issuer&#x27;s credential verification (VC) can be retrieved.</li>
+<li>Through this URL, the authenticity of the certificates issued by that Issuer can be verified.</li>
+<li>Example: <code>http://127.0.0.1:8091/issuer/api/v1/certificate-vc</code></li>
+</ul>
+</li>
+<li>
+<p><code>issue.revoke-verify-auth-type</code>:</p>
+<ul>
+<li>Sets the authentication method of the Holder when revoking the authenticated VC.</li>
+<li>This value is configured with reference to the <code>VerifyAuthType</code> enumeration (Enum), and multiple authentication methods are possible.</li>
+<li>Example: <code>PIN_OR_BIO</code> (using PIN or biometric authentication)</li>
+</ul>
+</li>
+<li>
+<p><code>issue.profiles</code>:</p>
+<ul>
+<li>Sets the profiles used for issuing VC (Verifiable Credential).</li>
+<li>The server supports various VC Plan IDs, and the profiles may vary based on each Plan ID.</li>
+<li><code>profile.req-e2e</code>: Sets the E2E (End-to-End) encryption method used during communication between Issuer and Holder.</li>
+<li>Example: Use it after changing the domain to suit the environment.
+<div class="language-yml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">issue</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">profiles</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        </span><span class="token key atrule" style="color:#00a4db">VCPLANID000000000001</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token key atrule" style="color:#00a4db">type</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> IssueProfile</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token key atrule" style="color:#00a4db">title</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> Mobile Driver License</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token key atrule" style="color:#00a4db">description</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> Mobile Driver License</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token key atrule" style="color:#00a4db">encoding</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> UTF</span><span class="token punctuation" style="color:#393A34">-</span><span class="token number" style="color:#36acaa">8</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token key atrule" style="color:#00a4db">language</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> ko</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            </span><span class="token key atrule" style="color:#00a4db">profile</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">issuer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">did</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> did</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">omn</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">issuer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> issuer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token comment" style="color:#999988;font-style:italic"># Issuer cert VC URL</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">cert-vc-ref</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">issue.cert</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">vc</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">ref</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">credential-schema</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token comment" style="color:#999988;font-style:italic"># VC Schema URL</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    </span><span class="token key atrule" style="color:#00a4db">id</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">issue.domain</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain">/api/v1/vc/vcschema</span><span class="token punctuation" style="color:#393A34">?</span><span class="token plain">name=mdl</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    </span><span class="token key atrule" style="color:#00a4db">type</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> OsdSchemaCredential</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">process</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    </span><span class="token key atrule" style="color:#00a4db">endpoints</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                        </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">issue.domain</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                </span><span class="token key atrule" style="color:#00a4db">req-e2e</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    </span><span class="token key atrule" style="color:#00a4db">curve</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> Secp256r1</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    </span><span class="token key atrule" style="color:#00a4db">cipher</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> AES</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">256</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">CBC</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">                    </span><span class="token key atrule" style="color:#00a4db">padding</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> PKCS5</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="56-blockchainproperties">5.6. blockchain.properties<a href="#56-blockchainproperties" class="hash-link" aria-label="5.6. blockchain.properties에 대한 직접 링크" title="5.6. blockchain.properties에 대한 직접 링크">​</a></h2>
+<ul>
+<li>
+<p>Role: Configures the blockchain server information for integration with the Issuer server. After installing the Hyperledger Fabric test network according to section &#x27;5.1.1. Installing the Hyperledger Fabric Test Network&#x27; in the <a href="https://github.com/OmniOneID/did-release/blob/main/docs/guide/installation/OepnDID_Installation_Guide.md" target="_blank" rel="noopener noreferrer">Open DID Installation Guide</a>, files for the private key, certificates, and server connection information will be automatically generated. In the blockchain.properties file, you need to set the paths to these files and specify the network name that was used during the installation of the Hyperledger Fabric test network. Additionally, you will configure the chaincode name for Open DID that was deployed in &#x27;5.1.2. Deploying the Open DID Chaincode&#x27;.</p>
+</li>
+<li>
+<p>Location: <code>src/main/resources/properties</code></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="561-blockchain-integration-settings">5.6.1. Blockchain Integration Settings<a href="#561-blockchain-integration-settings" class="hash-link" aria-label="5.6.1. Blockchain Integration Settings에 대한 직접 링크" title="5.6.1. Blockchain Integration Settings에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><code>fabric.configFilePath:</code>:</p>
+<ul>
+<li>Specifies the path to the connection information file for Hyperledger Fabric. This file is automatically generated when the Hyperledger Fabric test network is installed, and the default filename is &#x27;connection-org1.json&#x27;</li>
+<li>Example: {yourpath}/connection-org1.json</li>
+</ul>
+</li>
+<li>
+<p><code>fabric.privateKeyFilePath:</code>:</p>
+<ul>
+<li>Specifies the path to the private key file used by the Hyperledger Fabric client for signing transactions and authentication on the network. This file is automatically generated during the installation of the Hyperledger Fabric test netw</li>
+<li>Example: {yourpath}/{private key filename}</li>
+</ul>
+</li>
+<li>
+<p><code>fabric.certificateFilePath:</code>:</p>
+<ul>
+<li>Specifies the path to the client certificate for Hyperledger Fabric. This file is automatically generated when the Hyperledger Fabric test network is installed, and the default filename is &#x27;cert.pem&#x27;</li>
+<li>Example: {yourpath}/cert.pem</li>
+</ul>
+</li>
+<li>
+<p><code>fabric.mychannel:</code>:</p>
+<ul>
+<li>The name of the private network (channel) used in Hyperledger Fabric. You must set this to the channel name entered during the installation of the Hyperledger Fabric test network.</li>
+<li>Example: mychannel</li>
+</ul>
+</li>
+<li>
+<p><code>fabric.chaincodeName:</code>: 🔒</p>
+<ul>
+<li>The name of the Open DID chaincode used in Hyperledger Fabric. This value is fixed as opendid.</li>
+<li>Example: opendid</li>
+</ul>
+</li>
+</ul>
+<br>
+<h1>6. Profile Configuration and Usage</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="61-profile-overview-sample-dev">6.1. Profile Overview (<code>sample</code>, <code>dev</code>)<a href="#61-profile-overview-sample-dev" class="hash-link" aria-label="61-profile-overview-sample-dev에 대한 직접 링크" title="61-profile-overview-sample-dev에 대한 직접 링크">​</a></h2>
+<p>The Issuer server supports two profiles, <code>sample</code> and <code>dev</code>, to allow operation in various environments.</p>
+<p>Each profile is designed to apply the appropriate settings for its environment. By default, the Issuer server is configured to use the <code>sample</code> profile, which is designed to run the server independently without connecting to external services such as a database or blockchain. The <code>sample</code> profile is ideal for testing API calls, allowing developers to quickly verify the basic functionality of the application. This profile returns fixed response data for all API calls, making it useful in early development environments.</p>
+<p>Sample API calls are written as JUnit tests, which can be referenced when writing your own tests.</p>
+<p>On the other hand, the <code>dev</code> profile is designed to perform actual operations. When using this profile, testing and validation with real data are possible. Activating the dev profile enables integration with external services such as databases and blockchain, allowing you to test the application&#x27;s behavior in a real-world environment.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="611-sample-profile">6.1.1. <code>sample</code> Profile<a href="#611-sample-profile" class="hash-link" aria-label="611-sample-profile에 대한 직접 링크" title="611-sample-profile에 대한 직접 링크">​</a></h3>
+<p>The <code>sample</code> profile is designed to run the server independently without connecting to external services (e.g., databases, blockchain). This profile is suitable for testing API calls, allowing developers to quickly verify the basic functionality of the application. It returns fixed response data for all API calls, making it useful in the early development stage or for functional testing. Since no integration with external systems is required, it provides an environment where the server can be run and tested standalone.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="612-dev-profile">6.1.2. <code>dev</code> Profile<a href="#612-dev-profile" class="hash-link" aria-label="612-dev-profile에 대한 직접 링크" title="612-dev-profile에 대한 직접 링크">​</a></h3>
+<p>The <code>dev</code> profile includes settings suited for the development environment and is used on development servers. To use this profile, you will need configuration for the development environment&#x27;s database and blockchain node.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="62-how-to-configure-profiles">6.2. How to Configure Profiles<a href="#62-how-to-configure-profiles" class="hash-link" aria-label="6.2. How to Configure Profiles에 대한 직접 링크" title="6.2. How to Configure Profiles에 대한 직접 링크">​</a></h2>
+<p>This section explains how to switch profiles for each server operation method.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="621-running-the-server-using-an-ide">6.2.1. Running the Server Using an IDE<a href="#621-running-the-server-using-an-ide" class="hash-link" aria-label="6.2.1. Running the Server Using an IDE에 대한 직접 링크" title="6.2.1. Running the Server Using an IDE에 대한 직접 링크">​</a></h3>
+<ul>
+<li><strong>Select Configuration File:</strong>  In the <code>src/main/resources path</code>, select the <code>application.yml</code> file.</li>
+<li><strong>Specify Profile:</strong> In the IDE&#x27;s Run/Debug Configurations, add the option <code>--spring.profiles.active={profile}</code> to activate the desired profile.</li>
+<li><strong>Apply Configuration:</strong> The configuration file corresponding to the activated profile will be applied.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="622-running-the-server-using-console-commands">6.2.2. Running the Server Using Console Commands<a href="#622-running-the-server-using-console-commands" class="hash-link" aria-label="6.2.2. Running the Server Using Console Commands에 대한 직접 링크" title="6.2.2. Running the Server Using Console Commands에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><strong>Select Configuration File:</strong> Prepare the profile-specific configuration files in the same directory as the built JAR file or in the directory where the configuration files are located.</p>
+</li>
+<li>
+<p><strong>Specify Profile:</strong> Add the option <code>--spring.profiles.active={profile}</code> to the server startup command to activate the desired profile.</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">java -jar build/libs/did-issuer-server-1.0.0.jar --spring.profiles.active={profile}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>Apply Configuration:</strong> The configuration file corresponding to the activated profile will be applied.</p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="623-running-the-server-using-docker">6.2.3. Running the Server Using Docker<a href="#623-running-the-server-using-docker" class="hash-link" aria-label="6.2.3. Running the Server Using Docker에 대한 직접 링크" title="6.2.3. Running the Server Using Docker에 대한 직접 링크">​</a></h3>
+<ul>
+<li>
+<p><strong>Select Configuration File:</strong> When creating a Docker image, specify the configuration file path in the Dockerfile, or mount external configuration files to the Docker container.</p>
+</li>
+<li>
+<p><strong>Specify Profile:</strong> Set the <code>SPRING_PROFILES_ACTIVE</code> environment variable in the Docker Compose file or the Docker run command to specify the profile.</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">environment</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> SPRING_PROFILES_ACTIVE=</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">profile</span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>Apply Configuration:</strong> The specified profile&#x27;s configuration will be applied when the Docker container is executed.</p>
+</li>
+</ul>
+<p>By following these methods, you can flexibly switch profile-specific settings and easily apply the appropriate configuration for your project environment.</p>
+<h1>7. Running After Building with Docker</h1>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="71-how-to-build-a-docker-image-based-on-dockerfile">7.1. How to Build a Docker Image (Based on <code>Dockerfile</code>)<a href="#71-how-to-build-a-docker-image-based-on-dockerfile" class="hash-link" aria-label="71-how-to-build-a-docker-image-based-on-dockerfile에 대한 직접 링크" title="71-how-to-build-a-docker-image-based-on-dockerfile에 대한 직접 링크">​</a></h2>
+<p>Build the Docker image using the following command:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">docker build -t did-issuer-server .</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="72-running-the-docker-image">7.2. Running the Docker Image<a href="#72-running-the-docker-image" class="hash-link" aria-label="7.2. Running the Docker Image에 대한 직접 링크" title="7.2. Running the Docker Image에 대한 직접 링크">​</a></h2>
+<p>Run the built image with the following command:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">docker run -d -p 8091:8091 did-issuer-server</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="73-running-with-docker-compose">7.3. Running with Docker Compose<a href="#73-running-with-docker-compose" class="hash-link" aria-label="7.3. Running with Docker Compose에 대한 직접 링크" title="7.3. Running with Docker Compose에 대한 직접 링크">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="731-docker-composeyml-file-explanation">7.3.1. <code>docker-compose.yml</code> File Explanation<a href="#731-docker-composeyml-file-explanation" class="hash-link" aria-label="731-docker-composeyml-file-explanation에 대한 직접 링크" title="731-docker-composeyml-file-explanation에 대한 직접 링크">​</a></h3>
+<p>The <code>docker-compose.yml</code> file allows you to easily manage multiple containers.</p>
+<div class="language-yaml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yaml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">version</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;3&#x27;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">services</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">app</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">image</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> did</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">issuer</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">server</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">ports</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&quot;8091:8091&quot;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">your</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">config</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">dir</span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/app/config</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">environment</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> SPRING_PROFILES_ACTIVE=sample</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="732-running-and-managing-containers">7.3.2. Running and Managing Containers<a href="#732-running-and-managing-containers" class="hash-link" aria-label="7.3.2. Running and Managing Containers에 대한 직접 링크" title="7.3.2. Running and Managing Containers에 대한 직접 링크">​</a></h3>
+<p>Run the container using Docker Compose with the following command:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">docker-compose up -d</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="733-how-to-configure-the-server">7.3.3. How to Configure the Server<a href="#733-how-to-configure-the-server" class="hash-link" aria-label="7.3.3. How to Configure the Server에 대한 직접 링크" title="7.3.3. How to Configure the Server에 대한 직접 링크">​</a></h3>
+<p>In the example above, the <code>${your-config-dir}</code> directory is mounted to <code>/app/config</code> inside the container to share configuration files.</p>
+<ul>
+<li>If additional configuration is required, you can modify settings by adding separate property files to the mounted folder.
+For example, add an application.yml file to <code>${your-config-dir}</code> and write the necessary configuration changes in this file.
+The <code>application.yml</code> file located in <code>${your-config-dir}</code> will take precedence over the default configuration files.</li>
+<li>For detailed configuration instructions, please refer to <a href="#5-configuration-guide">5. Configuration Guide.</a></li>
+</ul>
+<h1>8. Installing PostgreSQL with Docker</h1>
+<p>This section explains how to install PostgreSQL using Docker. By following this method, you can easily install PostgreSQL and integrate it with your server for use.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="81-installing-postgresql-using-docker-compose">8.1. Installing PostgreSQL Using Docker Compose<a href="#81-installing-postgresql-using-docker-compose" class="hash-link" aria-label="8.1. Installing PostgreSQL Using Docker Compose에 대한 직접 링크" title="8.1. Installing PostgreSQL Using Docker Compose에 대한 직접 링크">​</a></h2>
+<p>The following is a method to install PostgreSQL using Docker Compose:</p>
+<div class="language-yml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-yml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token key atrule" style="color:#00a4db">services</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token key atrule" style="color:#00a4db">postgres</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">container_name</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> postgre</span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain">issuer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">image</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> postgres</span><span class="token punctuation" style="color:#393A34">:</span><span class="token number" style="color:#36acaa">16.4</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">restart</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> always</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> postgres_data_issuer</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain">/var/lib/postgresql/data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">ports</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token punctuation" style="color:#393A34">-</span><span class="token plain"> 5431</span><span class="token punctuation" style="color:#393A34">:</span><span class="token number" style="color:#36acaa">5432</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token key atrule" style="color:#00a4db">environment</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">POSTGRES_USER</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">USER</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">POSTGRES_PASSWORD</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> $</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain">PW</span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">      </span><span class="token key atrule" style="color:#00a4db">POSTGRES_DB</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"> issuer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token key atrule" style="color:#00a4db">volumes</span><span class="token punctuation" style="color:#393A34">:</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  postgres_data_issuer</span><span class="token punctuation" style="color:#393A34">:</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This Docker Compose file installs PostgreSQL version 16.4 and applies the following settings:</p>
+<ul>
+<li><strong>container_name</strong>: Sets the container name to <code>postgre-issuer</code>.</li>
+<li><strong>volumes</strong>: Mounts the <code>postgres_data_issuer</code> volume to PostgreSQL&#x27;s data directory (<code>/var/lib/postgresql/data</code>), ensuring data persistence.</li>
+<li><strong>ports</strong>: Maps port 5431 on the host to port 5432 on the container.</li>
+<li><strong>environment</strong>: onfigures the PostgreSQL username, password, and database name. <code>${USER}</code> and <code>${PW}</code> can be set as environment variables.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="82-running-the-postgresql-container">8.2. Running the PostgreSQL Container<a href="#82-running-the-postgresql-container" class="hash-link" aria-label="8.2. Running the PostgreSQL Container에 대한 직접 링크" title="8.2. Running the PostgreSQL Container에 대한 직접 링크">​</a></h2>
+<p>To run the PostgreSQL container using the Docker Compose file above, execute the following command in your terminal:</p>
+<div class="language-bash codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-bash codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">docker-compose up -d</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="클립보드에 코드 복사" title="복사" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>This command runs the PostgreSQL container in the background. The PostgreSQL server will start based on the configured environment variables, and the database will be prepared. You can proceed with the integration settings to allow your application to use this database.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/versioned_docs/version-1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>페이지 편집</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="문서 페이지"><a class="pagination-nav__link pagination-nav__link--prev" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/errorCode/Issuer_ErrorCode"><div class="pagination-nav__sublabel">이전</div><div class="pagination-nav__label">Issuer Server Error</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/architecture/ko/docs/1.100/Server/did-issuer-server/docs/installation/OpenDID_IssuerServer_InstallationAndOperation_Guide_ko"><div class="pagination-nav__sublabel">다음</div><div class="pagination-nav__label">Open DID Issuer Server Installation And Operation Guide</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#11-overview" class="table-of-contents__link toc-highlight">1.1. Overview</a></li><li><a href="#12-issuer-server-definition" class="table-of-contents__link toc-highlight">1.2. Issuer Server Definition</a></li><li><a href="#13-system-requirements" class="table-of-contents__link toc-highlight">1.3. System Requirements</a></li><li><a href="#21-git-installation" class="table-of-contents__link toc-highlight">2.1. Git Installation</a></li><li><a href="#22-postgresql-installation" class="table-of-contents__link toc-highlight">2.2. PostgreSQL Installation</a></li><li><a href="#31-cloning-the-source-code" class="table-of-contents__link toc-highlight">3.1. Cloning the Source Code</a></li><li><a href="#32-directory-structure" class="table-of-contents__link toc-highlight">3.2. Directory Structure</a></li><li><a href="#41-running-with-intellij-idea-gradle-support" class="table-of-contents__link toc-highlight">4.1. Running with IntelliJ IDEA (Gradle Support)</a><ul><li><a href="#411-installing-and-setting-up-intellij-idea" class="table-of-contents__link toc-highlight">4.1.1. Installing and Setting Up IntelliJ IDEA</a></li><li><a href="#412-opening-the-project-in-intellij" class="table-of-contents__link toc-highlight">4.1.2. Opening the Project in IntelliJ</a></li><li><a href="#413-gradle-build" class="table-of-contents__link toc-highlight">4.1.3. Gradle Build</a></li><li><a href="#414-running-the-server" class="table-of-contents__link toc-highlight">4.1.4. Running the Server</a></li><li><a href="#415-database-installation" class="table-of-contents__link toc-highlight">4.1.5. Database Installation</a></li><li><a href="#416-server-configuration" class="table-of-contents__link toc-highlight">4.1.6. Server Configuration</a></li></ul></li><li><a href="#42-running-the-server-using-console-commands" class="table-of-contents__link toc-highlight">4.2. Running the Server Using Console Commands</a><ul><li><a href="#421-gradle-build-command" class="table-of-contents__link toc-highlight">4.2.1. Gradle Build Command</a></li><li><a href="#422-running-the-server" class="table-of-contents__link toc-highlight">4.2.2. Running the Server</a></li><li><a href="#423-database-installation" class="table-of-contents__link toc-highlight">4.2.3. Database Installation</a></li><li><a href="#424-server-configuration" class="table-of-contents__link toc-highlight">4.2.4. Server Configuration</a></li></ul></li><li><a href="#43-running-with-docker" class="table-of-contents__link toc-highlight">4.3. Running with Docker</a></li><li><a href="#51-applicationyml" class="table-of-contents__link toc-highlight">5.1. application.yml</a><ul><li><a href="#511-spring-basic-settings" class="table-of-contents__link toc-highlight">5.1.1. Spring Basic Settings</a></li><li><a href="#512-server-settings" class="table-of-contents__link toc-highlight">5.1.2. Server Settings</a></li><li><a href="#513-tas-settings" class="table-of-contents__link toc-highlight">5.1.3. TAS Settings</a></li></ul></li><li><a href="#52-application-loggingyml" class="table-of-contents__link toc-highlight">5.2. application-logging.yml</a><ul><li><a href="#521-logging-settings" class="table-of-contents__link toc-highlight">5.2.1. Logging Settings</a></li></ul></li><li><a href="#53-databaseyml" class="table-of-contents__link toc-highlight">5.3. database.yml</a><ul><li><a href="#531-spring-liquibase-settings" class="table-of-contents__link toc-highlight">5.3.1. Spring Liquibase Settings</a></li><li><a href="#532-data-source-settings" class="table-of-contents__link toc-highlight">5.3.2. Data Source Settings</a></li><li><a href="#533-jpa-settings" class="table-of-contents__link toc-highlight">5.3.3. JPA Settings</a></li></ul></li><li><a href="#54-walletyml" class="table-of-contents__link toc-highlight">5.4. wallet.yml</a><ul><li><a href="#541-wallet-settings" class="table-of-contents__link toc-highlight">5.4.1. Wallet Settings</a></li></ul></li><li><a href="#55-issueyml" class="table-of-contents__link toc-highlight">5.5. issue.yml</a><ul><li><a href="#551-issuer-settings" class="table-of-contents__link toc-highlight">5.5.1. Issuer Settings</a></li></ul></li><li><a href="#56-blockchainproperties" class="table-of-contents__link toc-highlight">5.6. blockchain.properties</a><ul><li><a href="#561-blockchain-integration-settings" class="table-of-contents__link toc-highlight">5.6.1. Blockchain Integration Settings</a></li></ul></li><li><a href="#61-profile-overview-sample-dev" class="table-of-contents__link toc-highlight">6.1. Profile Overview (<code>sample</code>, <code>dev</code>)</a><ul><li><a href="#611-sample-profile" class="table-of-contents__link toc-highlight">6.1.1. <code>sample</code> Profile</a></li><li><a href="#612-dev-profile" class="table-of-contents__link toc-highlight">6.1.2. <code>dev</code> Profile</a></li></ul></li><li><a href="#62-how-to-configure-profiles" class="table-of-contents__link toc-highlight">6.2. How to Configure Profiles</a><ul><li><a href="#621-running-the-server-using-an-ide" class="table-of-contents__link toc-highlight">6.2.1. Running the Server Using an IDE</a></li><li><a href="#622-running-the-server-using-console-commands" class="table-of-contents__link toc-highlight">6.2.2. Running the Server Using Console Commands</a></li><li><a href="#623-running-the-server-using-docker" class="table-of-contents__link toc-highlight">6.2.3. Running the Server Using Docker</a></li></ul></li><li><a href="#71-how-to-build-a-docker-image-based-on-dockerfile" class="table-of-contents__link toc-highlight">7.1. How to Build a Docker Image (Based on <code>Dockerfile</code>)</a></li><li><a href="#72-running-the-docker-image" class="table-of-contents__link toc-highlight">7.2. Running the Docker Image</a></li><li><a href="#73-running-with-docker-compose" class="table-of-contents__link toc-highlight">7.3. Running with Docker Compose</a><ul><li><a href="#731-docker-composeyml-file-explanation" class="table-of-contents__link toc-highlight">7.3.1. <code>docker-compose.yml</code> File Explanation</a></li><li><a href="#732-running-and-managing-containers" class="table-of-contents__link toc-highlight">7.3.2. Running and Managing Containers</a></li><li><a href="#733-how-to-configure-the-server" class="table-of-contents__link toc-highlight">7.3.3. How to Configure the Server</a></li></ul></li><li><a href="#81-installing-postgresql-using-docker-compose" class="table-of-contents__link toc-highlight">8.1. Installing PostgreSQL Using Docker Compose</a></li><li><a href="#82-running-the-postgresql-container" class="table-of-contents__link toc-highlight">8.2. Running the PostgreSQL Container</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">© OMNIONE.LTD All rights reserved.</div></div></div></footer></div>
+</body>
+</html>

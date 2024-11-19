@@ -1,0 +1,125 @@
+@startuml create_wallet_token_ko
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 설정
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID 기술 규격
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== 제목 ===
+title
+	<size:25>월렛토큰 생성</size>
+end title
+
+'=== 옵션 ===
+' 자동채번: ex) "<b>000." => 앞에 0을 채워 3자리 숫자로 표시
+autonumber "<b>(#)</b>"
+' 페이지 하단 participant box 숨기기
+'hide footbox
+
+'=== Panticipants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+
+
+box 모바일 #OldLace
+    participant "**월렛**" as WALLET <<Wallet>> #WhiteSmoke
+    participant "**인가앱**" as CA <<App>> #WhiteSmoke    
+end box
+
+
+
+box 신뢰저장소
+    participant "**blockchain**" as BC <<Storage>> #WhiteSmoke
+end box 
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 상수
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+!$refdoc = "별도 문서 참조"
+!$doc = "데이터명세 문서 참조"
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 내용
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|||
+
+
+== 월렛 토큰 생성 ==
+
+activate CA
+
+CA -> WALLET++ : tmpToken 생성 요청 {purpose, pkgname, userId}
+    WALLET -> WALLET : nonce 생성 
+    WALLET -> WALLET : tmpToken 생성 (TmpToken), 유효시간
+return {TmpToken}
+rnote right of WALLET #MintCream
+    **TmpToken** : $doc
+    TmpToken = 
+        (nonce | expTime | purpose | pkgname | userId)
+end note
+
+group 인가앱서버에서 생성
+    CA -> CA : TmpToken와, userId(id로 유저조회)로 서명 생성
+
+    CA -> CA : 월렛 토큰 요청 데이터 생성 \n(ReqWalletToken) 
+    rnote right of CA #MintCream
+        **ReqWalletToken** : $doc
+        TmpToken | pii | Proof
+        Proof = sign(TmpToken | pii, CAP_PriKey)
+
+        CAP : 인가앱사업자 (인가앱서버)
+    end note
+end
+
+CA -> WALLET++ : WalletToken 생성 요청 \n{ReqWalletToken}
+    WALLET -> BC++ : CAP DID Doc 조회
+    rnote right of WALLET #LightGray
+        **[API_REQ : DID Doc 조회 요청]**
+        did
+    end note
+
+    return
+    rnote right of WALLET #LightGray
+        **[API_RES : DID Doc 조회 응답]**
+        DidDoc
+    end note
+    rnote right of WALLET #MintCream    
+        **DidDoc** : $refdoc
+    end note
+
+    WALLET -> WALLET : 서명 검증
+    WALLET -> WALLET : resultNonce 생성 (resultNonce)
+
+    WALLET -> WALLET : 월렛토큰 생성 {walletToken}
+    rnote right of WALLET #MintCream
+        **walletToken**
+        walletToken =
+            sha256(ReqWalletToken | resultNonce)
+    end note
+
+    return {resultNonce}
+    note right of WALLET : resultNonce 전달 적용 (4/18 전무님 검토사항)
+
+    CA -> CA : 월렛토큰 생성 {walletToken}
+    rnote right of CA #MintCream
+        **walletToken**
+        walletToken = 
+            sha256(ObjReqWalletToken | resultNonce)
+    end note
+
+
+
+
+
+
+|||
+|||
+@enduml
+

@@ -1,0 +1,14 @@
+@startuml lifecycle_vc_plan
+state ACTIVE: 활성화
+state INACTIVE: 비활성화
+state REMOVED: 삭제
+
+[*] -> ACTIVE
+ACTIVE -> INACTIVE
+INACTIVE -> ACTIVE
+ACTIVE -> REMOVED
+INACTIVE -> REMOVED
+REMOVED -> [*]
+@enduml
+
+

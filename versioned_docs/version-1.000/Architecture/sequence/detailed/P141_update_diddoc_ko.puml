@@ -1,0 +1,311 @@
+@startuml P141_update_diddoc_ko
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 설정
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID 기술 규격
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== 제목 ===
+title
+	<size:25>P141 : 사용자 DID Document 갱신</size>
+end title
+
+'=== 옵션 ===
+autonumber "<b>(#)</b>"
+
+'=== Panticipants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+actor "**사용자**" as USER
+
+box 모바일 #OldLace
+    participant "**월렛**" as WALLET <<Wallet>> #WhiteSmoke
+    participant "**인가앱**" as CA <<App>> #WhiteSmoke    
+end box
+
+box TAS 사업자 #AliceBlue
+    participant "**TAS**" as TAS <<WAS>> #WhiteSmoke
+end box
+
+box 신뢰저장소
+    participant "**blockchain**" as BC <<Storage>> #WhiteSmoke
+end box 
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 상수
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+!$refdoc = "별도 문서 참조"
+!$doc = "데이터명세 문서 참조"
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' 내용
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|||
+
+== P141-1: 사용자 DID Document 갱신 시작 요청 ==
+CA -> TAS++: 사용자 DID Document 갱신 시작 요청
+rnote right of CA #Lavender        
+    **[M141_REQ: 사용자 DID Document 갱신 시작 요청]**
+    body : 
+        messageId
+        did
+end note
+
+    TAS -> TAS: did가 변경 가능한 상태인지 확인
+    TAS -> TAS: authNonce = DID Auth용 nonce 생성
+
+return 사용자 DID Document 갱신 시작 응답
+rnote right of CA #Lavender        
+    **[M141_RES: 사용자 DID Document 갱신 시작 응답]**
+    body : 
+        txId
+        authNonce
+end note
+
+|||
+== P141-2: ECDH 요청  ==
+CA -> CA: ECDH 데이터 준비 및 서명\
+            \n* (ReqEcdh)reqEcdh\
+            \n   = ECDH 요청 생성
+
+opt KeyAgreement 서명 ON
+    CA -> WALLET ++: KeyAgreement 서명 요청\n{reqEcdh}
+        WALLET -> WALLET: signKeyAgree(reqEcdh)
+        note right
+            실제 호출 시
+            * 인가앱은 원문의 해시와 keyId를 전달
+            * 월렛은 서명값만 응답
+        end note
+    return {reqEcdh}
+end
+
+CA -> TAS++ : ECDH 요청
+rnote right of CA #Lavender
+    **[M141_REQ : ECDH 요청]**
+    body : 
+        messageId
+        txId
+        reqEcdh
+end note
+
+    opt KeyAgreement 서명 ON
+        TAS -> TAS: reqEcdh.proof 서명 검증
+    end
+
+    TAS -> TAS: ECDH 수행\
+                \n* sesKey = 세션키\
+                \n* (AccEcdh)accEcdh\
+                \n   = ECDH 수락 생성
+
+    opt KeyAgreement 서명  ONx
+        TAS -> TAS: signKeyAgree(accEcdh)
+    end
+
+return ECDH 응답
+rnote right of CA #Lavender
+    **[M141_RES : ECDH 응답]**
+    body : 
+        txId
+        accEcdh
+end note
+
+opt KeyAgreement 서명  ON
+    CA -> CA: accEcdh.proof 서명 검증
+end
+
+CA -> CA: ECDH 수행\n* sesKey = 세션키
+
+|||
+== P141-3: 서버토큰 생성 요청  ==
+hnote over CA, WALLET #LimeGreen
+    * purpose = "UpdateDid"
+    * (SignedWalletInfo)walletInfo = 월렛정보 생성
+    * walletToken = 월렛토큰
+end hnote
+
+CA -> CA: * (AttestedAppInfo)caAppInfo\
+        \n   = 서명된 앱정보 생성
+
+CA -> CA: 서버토큰시드 생성\
+        \n* (ServerTokenSeed)seed = {\
+        \n     purpose = "UpdateDid",\
+        \n     walletInfo,\
+        \n     caAppInfo\
+        \n  }
+
+CA -> TAS++ : 서버토큰 생성 요청
+rnote right of CA #Lavender
+    **[M141_REQ : 서버토큰 생성 요청]**
+    body : 
+        messageId
+        txId
+        seed
+end note
+
+    TAS -> TAS: 서명 검증\
+            \n* 월렛서명 검증\
+            \n* 인증앱 사업자 서명 검증
+
+    TAS -> TAS: seed에서 정보 추출\
+            \n* appId = 인가앱 식별자\
+            \n* walletId = 월렛 식별자\
+            \n* walletDid = 월렛 DID\
+            \n* walletProviderDid = 월렛 사업자 DID
+
+    TAS -> TAS: 등록된 월렛정보와 일치여부 확인
+
+    TAS -> TAS: 서버토큰 생성 및 저장\
+            \n* (ServerTokenData)std 생성\
+            \n* serverToken = sha256(std)
+
+    TAS -> TAS: 응답정보 암호화\
+            \n* iv = IV 생성\
+            \n* tmp = enc(std, sesKey, iv)\
+            \n* encStd = multibase(tmp)
+
+return 서버토큰 생성 응답
+rnote right of CA #Lavender
+    **[M141_RES : 서버토큰 생성 응답]**
+    body : 
+        txId
+        iv
+        encStd
+end note
+
+CA -> CA: 복호화(생략) 및 데이터 준비\
+        \n* serverToken 계산
+
+|||
+== P141-4: 사용자 DID Document 갱신 요청  ==
+
+opt DID 키 추가하는 경우
+    CA -> WALLET ++: 사용자 DID 키 생성 요청\n{walletToken}
+        WALLET -> WALLET: walletToken 검증
+
+        opt PIN 키 추가하는 경우
+            USER -[#Blue]\ WALLET: PIN 입력
+            WALLET -> WALLET: PIN 키 생성
+        end
+        opt BIO 키 추가하는 경우
+            USER -[#Blue]\ WALLET: 지문/안면 인식
+            WALLET -> WALLET: BIO 키 생성
+        end
+        opt BIO 키 추가하는 경우
+            WALLET -> WALLET: 키교환용 키 생성
+        end
+    return OK
+end
+
+CA -> WALLET ++: 사용자 DID Document 갱신 요청\n{walletToken, serverToken}
+    WALLET -> WALLET: walletToken 검증
+
+    WALLET -> WALLET: (DidDoc)didDoc \
+            \n  = DID Document 생성
+    note right
+        아래 항목은 모두 최신 값으로 변경되어야 함
+        * updated: 최종 변경 일시
+        * versionId: 변경 전 보다 +1
+    end note
+
+    WALLET -> WALLET: (OwnerDidDoc)ownerDidDoc\
+            \n  = 개별키서명(didDoc)
+    WALLET -> WALLET: (SignedDidDoc)sgdDidDoc = {\
+            \n   onwerDidDoc,\
+            \n   wallet = 월렛 정보,\
+            \n   nonce = nonce 생성\
+            \n }
+    WALLET -> WALLET: 월렛 서명\
+            \n* signAssert(sgdDidDoc)
+
+    WALLET -> WALLET: DID Auth 데이터 준비\
+    \n* (DidAuth)didAuth = {\
+    \n     did = Holder DID,\
+    \n     authNonce\
+    \n  }
+
+    USER -[#Blue]\ WALLET: 사용자 인증
+    WALLET -> WALLET: signAuth(didAuth)
+
+    WALLET -> TAS ++: 사용자 DID Document 갱신 요청
+    rnote right of WALLET #Lavender
+        **[M141_REQ : 사용자 DID Document 갱신 요청]**
+        body:
+            messageId
+            txId
+            serverToken
+            didAuth
+            signedDidDoc
+    end note
+        TAS -> TAS: serverToken 검증
+
+        TAS -> TAS: DID Auth 검증\
+                \n* didAuth.proof 검증\
+                \n* authNonce 일치여부 확인
+
+        TAS -> TAS: 서명 검증\
+            \n* 월렛 서명 검증\
+            \n* 개별키 서명 검증
+        
+        TAS -> TAS: DID 비교 검증\
+            \n* didDoc.did = M141_1_REQ.did\
+            \n* didDoc.did = didAuth.did
+
+        TAS -> TAS: (InvokedDidDoc)invDidDoc = {\
+            \n   didDoc,\
+            \n   controller = TAS 정보,\
+            \n   nonce = nonce 생성\
+            \n }
+
+        TAS -> TAS: Controller 서명\
+            \n* signInvoke(invDidDoc)
+
+        TAS -> BC ++: DID 등록 요청\n{invDidDoc}
+            BC -> BC: Controller\n서명 검증
+            BC -> BC: 등록
+        return OK
+
+        TAS -> TAS: 사용자 매핑정보 DB 확인\
+                \n* holderDid (사용자 DID)\
+                \n* walletId (월렛 식별자)\
+                \n* appId (인가앱 식별자)
+        return 사용자 DID Document 갱신 응답
+        rnote right of WALLET #Lavender
+            **[M141_REQ : 사용자 DID Document 갱신]**
+            body:
+                txId
+        end note
+return OK
+
+
+|||
+== P141-5: 사용자 DID Document 갱신 완료  ==
+CA -> TAS++: 사용자 DID Document 갱신 완료 요청
+rnote right of CA #Lavender        
+    **[M141_REQ: 사용자 DID Document 갱신 완료 요청]**
+    body:
+        messageId
+        txId
+        serverToken
+end note
+
+    TAS -> TAS: serverToken 검증
+    TAS -> TAS: 세션정보 삭제 및 거래종료
+
+return 사용자 등록 완료 응답
+rnote right of CA #Lavender        
+    **[M141_RES: 사용자 DID Document 갱신 완료 요청]**
+    body:
+        txId
+end note
+
+|||
+|||
+@enduml
+

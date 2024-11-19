@@ -1,0 +1,70 @@
+@startuml retrieve_vc_list_simple
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Settings
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'=== Header and Footer ===
+header OPEN-DID Technical Specification
+footer
+  	Page %page% of %lastpage% at %date("yyyy-MM-dd hh:mm:ss")
+end footer
+
+'=== Title ===
+title
+	<size:25>Retrieve VC List</size>
+end title
+
+'=== Options ===
+autonumber "<b>(#)</b>"
+
+
+'=== Participants ===
+skinparam ParticipantPadding 20
+skinparam BoxPadding 20
+skinparam MaxMessageSize 500
+skinparam MinClassWidth 80
+
+
+box Mobile #OldLace
+    participant "**Wallet**" as WALLET <<Wallet>> #WhiteSmoke
+    participant "**Certified App**" as CA <<App>> #WhiteSmoke    
+end box
+
+box Trusted Storage
+    participant "**blockchain**" as BC <<Storage>> #WhiteSmoke
+end box 
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Constants
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+!$doc = "Refer to data specification document"
+
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+' Content
+'- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+||| 
+
+== Wallet Token Creation ==
+rnote over WALLET, CA #white
+    Wallet token creation: Certified App -> Wallet
+end note
+
+||| 
+== Retrieve VC List ==
+CA -> WALLET++ : Retrieve VC List \n{Wallet Token}
+WALLET --> CA--: VC List
+
+
+||| 
+== Retrieve VC Status ==
+loop For each VC
+    CA -> BC++ : Retrieve VC Status
+    BC --> CA--: VcMeta
+    rnote right of CA #MintCream    
+        **VcMeta** : $doc
+    end note
+end loop
+
+||| 
+||| 
+@enduml

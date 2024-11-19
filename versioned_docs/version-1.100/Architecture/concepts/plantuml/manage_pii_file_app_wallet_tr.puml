@@ -1,0 +1,27 @@
+@startuml
+participant app as "Client App"
+participant tas as "TAS Server"
+
+app ->> tas : PII Registration Request (PII)
+tas -->> app : Response (Whether Already Registered)
+
+alt When using an existing wallet
+    app ->> tas : Request to use existing wallet
+    note right of tas : Cannot use existing wallet if it is a different device from the previously registered one.
+    tas -> tas : Update information (user, app)
+    tas -->> app : OK
+else When registering a new wallet (Single device per person)
+    app ->> tas : DIDDoc Registration Request
+    tas -> tas : If already registered, revoke existing wallet and DIDDoc
+    tas -> tas : Update information (user, wallet, app)
+    tas -->> app : OK
+else When registering a new wallet (Multiple devices per person)
+    app ->> tas : DIDDoc Registration Request
+    tas -> tas : If already registered, revoke existing wallet and DIDDoc
+    tas -> tas : Update information (user, wallet, app)
+    tas -->> app : OK
+end
+
+app ->> tas : Verification Request
+tas -->> app : OK
+@enduml

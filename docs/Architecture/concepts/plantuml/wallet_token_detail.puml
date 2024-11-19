@@ -1,0 +1,71 @@
+@startuml proc_wallet_token_detail
+title
+	<size:25>월렛토큰 생성</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+participant "**월렛**" as wal <<Wallet>>
+participant "**인가앱**" as ca <<App>>
+participant "**인가앱 서비스**" as cap <<Server>>
+
+activate ca
+
+rnote over ca
+    **[Pre-defined]**
+    * PKG_NAME = 인가앱의 패키지명
+end rnote
+/ rnote over cap
+    **[Pre-defined]**
+    * PII = 인가앱 소유자의 개인식별자
+end rnote
+
+== 1. WalletTokenSeed ==
+
+ca -> ca: 준비\
+    \n* purpose = 용도에 맞게 지정\
+    \n* pkgName = PKG_NAME
+
+ca -> wal ++: 월렛토큰 시드 생성요청\n{purpose, pkgName}
+    wal -> wal: purpose, pkgName 유효성 확인
+    note right: pkgName 값을 확인하여 인가되지 않은 앱의 접근 차단
+    wal -> wal: 데이터 준비\
+            \n* validUntil = 유효일시\
+            \n* nonce = 난수 생성
+    wal -> wal: (WalletTokenSeed)seed\
+            \n = {pupose, validUntil, pkgName, nonce}
+return {seed}
+
+== 2. WalletTokenData ==
+
+ca -> cap ++: 월렛토큰 데이터 생성요청\n{seed}
+    cap -> cap: 데이터 준비\
+        \n* sha256_pii = multibase(sha256(PII))\
+        \n* provider = 사업자 정보\
+        \n* nonce = 난수 생성\
+        \n* dataset = {seed, sha256_pii, provider, nonce}
+    cap -> cap: 인가앱 사업자 서명\
+        \n* priKey = Attestation 개인키\
+        \n* proof = signAssert(dataset, priKey)
+    cap -> cap: (WalletTokenData)wtd\
+        \n = {seed, sha256_pii, provider, nonce, proof}
+return {wtd}
+
+== 3. walletToken ==
+
+ca -> wal ++: 월렛토큰 생성요청\n{wtd}
+    wal -> wal: 인가앱 사업자 Attestation 서명 검증\
+            \n* (옵션)사업자 가입증명서 VC 검증\
+            \n* wtd.proof 검증
+    wal -> wal: 월렛토큰 생성\
+            \n* resultNonce = 난수 생성\
+            \n* walletToken = sha256(wtd, resultNonce)
+return {resultNonce}
+
+ca -> ca: 월렛토큰 생성\
+    \n* walletToken = sha256(wtd, resultNonce)
+
+hnote over wal, ca #LimeGreen
+    월렛에 접근 시 walletToken 제출
+end hnote
+@enduml

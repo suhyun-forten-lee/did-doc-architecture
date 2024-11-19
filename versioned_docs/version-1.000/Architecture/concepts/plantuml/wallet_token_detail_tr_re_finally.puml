@@ -1,0 +1,71 @@
+@startuml proc_wallet_token_detail
+title
+	<size:25>Wallet Token Generation</size>
+end title
+
+autonumber "<b>(#)</b>"
+
+participant "**Wallet**" as wal <<Wallet>>
+participant "**Certified App**" as ca <<App>>
+participant "**Certified App Service**" as cap <<Server>>
+
+activate ca
+
+rnote over ca
+    **[Pre-defined]**
+    * PKG_NAME = Package name of the Certified App
+end rnote
+/ rnote over cap
+    **[Pre-defined]**
+    * PII = Personal Identifier of the Certified App Owner
+end rnote
+
+== 1. WalletTokenSeed ==
+
+ca -> ca: Preparation\
+    \n* purpose = Specify according to purpose\
+    \n* pkgName = PKG_NAME
+
+ca -> wal ++: Request to generate Wallet Token Seed\n{purpose, pkgName}
+    wal -> wal: Validate purpose, pkgName
+    note right: Block access from unauthorized apps by checking pkgName
+    wal -> wal: Data preparation\
+            \n* validUntil = Expiration date and time\
+            \n* nonce = Generate random number
+    wal -> wal: (WalletTokenSeed)seed\
+            \n = {purpose, validUntil, pkgName, nonce}
+return {seed}
+
+== 2. WalletTokenData ==
+
+ca -> cap ++: Request to generate Wallet Token Data\n{seed}
+    cap -> cap: Data preparation\
+        \n* sha256_pii = multibase(sha256(PII))\
+        \n* provider = Provider information\
+        \n* nonce = Generate random number\
+        \n* dataset = {seed, sha256_pii, provider, nonce}
+    cap -> cap: CApp provider signature\
+        \n* priKey = Attestation private key\
+        \n* proof = signAssert(dataset, priKey)
+    cap -> cap: (WalletTokenData)wtd\
+        \n = {seed, sha256_pii, provider, nonce, proof}
+return {wtd}
+
+== 3. walletToken ==
+
+ca -> wal ++: Request to generate Wallet Token\n{wtd}
+    wal -> wal: Verify CApp provider Attestation signature\
+            \n* (Optional) Verify provider registration certificate VC\
+            \n* Verify wtd.proof
+    wal -> wal: Generate Wallet Token\
+            \n* resultNonce = Generate random number\
+            \n* walletToken = sha256(wtd, resultNonce)
+return {resultNonce}
+
+ca -> ca: Wallet Token Generation\
+    \n* walletToken = sha256(wtd, resultNonce)
+
+hnote over wal, ca #LimeGreen
+    Submit walletToken when accessing the wallet
+end hnote
+@enduml

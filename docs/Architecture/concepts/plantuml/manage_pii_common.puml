@@ -1,0 +1,24 @@
+
+@startuml
+participant app as "Client App"
+participant tas as "TAS Server"
+
+app ->> tas : PII 등록 요청 (PII)
+tas -->> app : 결과 전달 (기등록 여부)
+
+alt 기존 월렛 사용하는 경우
+    app ->> tas : 기존 월렛 사용 요청
+   note right of tas : File 월렛은 기존 월렛 사용 불가능
+   note right of tas : App 월렛은 단말이 이전과 다른 경우에는 기존 월렛 사용 불가능
+    tas -> tas : 정보 갱신 (사용자, 앱)
+    tas -->> app : OK
+else 새로운 월렛 등록하는 경우
+    app ->> tas : DIDDoc 등록 요청
+    tas -> tas : 기존 월렛, DIDDoc 폐기
+    tas -> tas : 정보 갱신 (사용자, 월렛, 앱)
+    tas -->> app : OK
+end
+
+app ->> tas : 확인 요청
+tas -->> app : OK
+@enduml

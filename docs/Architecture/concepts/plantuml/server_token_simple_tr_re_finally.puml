@@ -1,0 +1,28 @@
+@startuml proc_server_token
+title
+	<size:25>Server Token Creation</size>
+end title
+
+participant "**Wallet**" as wal <<Wallet>>
+participant "**Certified App**" as ca <<App>>
+participant "**Certified App Service**" as cap <<Server>>
+participant "**TA**" as ta <<Server>>
+autonumber "<b>(#)</b>"
+
+ca -> wal++: Request SignedWalletInfo 
+wal --> ca--: Transmit SignedWalletInfo
+ca -> cap++: Request AttestedAppInfo
+cap --> ca--: Transmit AttestedAppInfo
+ca -> ca: Generate ServerTokenSeed (SignedWalletInfo, AttestedAppInfo)
+ca -> ta++: Request ServerToken Generation (ServerTokenSeed)
+ta -> ta: Generate ServerTokenData (ServerTokenSeed)
+ta -> ta: Generate ServerToken (ServerTokenData)
+ta -> ta: Generate IV
+ta -> ta: Encrypt ServerTokenData (SessionKey, IV)
+note left: The TA and the CApp have already exchanged session keys before issuing the server token.
+ta --> ca--: Transmit Encrypted ServerTokenData (IV)
+ca -> ca: Decrypt ServerTokenData
+ca -> ca : Generate ServerToken (ServerTokenData)
+ca -> ta: When accessing TAS, submit the ServerToken
+
+@enduml
